@@ -58,7 +58,7 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-white text-brand-text;
     }
 
     .h-stack {
@@ -67,5 +67,8 @@
 
     .v-stack {
         @apply flex flex-col space-y-4;
+    }
+    .stack-center {
+        @apply flex justify-center items-center;
     }
 }
