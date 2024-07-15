@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    :root {
+        --background: 179 0% 95%;
+        --foreground: 179 0% 0%;
+        --card: 179 0% 90%;
+        --card-foreground: 179 0% 10%;
+        --popover: 179 0% 95%;
+        --popover-foreground: 179 95% 0%;
+        --primary: 179 78.6% 11%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 179 10% 70%;
+        --secondary-foreground: 0 0% 0%;
+        --muted: 141 10% 85%;
+        --muted-foreground: 179 0% 35%;
+        --accent: 141 10% 80%;
+        --accent-foreground: 179 0% 10%;
+        --destructive: 0 50% 30%;
+        --destructive-foreground: 179 0% 90%;
+        --border: 179 20% 50%;
+        --input: 179 20% 18%;
+        --ring: 179 78.6% 11%;
+        --radius: 0.5rem;
+    }
+
+    .dark {
+        --background: 179 10% 5%;
+        --foreground: 179 0% 90%;
+        --card: 179 0% 0%;
+        --card-foreground: 179 0% 90%;
+        --popover: 179 10% 5%;
+        --popover-foreground: 179 0% 90%;
+        --primary: 179 78.6% 11%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 179 10% 10%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 141 10% 15%;
+        --muted-foreground: 179 0% 60%;
+        --accent: 141 10% 15%;
+        --accent-foreground: 179 0% 90%;
+        --destructive: 0 50% 30%;
+        --destructive-foreground: 179 0% 90%;
+        --border: 179 20% 18%;
+        --input: 179 20% 18%;
+        --ring: 179 78.6% 11%;
+        --radius: 0.5rem;
+    }
+
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    .h-stack {
+        @apply flex flex-row space-x-4;
+    }
+
+    .v-stack {
+        @apply flex flex-col space-y-4;
+    }
+}
