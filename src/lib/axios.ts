@@ -11,10 +11,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (request) => {
     try {
         // Add token to request headers
-        const token = localStorage.getItem('token');
-        if (token) {
-            request.headers.Authorization = `Bearer ${token}`;
-        }
+        // const token = window && localStorage.getItem('token');
+        // if (token) {
+        //     request.headers.Authorization = `Bearer ${token}`;
+        // }
         return request;
     } catch (error) {
         return Promise.reject(error);
