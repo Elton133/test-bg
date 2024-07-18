@@ -95,7 +95,7 @@ export default function SignInForm() {
           )}
         />
         <Link
-          href={"/forgot-password"}
+          href={"/reset-password"}
           className={"text-[#3A7FA8] place-self-end text-xs"}
         >
           Forgot password?

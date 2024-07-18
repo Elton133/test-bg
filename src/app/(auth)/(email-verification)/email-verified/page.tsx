@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Button } from "@components/ui/button";
-import LikeIcon from '@assets/like_icon.png'
 import Link from "next/link";
 
 export default function EmailVerified() {
@@ -10,7 +9,7 @@ export default function EmailVerified() {
         <div className={"v-stack stack-center"}>
           <Image
             src={
-              LikeIcon
+              "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721229538/qlwm2s5rqxxcusaxiego.gif"
             }
             width={86}
             height={78}

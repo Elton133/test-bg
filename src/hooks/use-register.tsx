@@ -86,7 +86,6 @@ export default function useRegister() {
             type: "manual",
             message: error?.message,
           });
-          console.log(error);
           if (error?.response?.data?.errors) {
             const errors = error.response.data.errors;
             for (const key in errors) {
