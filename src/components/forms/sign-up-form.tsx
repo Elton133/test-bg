@@ -223,7 +223,7 @@ export default function RegisterForm() {
               <hr className={"border-[#ABB3BF] w-full my-4"} />
             </div>
             <Link
-              href={"/login"}
+              href={'https://api.thebeststudyguide.com/api/auth/google/redirect'}
               className={"h-stack w-full stack-center py-2 border rounded-lg"}
             >
               {/* <Image
