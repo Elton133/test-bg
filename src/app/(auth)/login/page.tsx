@@ -20,11 +20,11 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="max-w-[455px] h-[calc(100vh_-_80px)] w-full px-4 lg:px-8 py-2 sm:py-[5%]">
+    <main className="max-w-[455px] h-[calc(100vh_-_80px)] w-full px-4 lg:px-8 py-2 sm:py-[2%]">
       <div className={"v-stack gap-6 h-full"}>
         <div className={"v-stack"}>
           <h1 className="text-2xl font-semibold">Sign in</h1>
-          <p className={"text-sm font-normal text-[#70787C]"}>
+          <p className={"text-sm font-medium text-[#70787C]"}>
             Your journey to legal mastery begins here!
           </p>
         </div>

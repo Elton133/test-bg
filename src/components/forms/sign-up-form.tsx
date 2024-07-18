@@ -21,12 +21,12 @@ import Link from "next/link";
 // import Image from "next/image";
 // import GoogleLogo from "@assets/google_logo.png";
 import { LoaderCircle } from "lucide-react";
-import useLogin from "@hooks/use-login";
+import useRegister from "@hooks/use-register";
 import { cn } from "@/lib/utils";
 
-export default function SignInForm() {
+export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { form, errors, loading, onSubmit } = useLogin();
+  const { form, loading, errors, onSubmit } = useRegister();
 
   return (
     <Form {...form}>
@@ -37,6 +37,52 @@ export default function SignInForm() {
       >
         <FormField
           control={form.control}
+          name={"fname"}
+          render={({ field }) => (
+            <FormItem>
+              <div className={"relative"}>
+                <FormControl>
+                  <FloatingInput type={"text"} placeholder={""} {...field} />
+                </FormControl>
+                <FloatingLabel
+                  className={cn("", {
+                    "peer-focus:text-destructive": errors.email,
+                  })}
+                >
+                  First name
+                </FloatingLabel>
+              </div>
+              <FormMessage className={"text-xs"}>
+                {errors.fname?.message}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name={"lname"}
+          render={({ field }) => (
+            <FormItem>
+              <div className={"relative"}>
+                <FormControl>
+                  <FloatingInput type={"text"} placeholder={""} {...field} />
+                </FormControl>
+                <FloatingLabel
+                  className={cn("", {
+                    "peer-focus:text-destructive": errors.email,
+                  })}
+                >
+                  Last name
+                </FloatingLabel>
+              </div>
+              <FormMessage className={"text-xs"}>
+                {errors.lname?.message}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name={"email"}
           render={({ field }) => (
             <FormItem>
@@ -44,10 +90,13 @@ export default function SignInForm() {
                 <FormControl>
                   <FloatingInput type={"email"} placeholder={""} {...field} />
                 </FormControl>
-                <FloatingLabel className={cn("", {
-                    "peer-focus:text-destructive":
-                      errors.email,
-                  })}>Email</FloatingLabel>
+                <FloatingLabel
+                  className={cn("", {
+                    "peer-focus:text-destructive": errors.email,
+                  })}
+                >
+                  Email
+                </FloatingLabel>
               </div>
               <FormMessage className={"text-xs"}>
                 {errors.email?.message}
@@ -68,10 +117,13 @@ export default function SignInForm() {
                     {...field}
                   />
                 </FormControl>
-                <FloatingLabel className={cn("", {
-                    "peer-focus:text-destructive":
-                      errors.email,
-                  })}>Password</FloatingLabel>
+                <FloatingLabel
+                  className={cn("", {
+                    "peer-focus:text-destructive": errors.email,
+                  })}
+                >
+                  Password
+                </FloatingLabel>
                 {showPassword ? (
                   <Eye
                     variant={"Bold"}
@@ -94,25 +146,71 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
-        <Link
-          href={"/forgot-password"}
-          className={"text-[#3A7FA8] place-self-end text-xs"}
-        >
-          Forgot password?
-        </Link>
+        <FormField
+          control={form.control}
+          name={"confirmPassword"}
+          render={({ field }) => (
+            <FormItem>
+              <div className={"relative"}>
+                <FormControl>
+                  <FloatingInput
+                    type={showPassword ? "text" : "password"}
+                    placeholder={""}
+                    {...field}
+                  />
+                </FormControl>
+                <FloatingLabel
+                  className={cn("", {
+                    "peer-focus:text-destructive": errors.email,
+                  })}
+                >
+                  Confirm password
+                </FloatingLabel>
+                {showPassword ? (
+                  <Eye
+                    variant={"Bold"}
+                    color={"#292D32"}
+                    onClick={() => setShowPassword(false)}
+                    className={"absolute right-2 top-0 translate-y-1/2"}
+                  />
+                ) : (
+                  <EyeSlash
+                    variant={"Bold"}
+                    color={"#292D32"}
+                    onClick={() => setShowPassword(true)}
+                    className={"absolute right-2 top-0 translate-y-1/2"}
+                  />
+                )}
+              </div>
+              <FormMessage className={"text-xs"}>
+                {errors.confirmPassword?.message}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
+        <div className={"place-self-center text-xs text-muted"}>
+          By signing up, you agree to our{" "}
+          <Link href={"/#"} className={"text-[#CAAB57] hover:underline"}>
+            terms & conditions
+          </Link>{" "}
+          and{" "}
+          <Link href={"/#"} className={"text-[#CAAB57] hover:underline"}>
+            privacy policy
+          </Link>
+        </div>
         <div className={"v-stack h-full justify-end sm:justify-start"}>
           <div className={"v-stack gap-4"}>
             <Button type={"submit"}>
               {loading ? (
                 <LoaderCircle className={"animate-spin"} />
               ) : (
-                "Sign in"
+                "Create account"
               )}
             </Button>
             <p className={"text-xs text-center font-medium"}>
-              Don&apos;t have an account?{" "}
-              <Link className={"text-[#3A7FA8] font-medium"} href={"/register"}>
-                Sign up
+              Already have an account?{" "}
+              <Link className={"text-[#3A7FA8] font-medium"} href={"/login"}>
+                Sign in
               </Link>
             </p>
             <div
@@ -125,7 +223,7 @@ export default function SignInForm() {
               <hr className={"border-[#ABB3BF] w-full my-4"} />
             </div>
             <Link
-              href={'https://api.thebeststudyguide.com/api/auth/google/redirect'}
+              href={"/login"}
               className={"h-stack w-full stack-center py-2 border rounded-lg"}
             >
               {/* <Image
