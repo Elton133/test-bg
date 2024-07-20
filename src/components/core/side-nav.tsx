@@ -12,31 +12,31 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { ArrowRightToLine } from "lucide-react";
 import NavLink from "@components/ui/nav-link";
+import {usePathname} from "next/navigation";
 
 const sideBarVariants = {
   close: {
-    width: "110px",
+    minWidth: "56px",
     transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 10,
-      duration: 0.5,
+      type: "tween",
+      // bounce: 0,
+      // damping: 15,
+      // duration: 0.5,
     },
   },
   open: {
-    width: "200px",
+    minWidth: "200px",
     transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 10,
-      duration: 0.5,
+      type: "tween",
+      // bounce: 0,
+      // damping: 15,
+      // duration: 0.5,
     },
   },
 };
 
 const SideBar = () => {
-
-  const [active, setActive] = useState(window.location.pathname);
+  const path = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const controls = useAnimationControls();
 
@@ -50,7 +50,6 @@ const SideBar = () => {
     } else {
       controls.start("close");
     }
-    setActive(window.location.pathname);
   }, [controls, isOpen]);
 
   const navItems = [
@@ -59,8 +58,8 @@ const SideBar = () => {
       icon: (
         <Home
           size={24}
-          variant={active === "/dashboard" ? "Bold" : "Linear"}
-          color={"#706F66"}
+          variant={path === "/dashboard" ? "Bold" : "Linear"}
+          color={path === "/dashboard" ? "#063231" : "#706F66"}
         />
       ),
       url: "/dashboard",
@@ -70,8 +69,8 @@ const SideBar = () => {
       icon: (
         <Profile
           size={24}
-          variant={active === "/account" ? "Bold" : "Linear"}
-          color={"#706F66"}
+          variant={path === "/dashboard/account" ? "Bold" : "Linear"}
+          color={path === "/dashboard/account" ? "#063231" : "#706F66"}
         />
       ),
       url: "/account",
@@ -81,8 +80,8 @@ const SideBar = () => {
       icon: (
         <Book1
           size={24}
-          variant={active === "/courses" ? "Bold" : "Linear"}
-          color={"#706F66"}
+          variant={path === "/dashboard/courses" ? "Bold" : "Linear"}
+          color={path === "/dashboard/courses" ? "#063231" : "#706F66"}
         />
       ),
       url: "/courses",
@@ -93,8 +92,8 @@ const SideBar = () => {
       icon: (
         <Bag2
           size={24}
-          variant={active === "/shop" ? "Bold" : "Linear"}
-          color={"#706F66"}
+          variant={path === "/dashboard/shop" ? "Bold" : "Linear"}
+          color={path === "/dashboard/shop" ? "#063231" : "#706F66"}
         />
       ),
     },
@@ -103,8 +102,8 @@ const SideBar = () => {
       icon: (
         <InfoCircle
           size={24}
-          variant={active === "/support" ? "Bold" : "Linear"}
-          color={"#706F66"}
+          variant={path === "/dashboard/support" ? "Bold" : "Linear"}
+          color={path === "/dashboard/support" ? "#063231" : "#706F66"}
         />
       ),
       url: "/support",
@@ -114,15 +113,13 @@ const SideBar = () => {
       icon: (
         <Setting2
           size={24}
-          variant={active === "/account/settings" ? "Bold" : "Linear"}
-          color={"#706F66"}
+          variant={path === "/dashboard/account/settings" ? "Bold" : "Linear"}
+          color={path === "/dashboard/account/settings" ? "#063231" : "#706F66"}
         />
       ),
       url: "/account/settings",
     },
   ];
-
-  console.log("active", active);
 
   return (
     <motion.aside
@@ -134,25 +131,35 @@ const SideBar = () => {
     >
       <div
         className={cn(
-          "flex flex-col items-center h-full py-36",
+          "flex flex-col items-center h-full px-5 py-12 gap-6",
           isOpen && "items-start px-4",
         )}
       >
-        <div className="rounded-full border flex justify-center absolute top-12 right-2 items-center w-12 h-12">
+        <motion.div
+          className={cn(
+            "rounded-full border flex justify-center items-center w-12 h-12", {
+              "place-self-end": isOpen,
+              }
+          )}
+        >
           {/*{!isOpen && !sidePane && (*/}
           {/*  <button className={"my-4"} onClick={handleToggleSidebar}>*/}
           {/*    <Home />*/}
           {/*  </button>*/}
           {/*)}*/}
-          <button
-            className={cn("", {
-              "rotate-180": isOpen,
-            })}
+          <motion.button
+            initial={false}
+            animate={{
+                rotateY: isOpen ? 180 : 0,
+                transition: {
+                    duration: 0.5,
+                },
+            }}
             onClick={handleToggleSidebar}
           >
             <ArrowRightToLine size={24} color={"#706F66 "} />
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         <ul
           className={cn("flex flex-col gap-6", {
@@ -165,8 +172,8 @@ const SideBar = () => {
               className={cn(
                 "hover:bg-[#E6EBEA] h-14 min-w-14 flex flex-col justify-center rounded-[12px] cursor-pointer",
                 {
-                  "bg-[#DAE0E0]": active === item.url,
-                  "bg-white": active !== item.url,
+                  "bg-[#DAE0E0]": path === item.url,
+                  "bg-white": path !== item.url,
                   "items-center": !isOpen,
                   "px-4": isOpen,
                 },
