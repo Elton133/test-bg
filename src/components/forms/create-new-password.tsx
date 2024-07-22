@@ -61,7 +61,6 @@ export default function CreateNewPassword() {
           );
           return res.data;
         } catch (error) {
-          console.log(error);
           throw error;
         }
       },

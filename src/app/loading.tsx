@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function Loading() {
-    console.log('Loading');
   return (
     <main className="max-w-[455px] h-[calc(100vh_-_80px)] w-full mx-auto">
         <div className={"v-stack stack-center h-full"}>

@@ -20,7 +20,6 @@ export default function ResetPassword() {
           });
           return res.data;
         } catch (error) {
-          console.log(error);
           throw error;
         }
       },

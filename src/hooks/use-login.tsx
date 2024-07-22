@@ -34,7 +34,6 @@ export default function useLogin() {
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     setLoading(true);
-    console.log(values);
     toast.promise(
       async () =>
         await signIn("credentials", {

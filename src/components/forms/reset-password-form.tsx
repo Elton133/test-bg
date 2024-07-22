@@ -53,7 +53,6 @@ export default function SendResetPasswordForm() {
           );
           return res.data;
         } catch (error) {
-          console.log(error);
           throw error;
         }
       },
