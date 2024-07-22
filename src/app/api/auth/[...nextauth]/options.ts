@@ -34,6 +34,7 @@ export const authOptions: AuthOptions = {
           const res = await axiosInstance.post("/api/auth/login", credentials);
           if (res.status) {
             // console.log(res.data)
+
             return res.data;
           }
         } catch (error) {
@@ -46,7 +47,9 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-      return { ...session, ...token };
+      // console.log(session, token);
+      session.user = token
+      return session;
     },
 
     async jwt({ token, user, session }) {

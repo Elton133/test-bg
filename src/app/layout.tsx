@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import "./globals.css";
 import NavBar from "@components/core/navbar";
-import SessionWrapper from "@components/providers/session-wrapper";
-import {InfoCircle} from "iconsax-react";
-import {CircleCheck} from "lucide-react";
+import SessionWrapper from "@/providers/session-wrapper";
+import { InfoCircle } from "iconsax-react";
+import { CircleCheck } from "lucide-react";
+import { UserProvider } from "@/context/userContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -38,14 +39,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} min-h-screen h-full`}>
-      <SessionWrapper>
-          <NavBar />
-          {children}
-        <Toaster icons={{
-          error: <InfoCircle color={'red'} size={16} />,
-          success: <CircleCheck color={'#063231'} size={16} />,
-        }} position={'top-center'} />
-      </SessionWrapper>
+        <SessionWrapper>
+          <UserProvider>
+            <NavBar />
+            {children}
+            <Toaster
+              icons={{
+                error: <InfoCircle color={"red"} size={16} />,
+                success: <CircleCheck color={"#063231"} size={16} />,
+              }}
+              position={"top-center"}
+            />
+          </UserProvider>
+        </SessionWrapper>
       </body>
     </html>
   );

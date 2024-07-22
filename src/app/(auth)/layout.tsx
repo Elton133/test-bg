@@ -1,11 +1,11 @@
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
+  children,
+}: Readonly<{
+  children: React.ReactNode;
 }>) {
-    return (
-        <main className={'flex place-items-start place-content-center h-full'}>
-            {children}
-        </main>
-    );
+  return (
+    <main className={"flex place-items-start place-content-center h-full"}>
+      {children}
+    </main>
+  );
 }
