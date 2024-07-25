@@ -1,13 +1,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import CourseCardGrid from "@components/courses/course-card-grid";
+import getUserSession from "@/services/get-user";
 
-export default function Page() {
+export default async function Page() {
+  const data = await getUserSession()
   return (
     <section className={"py-6 px-4"}>
       <div className={"v-stack"}>
         <h1 className={"text-2xl font-semibold"}>My learning</h1>
         <p className={"text-sm font-medium text-muted"}>
-          Hi Jane, this is where you left off.
+          Hi {data?.fname}, this is where you left off.
         </p>
       </div>
       <div className={"pt-6 pb-4"}>
