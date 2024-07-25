@@ -3,25 +3,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@assets/logo.jpg";
-import React from "react";
-import { useUser } from "@/context/userContext";
+import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import {
-  HambergerMenu,
-  NotificationBing,
-  ShoppingCart,
-} from "iconsax-react";
+import { HambergerMenu, NotificationBing, ShoppingCart } from "iconsax-react";
 import { X } from "lucide-react";
 import MobileNav from "@components/core/mobile-nav";
+import getUserSession from "@/services/get-user";
+import { IUser } from "@/types/user";
+import {MenuButton} from "@components/ui/menu-button";
 
 export default function NavBar(): React.ReactElement {
-  const { user } = useUser();
   const [open, setOpen] = React.useState(false);
+  const [user, setUser] = useState<IUser | null>();
   const { data: session } = useSession();
 
   const handleToggleSidebar = () => {
     setOpen(!open);
   };
+
+  // Fetching on server hence why this useEffect. I personally hate it myself
+  useEffect(() => {
+    const getUser = async () => {
+      const data = await getUserSession();
+      setUser(data);
+      return;
+    };
+    getUser();
+  }, []);
+
 
   return (
     <header className={"sm:h-[78px] h-[56px] z-20"}>
@@ -35,24 +44,10 @@ export default function NavBar(): React.ReactElement {
         )}
 
         <div className={"flex gap-4 items-center"}>
-          {open && session?.user && (
-            <X
-              size={24}
-              className={
-                "text-muted cursor-pointer animate-fade-right animate-once animate-ease-linear animate-duration-200"
-              }
-              onClick={handleToggleSidebar}
-            />
-          )}
-
-          {!open && session?.user && (
-            <HambergerMenu
-              onClick={handleToggleSidebar}
-              size={24}
-              className={
-                "sm:hidden text-muted cursor-pointer animate-fade-right animate-once animate-ease-linear animate-duration-200"
-              }
-            />
+          {session?.user && (
+              <div className={'sm:hidden'}>
+                <MenuButton isOpen={open} onClick={handleToggleSidebar} />
+              </div>
           )}
           <Link href={"/"}>
             <Image
@@ -66,13 +61,13 @@ export default function NavBar(): React.ReactElement {
             />
           </Link>
         </div>
-        {session?.user && (
+        {session?.user && user && (
           <div className={"flex gap-2 items-center justify-start"}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/avatars/${user?.avatar}`}
+              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}`}
               alt={user?.name as string}
               width={28}
-              loading={"lazy"}
+              // loading={"lazy"}
               // blurDataURL={}
               height={28}
               // placeholder={"blur"}
