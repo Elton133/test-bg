@@ -9,6 +9,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "api.thebeststudyguide.com",
+      },
+      {
+        protocol: "https",
+        hostname: "bsg.nyc3.cdn.digitaloceanspaces.com"
       }
     ],
   },

@@ -6,7 +6,6 @@ import NavBar from "@components/core/navbar";
 import SessionWrapper from "@/providers/session-wrapper";
 import { InfoCircle } from "iconsax-react";
 import { CircleCheck } from "lucide-react";
-import { UserProvider } from "@/context/userContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -40,7 +39,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} min-h-screen h-full`}>
         <SessionWrapper>
-          <UserProvider>
             <NavBar />
             {children}
             <Toaster
@@ -50,7 +48,6 @@ export default function RootLayout({
               }}
               position={"top-center"}
             />
-          </UserProvider>
         </SessionWrapper>
       </body>
     </html>

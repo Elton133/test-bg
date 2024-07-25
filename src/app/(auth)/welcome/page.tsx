@@ -33,7 +33,7 @@ export default function LoginPage() {
         </div>
         <div className={"v-stack gap-2"}>
           <Link
-            href={"/login"}
+            href={"https://api.thebeststudyguide.com/api/auth/google/redirect"}
             className={"h-stack w-full stack-center py-2 border rounded-lg"}
           >
             {/* <Image
@@ -69,7 +69,7 @@ export default function LoginPage() {
             <p className={"text-sm"}>Continue with Google</p>
           </Link>
           <Link
-            href={'https://api.thebeststudyguide.com/api/auth/google/redirect'}
+            href={'/login'}
             className={"h-stack w-full stack-center py-2 border rounded-lg"}
           >
             {/* <Image src={EmailIcon} alt={"google logo"} width={24} height={24} /> */}
