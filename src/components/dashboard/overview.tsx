@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CourseCard from "@components/courses/course-card";
+import CourseCardList from "@components/courses/course-card-list";
 import { Button } from "@components/ui/button";
 
 export default function Overview() {
@@ -33,14 +33,14 @@ export default function Overview() {
         <div className={"sm:w-full"}>
           <p className={"text-sm font-semibold"}>Pick up where you left off</p>
           <div className={"v-stack gap-4 pt-6"}>
-            <CourseCard
+            <CourseCardList
               courseName={"Civil Procedure"}
               progress={80}
               imageUrl={
                 "https://res.cloudinary.com/dzpjlfcrq/image/upload/c_fill,w_300,h_300/v1721780876/c0e407a535283456f382c1a9d2c0c822_w46jpj.png"
               }
             />
-            <CourseCard
+            <CourseCardList
               courseName={"Legal"}
               progress={40}
               imageUrl={

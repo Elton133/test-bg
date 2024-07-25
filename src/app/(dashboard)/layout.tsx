@@ -11,7 +11,7 @@ export default function RootLayout({
       <div className={"bg-gray-50 w-full"}>
         <div
           className={
-            "max-w-screen-2xl w-full v-stack mx-auto lg:px-6 lg:py-4"
+            "max-w-screen-2xl w-full v-stack mx-auto lg:px-4 lg:py-4"
           }
         >
           {children}
