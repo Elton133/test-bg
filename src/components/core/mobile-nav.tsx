@@ -1,9 +1,9 @@
 import {motion, useAnimationControls} from "framer-motion";
 import {usePathname} from "next/navigation";
 import React, {useEffect} from "react";
-import {Bag2, Book1, Home, InfoCircle, Profile, Setting2} from "iconsax-react";
 import {cn} from "@/lib/utils";
 import NavLink from "@components/ui/nav-link";
+import useNavItems from "@hooks/use-nav-items";
 
 interface MobileNavProps {
   open: boolean;
@@ -12,6 +12,7 @@ interface MobileNavProps {
 
 const MobileNav = ({ open, onClose }: MobileNavProps) => {
   const controls = useAnimationControls();
+  const navItems = useNavItems()
   const path = usePathname();
 
   const variants = {
@@ -26,75 +27,6 @@ const MobileNav = ({ open, onClose }: MobileNavProps) => {
       controls.start("closed");
     }
   }, [controls, open]);
-
-  const navItems = [
-    {
-      name: "Home",
-      icon: (
-        <Home
-          size={24}
-          variant={path === "/dashboard" ? "Bold" : "Linear"}
-          color={path === "/dashboard" ? "#063231" : "#706F66"}
-        />
-      ),
-      url: "/dashboard",
-    },
-    {
-      name: "My account",
-      icon: (
-        <Profile
-          size={24}
-          variant={path === "/dashboard/account" ? "Bold" : "Linear"}
-          color={path === "/dashboard/account" ? "#063231" : "#706F66"}
-        />
-      ),
-      url: "/account",
-    },
-    {
-      name: "My learning",
-      icon: (
-        <Book1
-          size={24}
-          variant={path === "/dashboard/courses" ? "Bold" : "Linear"}
-          color={path === "/dashboard/courses" ? "#063231" : "#706F66"}
-        />
-      ),
-      url: "/courses",
-    },
-    {
-      name: "BSG Shop",
-      url: "/shop",
-      icon: (
-        <Bag2
-          size={24}
-          variant={path === "/dashboard/shop" ? "Bold" : "Linear"}
-          color={path === "/dashboard/shop" ? "#063231" : "#706F66"}
-        />
-      ),
-    },
-    {
-      name: "Support",
-      icon: (
-        <InfoCircle
-          size={24}
-          variant={path === "/dashboard/support" ? "Bold" : "Linear"}
-          color={path === "/dashboard/support" ? "#063231" : "#706F66"}
-        />
-      ),
-      url: "/support",
-    },
-    {
-      name: "Settings",
-      icon: (
-        <Setting2
-          size={24}
-          variant={path === "/dashboard/account/settings" ? "Bold" : "Linear"}
-          color={path === "/dashboard/account/settings" ? "#063231" : "#706F66"}
-        />
-      ),
-      url: "/account/settings",
-    },
-  ];
 
   return (
     <motion.div
