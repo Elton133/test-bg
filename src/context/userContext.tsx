@@ -9,20 +9,20 @@ import {
   useMemo,
   useState,
 } from "react";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 import swr from "swr";
 import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 
 interface UserProps {
-  user: User | null | undefined;
+  user: IUser | null | undefined;
 }
 
 const UserContext = createContext<UserProps | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const { data: session } = useSession();
-  const { data: user } = swr<User>(
+  const { data: user } = swr<IUser>(
     session?.user ? "/auth/me" : null,
     async () => {
       const data = await axiosInstance.get("/api/auth-user", {
@@ -31,18 +31,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           Authorization: `Bearer ${session?.user?.access_token}`,
         },
       });
-      if (data.status === 200) {
-        if (typeof window !== "undefined") {
-          !localStorage.getItem("user") &&
-            localStorage.setItem(
-              "user",
-              JSON.stringify({
-                avatar: data.data?.user.avatar,
-                name: `${data.data?.user.fname} ${data.data?.user.lname}`,
-              }),
-            );
-        }
-      }
+      // if (data.status === 200) {
+      //   if (typeof window !== "undefined") {
+      //     !localStorage.getItem("user") &&
+      //       localStorage.setItem(
+      //         "user",
+      //         JSON.stringify({
+      //           avatar: data.data?.user.avatar,
+      //           name: `${data.data?.user.fname} ${data.data?.user.lname}`,
+      //         }),
+      //       );
+      //   }
+      // }
       return data.data?.user;
     },
   );
