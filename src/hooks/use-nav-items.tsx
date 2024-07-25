@@ -31,7 +31,7 @@ const useNavItems = () => {
           color={path === "/dashboard/account" ? "#063231" : "#706F66"}
         />
       ),
-      url: "/account",
+      url: "/dashboard/account",
     },
     {
       name: "My learning",
