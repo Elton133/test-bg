@@ -59,7 +59,7 @@ const SideBar = () => {
     >
       <motion.div
         className={cn(
-          "flex flex-col items-center fixed shadow-md h-full px-5 py-12 gap-6 bg-white",
+          "flex flex-col items-center fixed shadow-md h-full px-5 py-12 gap-6 bg-white overflow-y-scroll no-scrollbar",
           isOpen && "items-start px-4",
         )}
       >
@@ -90,7 +90,7 @@ const SideBar = () => {
         </motion.div>
 
         <ul
-          className={cn("flex flex-col gap-6", {
+          className={cn("flex flex-col gap-6 mb-12", {
             "w-full": isOpen,
           })}
         >
