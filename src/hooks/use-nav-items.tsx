@@ -38,11 +38,11 @@ const useNavItems = () => {
       icon: (
         <Book1
           size={24}
-          variant={path === "/dashboard/courses" ? "Bold" : "Linear"}
-          color={path === "/dashboard/courses" ? "#063231" : "#706F66"}
+          variant={path === "/dashboard/my-learning" ? "Bold" : "Linear"}
+          color={path === "/dashboard/my-learning" ? "#063231" : "#706F66"}
         />
       ),
-      url: "/courses",
+      url: "/dashboard/my-learning",
     },
     {
       name: "BSG Shop",
