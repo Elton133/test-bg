@@ -5,12 +5,18 @@ import Link from "next/link";
 import Logo from "@assets/logo.jpg";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { HambergerMenu, NotificationBing, ShoppingCart } from "iconsax-react";
-import { X } from "lucide-react";
+import {NotificationBing, ShoppingCart } from "iconsax-react";
 import MobileNav from "@components/core/mobile-nav";
 import getUserSession from "@/services/get-user";
 import { IUser } from "@/types/user";
-import {MenuButton} from "@components/ui/menu-button";
+import {signOut} from 'next-auth/react';
+import { MenuButton } from "@components/ui/menu-button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@components/ui/dropdown-menu";
+import {Button} from "@components/ui/button";
 
 export default function NavBar(): React.ReactElement {
   const [open, setOpen] = React.useState(false);
@@ -31,6 +37,9 @@ export default function NavBar(): React.ReactElement {
     getUser();
   }, []);
 
+  const handleLogout = async () => {
+    await signOut();
+  }
 
   return (
     <header className={"sm:h-[78px] h-[56px] z-20"}>
@@ -45,9 +54,9 @@ export default function NavBar(): React.ReactElement {
 
         <div className={"flex gap-4 items-center"}>
           {session?.user && (
-              <div className={'sm:hidden'}>
-                <MenuButton isOpen={open} onClick={handleToggleSidebar} />
-              </div>
+            <div className={"sm:hidden"}>
+              <MenuButton isOpen={open} onClick={handleToggleSidebar} />
+            </div>
           )}
           <Link href={"/"}>
             <Image
@@ -62,19 +71,26 @@ export default function NavBar(): React.ReactElement {
           </Link>
         </div>
         {session?.user && user && (
-          <div className={"flex gap-2 items-center justify-start"}>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}`}
-              alt={user?.name as string}
-              width={28}
-              // loading={"lazy"}
-              // blurDataURL={}
-              height={28}
-              // placeholder={"blur"}
-              className={
-                "rounded-full cursor-pointer animate-fade animate-once animate-ease-linear"
-              }
-            />
+          <div className={"flex gap-2 items-center justify-start w-max"}>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}`}
+                  alt={user?.name as string}
+                  width={28}
+                  // loading={"lazy"}
+                  // blurDataURL={}
+                  height={28}
+                  // placeholder={"blur"}
+                  className={
+                    "rounded-full cursor-pointer animate-fade animate-once animate-ease-linear"
+                  }
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <Button variant={'ghost'} className={'w-full'} onClick={handleLogout}>Logout</Button>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <NotificationBing
               className={
                 "text-muted cursor-pointer animate-fade animate-once animate-ease-linear"
