@@ -1,6 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { AuthOptions } from "next-auth";
 import axiosInstance from "@/lib/axios";
+import {cookies} from "next/headers";
 
 export const authOptions: AuthOptions = {
   session: {
@@ -34,7 +35,12 @@ export const authOptions: AuthOptions = {
           const res = await axiosInstance.post("/api/auth/login", credentials);
           if (res.status) {
             // console.log(res.data)
-
+            cookies().set('__bsg_session', res.data.token, {
+              expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+            });
             return res.data;
           }
         } catch (error) {
