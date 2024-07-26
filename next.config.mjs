@@ -13,6 +13,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "bsg.nyc3.cdn.digitaloceanspaces.com"
+      },
+      {
+        protocol: "https",
+        hostname: "ui-avatars.com"
       }
     ],
   },
