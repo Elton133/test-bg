@@ -30,13 +30,13 @@ export default async function AccountPage() {
             className={"flex flex-col justify-center items-center py-4 gap-3"}
           >
             <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}`}
+              src={user?.avatar ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}` : `https://ui-avatars.com/api/?name=${user?.fname}+${user?.lname}&background=random&color=fff`}
               alt={"user avatar"}
               className={"rounded-full"}
               width={120}
               height={120}
             />
-            <p className={"text-sm"}>{`${user?.fname} ${user?.lname}`}</p>
+            <p className={"text-sm text-semibold"}>{`${user?.fname} ${user?.lname}`}</p>
           </div>
           <hr />
           <div

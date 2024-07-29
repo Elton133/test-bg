@@ -31,7 +31,7 @@ const MobileNav = ({ open, onClose }: MobileNavProps) => {
   return (
     <motion.div
       className={cn(
-        "h-screen bg-white absolute top-[55px] shadow left-0 py-4 px-4 z-50 sm:hidden",
+        "h-screen bg-white absolute top-[50px] left-0 py-4 px-4 z-50 sm:hidden",
         {
           "w-64": open,
         },

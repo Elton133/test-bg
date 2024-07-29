@@ -19,7 +19,7 @@ export default async function Page() {
             <TabsTrigger value="completed">Completed</TabsTrigger>
           </TabsList>
           <TabsContent value="progress">
-            <div className={"py-4 grid grid-col-1 sm:grid-cols-2 lg:grid-cols-4  sm:flex-row sm:justify-center lg:justify-start gap-y-4 sm:gap-x-4"}>
+            <div className={"py-4 grid grid-col-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5  sm:flex-row sm:justify-center lg:justify-start gap-y-4 sm:gap-x-4"}>
               <CourseCardGrid courseName={"Civil procedure"} progress={50} />
               <CourseCardGrid courseName={"Legal system"} progress={70} />
               <CourseCardGrid courseName={"Family law"} progress={20} />
@@ -30,7 +30,7 @@ export default async function Page() {
             </div>
           </TabsContent>
           <TabsContent value="completed">
-            <div className={"py-4 flex flex-col sm:flex-row flex-wrap gap-4"}>
+            <div className={"py-4 grid grid-col-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5  sm:flex-row sm:justify-center lg:justify-start gap-y-4 sm:gap-x-4"}>
               <CourseCardGrid courseName={"Civil procedure"} progress={100} />
               <CourseCardGrid courseName={"Legal system"} progress={100} />
               <CourseCardGrid courseName={"Family law"} progress={100} />
