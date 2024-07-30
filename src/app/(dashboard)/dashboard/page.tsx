@@ -29,7 +29,7 @@ export default async function Dashboard() {
   const user = await getUserSession();
 
   return (
-    <main className="h-full v-stack gap-6 pb-8">
+    <main className="h-full v-stack gap-6 pb-8 lg:px-8">
       <div className="max-w-screen-[1440px] mx-auto w-full 2xl:w-[75%] lg:h-[220px] relative bg-brand-yellow-primary lg:rounded-[20px] flex flex-col justify-center items-center">
         <div
           className={

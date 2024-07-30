@@ -5,7 +5,7 @@ import getUserSession from "@/services/get-user";
 export default async function Page() {
   const data = await getUserSession()
   return (
-    <section className={"py-6 px-4"}>
+    <section className={"py-6 lg:px-8"}>
       <div className={"v-stack"}>
         <h1 className={"text-2xl font-semibold"}>My learning</h1>
         <p className={"text-sm font-medium text-muted"}>
