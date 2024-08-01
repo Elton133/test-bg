@@ -33,12 +33,12 @@ export default function CourseCardWithButtons({
     });
   };
 
-  const isAdded = cart.find((item) => item.id === courseID);
+  const isAdded = cart.some((item) => item.id === courseID);
 
   return (
     <div
       className={
-        "v-stack p-3 min-w-[300px] max-w-[300] bg-white shadow-md w-full rounded-[18px] animate-once animate-flip-up animate-duration-300 animate-delay-200"
+        "v-stack p-3 md:max-w-[300px] bg-white shadow-md w-full rounded-[18px] animate-once animate-flip-up animate-duration-300 animate-delay-200"
       }
     >
       <div className={"v-stack stack-center"}>
@@ -76,7 +76,7 @@ export default function CourseCardWithButtons({
               </div>
             </Button>
           )}
-          {!isAdded && !purchased && (
+          {!purchased && (
             <Button
               className={
                 cn("bg-brand-yellow-primary text-xs md:text-sm text-primary hover:bg-brand-yellow-accent w-full", {
