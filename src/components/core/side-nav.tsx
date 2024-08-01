@@ -20,7 +20,7 @@ const sideBarVariants = {
     },
   },
   open: {
-    minWidth: "195px",
+    minWidth: "190px",
     transition: {
       type: "spring",
         ease: "easeInOut",
@@ -59,7 +59,7 @@ const SideBar = () => {
     >
       <motion.div
         className={cn(
-          "flex flex-col items-center fixed shadow-md h-full px-5 py-12 gap-6 bg-white overflow-y-scroll no-scrollbar",
+          "flex flex-col items-center fixed z-20 shadow-md h-full px-5 py-12 gap-6 bg-white overflow-y-scroll no-scrollbar",
           isOpen && "items-start px-4",
         )}
       >

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Progress } from "@components/ui/progress";
 import {cn} from "@/lib/utils";
 import {Check} from "lucide-react";
+import {ArrowRight} from "iconsax-react";
 
 interface CourseCardProps {
   courseName?: string;
@@ -37,7 +38,7 @@ export default function CourseCardGrid({
       <div className={"v-stack justify-between w-full py-4 gap-2"}>
         <div className={"flex justify-between w-full"}>
           <p className={"text-xs sm:text-sm font-semibold"}>{courseName}</p>
-          {/*<ArrowRight className={"text-muted text-base cursor-pointer"} />*/}
+          <ArrowRight className={"text-muted text-base cursor-pointer"} />
         </div>
         <div className={"font-semibold text-xs sm:text-sm v-stack"}>
           <div className={"flex items-center justify-between"}>
