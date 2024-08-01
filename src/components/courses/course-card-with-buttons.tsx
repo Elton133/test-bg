@@ -59,13 +59,13 @@ export default function CourseCardWithButtons({
         <div className={"flex justify-between w-full"}>
           <p className={"text-xs sm:text-sm font-semibold"}>{courseName}</p>
         </div>
-        <div className={"w-full flex gap-2 sm:justify-between"}>
+        <div className={"w-full flex gap-2 items-center sm:justify-between"}>
           {!purchased && (
             <Button
               // onClick={() => {
               // }}
               variant={"outline"}
-              className={"bg-white w-full"}
+              className={"bg-white w-1/2"}
             >
               <div className={"flex items-center gap-2"}>
                 <p className={"text-sm"}>View course</p>
@@ -79,7 +79,7 @@ export default function CourseCardWithButtons({
           {!purchased && (
             <Button
               className={
-                cn("bg-brand-yellow-primary text-xs md:text-sm text-primary hover:bg-brand-yellow-accent w-full", {
+                cn("bg-brand-yellow-primary text-xs md:text-sm text-primary hover:bg-brand-yellow-accent w-1/2", {
                   'bg-[#D3D5D6]': isAdded
                 })
               }

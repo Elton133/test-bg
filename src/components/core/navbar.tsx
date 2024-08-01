@@ -23,7 +23,7 @@ export default function NavBar(): React.ReactElement {
   const [open, setOpen] = React.useState(false);
   const [openCart, setOpenCart] = useState(false);
   const { data: session } = useSession();
-  const {dispatch } = useCart();
+  const {dispatch, cart } = useCart();
 
   const handleToggleSidebar = () => {
     setOpen(!open);
@@ -103,12 +103,23 @@ export default function NavBar(): React.ReactElement {
                 "text-muted cursor-pointer animate-fade animate-once animate-ease-linear"
               }
             />
-            <ShoppingCart
-              onClick={handleToggleCart}
-              className={
-                "text-muted cursor-pointer animate-fade animate-once animate-ease-linear"
-              }
-            />
+            <div className={'relative'}>
+              <ShoppingCart
+                onClick={handleToggleCart}
+                className={
+                  "text-muted cursor-pointer animate-fade animate-once animate-ease-linear"
+                }
+              />
+              <div className={'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'}>
+                <span
+                    className={
+                    "text-xs"
+                    }
+                >
+                    {cart.length}
+                </span>
+              </div>
+            </div>
           </div>
         )}
       </nav>
