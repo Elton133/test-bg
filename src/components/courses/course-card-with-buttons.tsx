@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Progress } from "@components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { Button } from "@components/ui/button";
@@ -18,7 +17,6 @@ interface CourseCardProps {
 
 export default function CourseCardWithButtons({
   courseName,
-  progress,
   imageUrl,
   courseID,
   purchased,

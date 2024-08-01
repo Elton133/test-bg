@@ -11,7 +11,7 @@ import {
 import { Trash } from "iconsax-react";
 import { Button } from "@components/ui/button";
 import { Cart, useCart } from "@/context/cart-context";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import PayStackButton from "@components/shop/paystack-button";
 import Image from "next/image";
@@ -67,7 +67,7 @@ export default function CartPanel({ open, onClose, user }: CartPanelProps) {
 
   const paystackCallback = async (reference: string) => {
     setLoading(true);
-    const res = await purchaseCourse({
+    await purchaseCourse({
       course: cart.map((item) => item.id),
       reference,
     });
