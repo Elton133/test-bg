@@ -7,9 +7,9 @@ export interface IStorage<T> {
 
 class LocalStorage<T> implements IStorage<T> {
   constructor() {
-    if (typeof window === "undefined") {
-      throw new Error("LocalStorage is only available in the browser");
-    }
+    // if (typeof window === "undefined") {
+    //   throw new Error("LocalStorage is only available in the browser");
+    // }
   }
 
   save(key: string, value: T) {
