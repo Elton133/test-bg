@@ -2,6 +2,7 @@ import Image from "next/image";
 import CourseCardList from "@components/courses/course-card-list";
 import { Button } from "@components/ui/button";
 import {getCourses} from "@/actions/courses";
+import Link from "next/link";
 
 export default async function Overview() {
   const courses = await getCourses()
@@ -50,7 +51,9 @@ export default async function Overview() {
           </div>
           {courses && purchasedCourses.length === 0 &&
               (<div className={'py-4'}>
-                <Button variant={'outline'} className={'text-primary bg-white px-12'}>Visit our shop</Button>
+                <Button variant={'outline'} className={'text-primary bg-white px-12'}>
+                  <Link href={'/dashboard/shop'}>Visit our shop</Link>
+                </Button>
               </div>)
           }
         </div>

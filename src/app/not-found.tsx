@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <main className={"h-stack stack-center my-auto h-[calc(100vh_-_80px)]"}>
+    <main className={"v-stack sm:h-stack stack-center my-auto h-[calc(100vh_-_80px)]"}>
       <div className={"v-stack stack-center max-w-[365px]"}>
         <p className={"text-8xl font-bold"}>404</p>
         <p className={"text-2xl text-center"}>

@@ -83,6 +83,7 @@ export default function CourseCardWithButtons({
                   'bg-[#D3D5D6]': isAdded
                 })
               }
+              disabled={isAdded}
               onClick={handleAddToCart}
             >
               <div className={"flex items-center gap-2"}>
