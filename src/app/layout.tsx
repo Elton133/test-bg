@@ -6,6 +6,7 @@ import NavBar from "@components/core/navbar";
 import SessionWrapper from "@/providers/session-wrapper";
 import { InfoCircle } from "iconsax-react";
 import { CircleCheck } from "lucide-react";
+import { CartProvider } from "@/context/cart-context";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -39,15 +40,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} min-h-screen h-full relative`}>
         <SessionWrapper>
+          <CartProvider>
             <NavBar />
             {children}
-            <Toaster
-              icons={{
-                error: <InfoCircle color={"red"} size={16} />,
-                success: <CircleCheck color={"#063231"} size={16} />,
-              }}
-              position={"top-center"}
-            />
+          </CartProvider>
+          <Toaster
+            icons={{
+              error: <InfoCircle color={"red"} size={16} />,
+              success: <CircleCheck color={"#063231"} size={16} />,
+            }}
+            position={"top-center"}
+          />
         </SessionWrapper>
       </body>
     </html>

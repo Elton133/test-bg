@@ -1,8 +1,14 @@
 import Image from "next/image";
 import CourseCardList from "@components/courses/course-card-list";
 import { Button } from "@components/ui/button";
+import {getCourses} from "@/actions/courses";
+import Link from "next/link";
 
-export default function Overview() {
+export default async function Overview() {
+  const courses = await getCourses()
+
+  const purchasedCourses = courses && courses.filter((item) => item.enroll_status === 'active')
+
   return (
     <section className={"max-w-[920px] mx-auto w-full"}>
       <p className={"font-bold text-lg py-6"}>Overview</p>
@@ -33,27 +39,23 @@ export default function Overview() {
         <div className={"sm:w-full"}>
           <p className={"text-sm font-semibold"}>Pick up where you left off</p>
           <div className={"v-stack gap-4 pt-6"}>
-            <CourseCardList
-              courseName={"Civil Procedure"}
-              progress={80}
-              imageUrl={
-                "https://res.cloudinary.com/dzpjlfcrq/image/upload/c_fill,w_300,h_300/v1721780876/c0e407a535283456f382c1a9d2c0c822_w46jpj.png"
-              }
-            />
-            <CourseCardList
-              courseName={"Legal"}
-              progress={40}
-              imageUrl={
-                "https://res.cloudinary.com/dzpjlfcrq/image/upload/c_fill,w_300,h_300/v1721780876/c0e407a535283456f382c1a9d2c0c822_w46jpj.png"
-              }
-            />
+            {courses && purchasedCourses.slice(0, 2).map((course) => (
+                <CourseCardList
+                    key={course.id}
+                    courseName={course.title}
+                    progress={50}
+                    // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+                />
+            ))
+            }
           </div>
-          {/* Empty State */}
-          {/*{*/}
-          {/*    <div className={'py-4'}>*/}
-          {/*      <Button variant={'outline'} className={'text-primary bg-white px-12'}>Visit our shop</Button>*/}
-          {/*    </div>*/}
-          {/*}*/}
+          {courses && purchasedCourses.length === 0 &&
+              (<div className={'py-4'}>
+                <Button variant={'outline'} className={'text-primary bg-white px-12'}>
+                  <Link href={'/dashboard/shop'}>Visit our shop</Link>
+                </Button>
+              </div>)
+          }
         </div>
       </div>
     </section>

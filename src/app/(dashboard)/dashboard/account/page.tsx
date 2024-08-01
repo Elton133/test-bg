@@ -1,11 +1,11 @@
 import { Button } from "@components/ui/button";
-import getUserSession from "@/services/get-user";
+import getUserSession from "@/actions/get-user";
 import Image from "next/image";
 
 export default async function AccountPage() {
   const user = await getUserSession();
   return (
-    <section className={"py-6"}>
+    <section className={"py-6 lg:px-8"}>
       <div className={"v-stack px-4"}>
         <h1 className={"text-2xl font-semibold"}>Account</h1>
       </div>

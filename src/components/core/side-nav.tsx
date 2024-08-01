@@ -20,7 +20,7 @@ const sideBarVariants = {
     },
   },
   open: {
-    minWidth: "200px",
+    minWidth: "195px",
     transition: {
       type: "spring",
         ease: "easeInOut",
@@ -52,7 +52,7 @@ const SideBar = () => {
   return (
     <motion.aside
       className={
-        "bg- shadow-d hidden sm:block min-h-[calc(100vh_-_80px)] h-full w-[110px]"
+        "bg- shadow-d hidden sm:block min-h-[calc(100vh_-_80px)] h-full w-[100px]"
       }
       animate={controls}
       variants={sideBarVariants}

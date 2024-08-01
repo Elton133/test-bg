@@ -46,7 +46,7 @@ const useNavItems = () => {
     },
     {
       name: "BSG Shop",
-      url: "/shop",
+      url: "/dashboard/shop",
       icon: (
         <Bag2
           size={24}
