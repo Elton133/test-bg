@@ -5,41 +5,40 @@ import Link from "next/link";
 import Logo from "@assets/logo.jpg";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import {NotificationBing, ShoppingCart } from "iconsax-react";
+import { NotificationBing, ShoppingCart } from "iconsax-react";
 import MobileNav from "@components/core/mobile-nav";
-import getUserSession from "@/services/get-user";
+import getUserSession from "@/actions/get-user";
 import { IUser } from "@/types/user";
-import {signOut} from 'next-auth/react';
+import { signOut } from "next-auth/react";
+import {Cart, useCart} from "@/context/cart-context";
 import { MenuButton } from "@components/ui/menu-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
-import {Button} from "@components/ui/button";
+import { Button } from "@components/ui/button";
+import CartPanel from "@components/shop/cart-panel";
 
 export default function NavBar(): React.ReactElement {
   const [open, setOpen] = React.useState(false);
-  const [user, setUser] = useState<IUser | null>();
+  const [openCart, setOpenCart] = useState(false);
   const { data: session } = useSession();
+  const { cart, dispatch } = useCart();
 
   const handleToggleSidebar = () => {
     setOpen(!open);
   };
 
-  // Fetching on server hence why this useEffect. I personally hate it myself
-  useEffect(() => {
-    const getUser = async () => {
-      const data = await getUserSession();
-      setUser(data);
-      return;
-    };
-    getUser();
-  }, []);
-
   const handleLogout = async () => {
+    dispatch({ type: "CLEAR_CART", payload: {} as Cart});
     await signOut();
-  }
+  };
+
+  const handleToggleCart = () => {
+    setOpenCart(!openCart);
+  };
+
 
   return (
     <header className={"sm:h-[78px] h-[56px] z-20"}>
@@ -70,13 +69,16 @@ export default function NavBar(): React.ReactElement {
             />
           </Link>
         </div>
-        {session?.user && user && (
+        {session?.user && (
           <div className={"flex gap-2 items-center justify-start w-max"}>
             <DropdownMenu>
               <DropdownMenuTrigger>
+                {/*TODO: Fix next auth types*/}
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}`}
-                  alt={user?.name as string}
+                    // @ts-ignore
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user?.user?.avatar}`}
+                    // @ts-ignore
+                  alt={session?.user?.user?.fname as string}
                   width={28}
                   // loading={"lazy"}
                   // blurDataURL={}
@@ -88,7 +90,13 @@ export default function NavBar(): React.ReactElement {
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <Button variant={'ghost'} className={'w-full'} onClick={handleLogout}>Logout</Button>
+                <Button
+                  variant={"ghost"}
+                  className={"w-full"}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
               </DropdownMenuContent>
             </DropdownMenu>
             <NotificationBing
@@ -97,6 +105,7 @@ export default function NavBar(): React.ReactElement {
               }
             />
             <ShoppingCart
+              onClick={handleToggleCart}
               className={
                 "text-muted cursor-pointer animate-fade animate-once animate-ease-linear"
               }
@@ -104,6 +113,14 @@ export default function NavBar(): React.ReactElement {
           </div>
         )}
       </nav>
+      {openCart && (
+        <CartPanel
+          open={openCart}
+          onClose={handleToggleCart}
+          // @ts-ignore
+          user={session?.user?.user as IUser}
+        />
+      )}
     </header>
   );
 }

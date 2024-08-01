@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import getUserSession from "@/services/get-user";
+import getUserSession from "@/actions/get-user";
 import Image from "next/image";
 import dayjs from "dayjs";
 import Announcement from "@components/dashboard/announcement";

@@ -1,5 +1,5 @@
 import { Button } from "@components/ui/button";
-import getUserSession from "@/services/get-user";
+import getUserSession from "@/actions/get-user";
 import Image from "next/image";
 
 export default async function AccountPage() {
