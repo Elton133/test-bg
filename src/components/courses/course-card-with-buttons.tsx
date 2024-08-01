@@ -38,7 +38,7 @@ export default function CourseCardWithButtons({
   return (
     <div
       className={
-        "v-stack p-3 md:max-w-[300px] bg-white shadow-md w-full rounded-[18px] animate-once animate-flip-up animate-duration-300 animate-delay-200"
+        "v-stack p-3 md:max-w-[350px] bg-white shadow-md w-full rounded-[18px] animate-once animate-flip-up animate-duration-300 animate-delay-200"
       }
     >
       <div className={"v-stack stack-center"}>
@@ -65,10 +65,10 @@ export default function CourseCardWithButtons({
               // onClick={() => {
               // }}
               variant={"outline"}
-              className={"bg-white w-1/2"}
+              className={"bg-white w-full text-xs md:text-sm"}
             >
               <div className={"flex items-center gap-2"}>
-                <p className={"text-sm"}>View course</p>
+                <p className={""}>View course</p>
                 <ArrowRight
                   size={16}
                   className={"text-muted text-base cursor-pointer"}
@@ -79,7 +79,7 @@ export default function CourseCardWithButtons({
           {!purchased && (
             <Button
               className={
-                cn("bg-brand-yellow-primary text-xs md:text-sm text-primary hover:bg-brand-yellow-accent w-1/2", {
+                cn("bg-brand-yellow-primary text-xs md:text-sm text-primary hover:bg-brand-yellow-accent w-full", {
                   'bg-[#D3D5D6]': isAdded
                 })
               }

@@ -82,7 +82,7 @@ export default async function ShopPage() {
       </section>
       <section
         className={
-          "w-full grid grid-col-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-4 md:px-8 py-8"
+          "w-full grid grid-col-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols- 2xl:grid-cols-5 px-4 md:px-8 py-8"
         }
       >
         {courses &&
