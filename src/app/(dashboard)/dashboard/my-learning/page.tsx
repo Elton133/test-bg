@@ -53,7 +53,7 @@ export default async function Page() {
                     <CourseCardGrid
                       key={course.id}
                       courseName={course.title}
-                      progress={50}
+                      progress={100}
                       // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
                     />
                   ))}
