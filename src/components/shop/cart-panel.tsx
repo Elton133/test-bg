@@ -17,14 +17,13 @@ import PayStackButton from "@components/shop/paystack-button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { purchaseCourse } from "@/actions/courses";
-import { IUser } from "@/types/user";
 
 interface CartPanelProps {
   open: boolean;
   onClose: () => void;
-  user: IUser;
+  email: string;
 }
-export default function CartPanel({ open, onClose, user }: CartPanelProps) {
+export default function CartPanel({ open, onClose, email }: CartPanelProps) {
   const { cart, dispatch } = useCart();
   const [reference] = useState(nanoid());
   const router = useRouter();
@@ -76,7 +75,7 @@ export default function CartPanel({ open, onClose, user }: CartPanelProps) {
   const paystackConfig = {
     reference: reference,
     amount: total,
-    email: user.email,
+    email: email,
     loading: loading,
     disabled: cart.length === 0,
     onSuccess: () => {

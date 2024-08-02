@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { IUser } from "@/types/user";
+// import {getServerSession} from "next-auth/next";
+// import {authOptions} from "@/app/api/auth/[...nextauth]/options";
 
-interface AchievementProps {
-  user: IUser;
-}
+export default async function Achievement() {
+  // const session = await getServerSession(authOptions);
 
-export default function Achievement({ user }: AchievementProps) {
   return (
     <div className="w-full 2xl:w-[75%] mx-auto lg:min-h-[240px] relative bg-[#063231] lg:rounded-[20px] flex flex-col justify-center items-center p-6 lg:mt-24">
       <div

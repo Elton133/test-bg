@@ -1,17 +1,18 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import CourseCardGrid from "@components/courses/course-card-grid";
-import getUserSession from "@/actions/get-user";
 import { getCourses } from "@/actions/courses";
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@/app/api/auth/[...nextauth]/options";
 
 export default async function Page() {
-  const data = await getUserSession();
-  const courses = await getCourses();
+    const session = await getServerSession(authOptions);
+    const courses = await getCourses();
   return (
     <section className={"py-6 px-4 lg:px-8 w-full min-h-[calc(100vh_-_50px)]"}>
       <div className={"v-stack"}>
         <h1 className={"text-2xl font-semibold"}>My learning</h1>
         <p className={"text-sm font-medium text-muted"}>
-          Hi {data?.fname}, this is where you left off.
+          Hi {session?.user.firstName}, this is where you left off.
         </p>
       </div>
       <div className={"pt-6 pb-4"}>
@@ -52,7 +53,7 @@ export default async function Page() {
                     <CourseCardGrid
                       key={course.id}
                       courseName={course.title}
-                      progress={50}
+                      progress={100}
                       // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
                     />
                   ))}

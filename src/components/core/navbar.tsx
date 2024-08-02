@@ -75,14 +75,11 @@ export default function NavBar(): React.ReactElement {
                 {/*TODO: Fix next auth types*/}
                 <Image
                     // @ts-ignore
-                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user?.user?.avatar}`}
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`}
                     // @ts-ignore
-                  alt={session?.user?.user?.fname as string}
+                  alt={session.user.name as string}
                   width={28}
-                  // loading={"lazy"}
-                  // blurDataURL={}
                   height={28}
-                  // placeholder={"blur"}
                   className={
                     "rounded-full cursor-pointer animate-fade animate-once animate-ease-linear"
                   }
@@ -128,7 +125,7 @@ export default function NavBar(): React.ReactElement {
           open={openCart}
           onClose={handleToggleCart}
           // @ts-ignore
-          user={session?.user?.user as IUser}
+          email={session?.user.email as string}
         />
       )}
     </header>
