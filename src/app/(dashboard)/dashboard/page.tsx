@@ -7,6 +7,8 @@ import Overview from "@components/dashboard/overview";
 import Achievement from "@components/dashboard/achievement";
 import { IUser } from "@/types/user";
 import GetSupport from "@components/get-support";
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@/app/api/auth/[...nextauth]/options";
 
 export const metadata: Metadata = {
   title: "BSG - Home",
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboard() {
-  const user = await getUserSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <main className="h-full v-stack gap-6 pb-8 lg:px-8 lg:py-6">
@@ -49,7 +51,7 @@ export default async function Dashboard() {
         >
           <div className={"flex gap-4 items-center"}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}`}
+              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`}
               alt={"user avatar"}
               width={120}
               height={120}
@@ -63,12 +65,12 @@ export default async function Dashboard() {
                   "text-primary text-lg sm:text-2xl font-bold animate-fade animate-once"
                 }
               >
-                Welcome, {`${user?.fname}`} to your BSG Hub
+                Welcome, {`${session?.user.firstName}`} to your BSG Hub
               </p>
               <p
                 className={"text-primary text-sm animate-once animate-fade-up"}
               >
-                Joined since {`${dayjs(user?.created_at).format("MMMM YYYY")}`}
+                Joined since {`${dayjs(session?.user.createdAt).format("MMMM YYYY")}`}
               </p>
             </div>
           </div>
@@ -100,7 +102,7 @@ export default async function Dashboard() {
           <Overview />
         </div>
         <div className={''}>
-          <Achievement user={user as IUser} />
+          <Achievement />
         </div>
         <div className={"px-4 mx-auto"}>
           <GetSupport />

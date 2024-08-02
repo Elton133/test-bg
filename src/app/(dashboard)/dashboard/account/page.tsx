@@ -1,9 +1,11 @@
 import { Button } from "@components/ui/button";
 import getUserSession from "@/actions/get-user";
+import { getServerSession } from "next-auth/next"
 import Image from "next/image";
+import {authOptions} from "@/app/api/auth/[...nextauth]/options";
 
 export default async function AccountPage() {
-  const user = await getUserSession();
+  const session = await getServerSession(authOptions);
   return (
     <section className={"py-6 lg:px-8"}>
       <div className={"v-stack px-4"}>
@@ -30,13 +32,13 @@ export default async function AccountPage() {
             className={"flex flex-col justify-center items-center py-4 gap-3"}
           >
             <Image
-              src={user?.avatar ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${user?.avatar}` : `https://ui-avatars.com/api/?name=${user?.fname}+${user?.lname}&background=random&color=fff`}
-              alt={"user avatar"}
+              src={session?.user ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=random&color=fff`}
+              alt={session?.user.name as string}
               className={"rounded-full"}
               width={120}
               height={120}
             />
-            <p className={"text-sm text-semibold"}>{`${user?.fname} ${user?.lname}`}</p>
+            <p className={"text-sm font-semibold"}>{session?.user.name}</p>
           </div>
           <hr />
           <div
