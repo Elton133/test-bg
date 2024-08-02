@@ -1,12 +1,14 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { AuthOptions } from "next-auth";
 import axiosInstance from "@/lib/axios";
-import {cookies} from "next/headers";
+import { cookies } from "next/headers";
+import { IUser } from "@/types/user";
 
 export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
+
   },
   jwt: {
     maxAge: 30 * 24 * 60 * 60,
@@ -35,11 +37,11 @@ export const authOptions: AuthOptions = {
           const res = await axiosInstance.post("/api/auth/login", credentials);
           if (res.status) {
             // console.log(res.data)
-            cookies().set('__bsg_session', res.data.token, {
+            cookies().set("__bsg_session", res.data.token, {
               expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+              httpOnly: true,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: "strict",
             });
             return res.data;
           }
@@ -53,8 +55,15 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-      // console.log(session, token);
-      session.user = token
+      const user: IUser = token?.user as IUser;
+      session.user = {
+        firstName: user.fname,
+        lastName: user.lname,
+        name: `${user.fname} ${user.lname}`,
+        image: user.avatar,
+        email: user.email,
+        createdAt: user.created_at,
+      };
       return session;
     },
 
