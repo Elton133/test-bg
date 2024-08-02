@@ -6,17 +6,19 @@ import {redirect} from "next/navigation";
 import {ICourse} from "@/types/course";
 
 const getCourses = async (): Promise<ICourse[]> => {
-    try {
-        const { data } = await axiosInstance.get("/api/courses", {
-        headers: {
-            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-        },
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`, {
+            headers: {
+                Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+            },
+            cache: "no-cache",
+            next: {
+                tags: ["courses"],
+            }
         });
-        return data?.courses;
-    } catch (err) {
-        // @ts-ignore
-        throw err
-    }
+        if (response.status !== 200) {
+            return [] as ICourse[];
+        }
+        return await response.json().then((data) => data?.courses);
 }
 
 const purchaseCourse = async (data: {course: string[], reference: string}) => {
