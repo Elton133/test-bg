@@ -3,17 +3,20 @@ import { Progress } from "@components/ui/progress";
 import {cn} from "@/lib/utils";
 import {Check} from "lucide-react";
 import {ArrowRight} from "iconsax-react";
+import Link from "next/link";
 
 interface CourseCardProps {
   courseName?: string;
   progress?: number;
   imageUrl?: string;
+  slug?: string;
 }
 
 export default function CourseCardGrid({
   courseName,
   progress,
   imageUrl,
+    slug
 }: CourseCardProps) {
   return (
     <div
@@ -36,10 +39,10 @@ export default function CourseCardGrid({
         />
       </div>
       <div className={"v-stack justify-between w-full py-4 gap-2"}>
-        <div className={"flex justify-between w-full"}>
+        <Link href={`/dashboard/course/${slug}`} className={"flex justify-between w-full hover:underline"}>
           <p className={"text-xs sm:text-sm font-semibold"}>{courseName}</p>
           {progress !== 100 && <ArrowRight className={"text-muted text-base cursor-pointer"} />}
-        </div>
+        </Link>
         <div className={"font-semibold text-xs sm:text-sm v-stack"}>
           <div className={"flex items-center justify-between"}>
             <p className={""}>

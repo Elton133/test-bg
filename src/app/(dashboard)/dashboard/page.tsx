@@ -1,11 +1,9 @@
 import { Metadata } from "next";
-import getUserSession from "@/actions/get-user";
 import Image from "next/image";
 import dayjs from "dayjs";
 import Announcement from "@components/dashboard/announcement";
 import Overview from "@components/dashboard/overview";
 import Achievement from "@components/dashboard/achievement";
-import { IUser } from "@/types/user";
 import GetSupport from "@components/get-support";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/app/api/auth/[...nextauth]/options";
@@ -25,6 +23,20 @@ export const metadata: Metadata = {
     "resources",
   ],
   robots: "follow, index",
+  applicationName: "BSG",
+  // openGraph: {
+  //   title: "BSG - Home",
+  //   description:
+  //     "We provide law students with a centralized platform, streamlining access to key resources for efficient bar exam preparation",
+  //   images: [
+  //     {
+  //       url: "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721666326/d76a8943c5aeb3fd7598873b5ba28604_wysvb0.png",
+  //       width: 800,
+  //       height: 600,
+  //       alt: "BSG",
+  //     },
+  //   ],
+  // }
 };
 
 export default async function Dashboard() {
