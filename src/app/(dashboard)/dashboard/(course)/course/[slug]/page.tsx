@@ -3,6 +3,14 @@ import { Progress } from "@components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Button } from "@components/ui/button";
 import TopicCard from "@components/courses/topic-card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default async function CourseDetails({
   params,
@@ -38,15 +46,13 @@ export default async function CourseDetails({
                 })}
               />
             </div>
-            <Button variant={"outline"} className={""}>
-              Reset my progress
-            </Button>
+            <ConfirmResetModal />
           </div>
         </div>
         <div className={"py-6"}>
           <h2 className={"text-xl font-semibold"}>Topics</h2>
         </div>
-        <div className={'v-stack gap-3'}>
+        <div className={"v-stack gap-3"}>
           {course?.notes &&
             course?.notes.map((note) => (
               <TopicCard key={note?.id} note={note} />
@@ -56,3 +62,35 @@ export default async function CourseDetails({
     </section>
   );
 }
+
+const ConfirmResetModal = () => {
+  return (
+    <Dialog>
+      <DialogTrigger className={"border border-primary rounded-lg px-4 py-2"}>
+        Reset Progress
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className={"text-2xl"}>Reset progress</DialogTitle>
+        </DialogHeader>
+        <div className={"flex flex-col gap-6"}>
+          <div>
+            <p>Are you sure you want to reset your course progress?</p>
+          </div>
+          <div className={"w-full flex justify-end items-center gap-3"}>
+            <Button variant={"outline"} className={"font-semibold"}>
+              Reset it
+            </Button>
+            <DialogTrigger
+              className={
+                "bg-primary px-4 py-2 rounded-lg text-white font-semibold"
+              }
+            >
+              No
+            </DialogTrigger>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
