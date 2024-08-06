@@ -46,7 +46,7 @@ const ContactUsModal = () => {
           <div className={"mx-auto v-stack items-center"}>
             <div
               className={
-                "w-16 h-16 rounded-full bg-[#DAE0E0] flex justify-center items-center"
+                "w-[80px] h-[80px] rounded-full bg-[#DAE0E0] flex justify-center items-center"
               }
             >
               <Message2 size={24} variant={"Bold"} className={"text-primary"} />
