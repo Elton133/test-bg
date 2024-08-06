@@ -30,7 +30,7 @@ export default async function CourseDetails({
       />
       <div className={"py-8 md:py-12 px-4 sm:px-6 lg:px-16 min-h-full"}>
         <div className={"v-stack"}>
-          <h1 className={"text-[40px] font-bold"}>{course?.title}</h1>
+          <h1 className={"text-[28px] md:text-[40px] font-bold"}>{course?.title}</h1>
           <div
             className={
               "v-stack lg:h-stack justify-between items-start lg:items-center space-y-6"
@@ -65,8 +65,8 @@ export default async function CourseDetails({
 const ConfirmResetModal = () => {
   return (
     <Dialog>
-      <DialogTrigger className={"border border-primary rounded-lg px-4 py-2"}>
-        Reset Progress
+      <DialogTrigger className={"border border-primary text-sm sm:text-base rounded-lg px-4 py-2 font-semibold"}>
+        Reset my progress
       </DialogTrigger>
       <DialogContent className={'w-[95%]'}>
         <DialogHeader>
