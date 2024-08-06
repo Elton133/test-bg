@@ -64,7 +64,7 @@ const useNavItems = () => {
           color={path === "/dashboard/support" ? "#063231" : "#706F66"}
         />
       ),
-      url: "/support",
+      url: "/dashboard/support",
     },
     {
       name: "Settings",

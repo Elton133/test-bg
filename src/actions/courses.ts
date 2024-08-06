@@ -3,7 +3,7 @@
 import axiosInstance from "@/lib/axios";
 import { cookies } from "next/headers";
 import {redirect} from "next/navigation";
-import {ICourse} from "@/types/course";
+import {ICourse, ICourseDetail} from "@/types/course";
 
 const getCourses = async (): Promise<ICourse[]> => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`, {
@@ -19,6 +19,23 @@ const getCourses = async (): Promise<ICourse[]> => {
             return [] as ICourse[];
         }
         return await response.json().then((data) => data?.courses);
+}
+
+const getCourse = async (slug: string): Promise<ICourseDetail> => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/course-details/${slug}`, {
+        headers: {
+            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        },
+        cache: "no-cache",
+        next: {
+            tags: ["courses"],
+        }
+    });
+    if (response.status !== 200) {
+        return {} as ICourseDetail;
+    }
+    return await response.json().then((data) => data?.course);
+
 }
 
 const purchaseCourse = async (data: {course: string[], reference: string}) => {
@@ -38,4 +55,4 @@ const purchaseCourse = async (data: {course: string[], reference: string}) => {
     }
 }
 
-export { getCourses, purchaseCourse };
+export { getCourses, purchaseCourse, getCourse };
