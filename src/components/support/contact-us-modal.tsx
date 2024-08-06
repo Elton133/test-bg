@@ -60,7 +60,7 @@ const ContactUsModal = () => {
             </p>
           </div>
           <div className={"w-full"}>
-            <Textarea className={""} />
+            <Textarea className={"min-h-[120px] max-h-[250px] placeholder:text-xs"} placeholder={'Your message goes here...'} />
           </div>
         </div>
         <DialogFooter className={"py-4"}>
