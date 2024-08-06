@@ -6,7 +6,6 @@ import TopicCard from "@components/courses/topic-card";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -69,7 +68,7 @@ const ConfirmResetModal = () => {
       <DialogTrigger className={"border border-primary rounded-lg px-4 py-2"}>
         Reset Progress
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className={'w-[95%]'}>
         <DialogHeader>
           <DialogTitle className={"text-2xl"}>Reset progress</DialogTitle>
         </DialogHeader>
