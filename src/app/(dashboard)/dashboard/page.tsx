@@ -96,14 +96,6 @@ export default async function Dashboard() {
             }}
             className={"w-[120px] h-[120px] mx-8"}
           />
-          {/*<Image*/}
-          {/*  src={*/}
-          {/*    "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721831113/logo_rnup6z.svg"*/}
-          {/*  }*/}
-          {/*  alt={"bsg logo"}*/}
-          {/*  width={120}*/}
-          {/*  height={120}*/}
-          {/*/>*/}
         </div>
       </div>
       <div className={"lg:px-4 v-stack gap-6"}>

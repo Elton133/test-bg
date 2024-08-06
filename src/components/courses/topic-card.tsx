@@ -21,7 +21,7 @@ export default function TopicCard({ note }: TopicCardProps) {
       >
         <div className={"relative items-center"}>
           <Checkbox className={"absolute top-[20px] object-center"} />
-          <AccordionTrigger>
+          <AccordionTrigger className={'text-left'}>
             <p className={"text-base pl-6"}>{note?.noteTitle}</p>
           </AccordionTrigger>
         </div>
