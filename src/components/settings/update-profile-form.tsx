@@ -134,7 +134,8 @@ export default function UpdateProfileForm({
                     type={"file"}
                     accept={"image/*"}
                     onChange={(e: ChangeEvent<HTMLElement>) => {
-                      const file = e.target.files?.[0];
+                      // @ts-ignore
+                      const file = e.target?.files?.[0];
                       if (file) form.setValue("avatar", file);
                     }}
                     className={"text-xs py-2 hidden"}

@@ -13,6 +13,8 @@ export async function getUserSession(): Promise<IUser | null> {
     });
     return data?.user;
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
     return null;
   }
 }
@@ -26,7 +28,8 @@ export async function updateUserProfile(data: FormData): Promise<IUser | null> {
     });
     return response.data
   } catch (err) {
-    console.log(err);
+    // eslint-disable-next-line no-console
+    console.error(err)
     return null;
   }
 }
