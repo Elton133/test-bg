@@ -58,6 +58,7 @@ export const authOptions: AuthOptions = {
       const user: IUser = token?.user as IUser;
       session.user = {
         firstName: user.fname,
+        id: user?.id + "",
         lastName: user.lname,
         name: `${user.fname} ${user.lname}`,
         image: user.avatar,
@@ -67,7 +68,11 @@ export const authOptions: AuthOptions = {
       return session;
     },
 
-    async jwt({ token, user, session }) {
+    async jwt({ token, user, session, trigger }) {
+      if (trigger === 'update' && session.user) {
+        token.user = session.user;
+        return token;
+      }
       token = { ...token, ...user };
       return token;
     },
