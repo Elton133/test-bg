@@ -38,17 +38,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} min-h-screen h-full relative`}>
+      <body className={`${poppins.className} min-h-screen h-full relative antialiased scroll-smooth`}>
         <SessionWrapper>
           <CartProvider>
             <NavBar />
             {children}
           </CartProvider>
           <Toaster
+              toastOptions={{
+                unstyled: true,
+                classNames: {
+                  toast: 'bg-[#D0EFE9] relative flex items-center gap-4 px-4 py-4 pr-1 shadow-md border-l-4 border-primary',
+                    closeButton: 'text-[#063231] absolute top-1/2 right-[20px] hover:text-[#FF170A] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50',
+                },
+              }}
             icons={{
               error: <InfoCircle color={"red"} size={16} />,
-              success: <CircleCheck color={"#063231"} size={16} />,
+              success: <CircleCheck fill={'#063231'} color={"#D0EFE9"} size={24} />,
             }}
+              // closeButton
             position={"top-center"}
           />
         </SessionWrapper>
