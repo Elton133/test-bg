@@ -1,12 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import CourseCardGrid from "@components/courses/course-card-grid";
 import { getCourses } from "@/actions/courses";
-import {getServerSession} from "next-auth/next";
-import {authOptions} from "@/app/api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export default async function Page() {
-    const session = await getServerSession(authOptions);
-    const courses = await getCourses();
+  const session = await getServerSession(authOptions);
+  const courses = await getCourses();
   return (
     <section className={"py-6 px-4 lg:px-8 w-full min-h-[calc(100vh_-_50px)]"}>
       <div className={"v-stack"}>

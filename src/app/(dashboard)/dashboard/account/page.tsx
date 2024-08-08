@@ -1,5 +1,4 @@
 import { Button } from "@components/ui/button";
-import getUserSession from "@/actions/get-user";
 import { getServerSession } from "next-auth/next"
 import Image from "next/image";
 import {authOptions} from "@/app/api/auth/[...nextauth]/options";
