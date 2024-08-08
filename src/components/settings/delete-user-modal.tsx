@@ -8,22 +8,40 @@ import {
   DialogTrigger,
 } from "@components/ui/dialog";
 import { Button } from "@components/ui/button";
-import { useState } from "react";
+import {ChangeEvent, useState} from "react";
 import { FloatingLabelInput } from "@components/ui/floating-label-input";
-import { FormLabel } from "@components/ui/form";
 import { Label } from "@components/ui/label";
+import { deleteUserAccount } from "@/actions/auth";
+import {LoaderCircle} from "lucide-react";
 
-const ConfirmDeleteUserModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const ConfirmDeleteUserModal = ({userID} : {userID: string}) => {
   const [openPassword, setOpenPassword] = useState(false);
-
-  const handleOpen = () => {
-    setIsOpen(!open);
-  };
+  const [error, setError] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handlePassword = () => {
     setOpenPassword(!openPassword);
   };
+
+  const handleDelete = async () => {
+    try {
+      if (!password) {
+        setError("Password is required");
+        return;
+      }
+
+      if (password.length < 6) {
+        setError("Password must be at least 6 characters");
+        return;
+      }
+        setLoading(true);
+        await deleteUserAccount(userID);
+        setLoading(false);
+    } catch (error) {
+      setError("An error occurred");
+    }
+  }
 
   return (
     <Dialog>
@@ -48,13 +66,22 @@ const ConfirmDeleteUserModal = () => {
               </p>
             )}
             {openPassword && (
-              <div className={'v-stack gap-4'}>
+              <div className={"v-stack gap-4"}>
                 <Label className={""}>Enter your password to confirm</Label>
                 <FloatingLabelInput
                   label={"Password"}
                   type={"password"}
                   placeholder={""}
+                  minLength={6}
+                  required
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setPassword(e.target.value);
+                  }}
+                  onBlur={() => {
+                    setPassword(password.trim());
+                  }}
                 />
+                {error && <p className={"text-red-500"}>{error}</p>}
               </div>
             )}
           </div>
@@ -76,8 +103,9 @@ const ConfirmDeleteUserModal = () => {
               </Button>
             )}
             {openPassword && (
-              <Button variant={"default"} className={"font-semibold"}>
-                Delete account
+              <Button variant={"default"} className={"font-semibold flex gap-1 items-center"} onClick={handleDelete}>
+                {loading && <LoaderCircle className={"animate-spin"} />}
+                <p>Delete account</p>
               </Button>
             )}
           </div>

@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { Button } from "@components/ui/button";
 import UpdateProfileForm from "@components/settings/update-profile-form";
+import ConfirmDeleteUserModal from "@components/settings/delete-user-modal";
 
 export default async function SettingsPage() {
   const session = await getServerSession(authOptions);
@@ -20,14 +20,7 @@ export default async function SettingsPage() {
         <p className={"font-semibold"}>Close account</p>
         <p>Caution: Deleting your account is permanent and irreversible.</p>
         <div className={"py-3"}>
-          <Button
-            variant={"outline"}
-            className={
-              "border-[#FF170A] text-[#FF170A] font-normal hover:text-white hover:bg-red-500 hover:border-red-400"
-            }
-          >
-            Delete account
-          </Button>
+          <ConfirmDeleteUserModal userID={session?.user.id as string} />
         </div>
       </div>
     </section>
