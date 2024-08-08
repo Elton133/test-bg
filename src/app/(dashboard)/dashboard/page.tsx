@@ -51,7 +51,7 @@ export default async function Dashboard() {
           }
           style={{
             backgroundImage:
-              "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/c_fill,w_1440,h_600/v1721666326/d76a8943c5aeb3fd7598873b5ba28604_wysvb0.png)",
+              "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721828471/BSG/d76a8943c5aeb3fd7598873b5ba28604_acnd3d.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -89,7 +89,7 @@ export default async function Dashboard() {
           <div
             style={{
               backgroundImage:
-                "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721831113/logo_rnup6z.svg)",
+                "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721831113/BSG/logo_rnup6z.svg)",
               backgroundPosition: "center",
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",

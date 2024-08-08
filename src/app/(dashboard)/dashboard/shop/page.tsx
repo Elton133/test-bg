@@ -68,7 +68,7 @@ export default async function ShopPage() {
           >
             <Image
               src={
-                "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1722344809/logo_rqte3l.png"
+                "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1722344809/BSG/logo_rqte3l.png"
               }
               className={
                 "max-w-[180px] max-h-[180px] w-full h-full md:max-w-[220px] md:max-h-[220px] lg:max-w-[290px] lg:max-h-[290px]"
