@@ -6,11 +6,9 @@ export default function DashBoardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className={"h-full w-full flex lg:gap- bg-gray-50"}>
+    <main className={"w-full flex h-full"}>
       <SideBar />
-      <div className={"h-full w-full"}>
-        <div className={"h-full w-full v-stack"}>{children}</div>
-      </div>
+      <div className={"min-h-full h-full w-full v-stack"}>{children}</div>
     </main>
   );
 }
