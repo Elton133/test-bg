@@ -23,7 +23,7 @@ const navItems = [
     id: 3,
     title: "Notifications",
     icon: <NotificationBing size={24} strokeWidth={1.5} />,
-    url: "/dashboard/account-settings/notifications",
+    url: "/dashboard/account-settings/notification",
   },
   {
     id: 4,
