@@ -34,7 +34,7 @@ export default async function AccountPage() {
             className={"flex flex-col justify-center items-center py-4 gap-3"}
           >
             <Image
-              src={session?.user ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=random&color=fff`}
+              src={`${session?.user.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`}`}
               alt={session?.user.name as string}
               className={"rounded-full"}
               width={120}

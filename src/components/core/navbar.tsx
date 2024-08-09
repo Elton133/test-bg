@@ -43,7 +43,7 @@ export default function NavBar(): React.ReactElement {
     <header className={"sm:h-[78px] h-[56px] z-20"}>
       <nav
         className={
-          "flex items-center justify-between bg-white sm:border-[0.5px] sm:border-[#D3D5D6] py-3 sm:py-5 px-4 lg:px-16 xl:px-20 w-full fixed top-0 z-20"
+          "flex items-center justify-between bg-white sm:border-[0.5px] sm:border-[#D3D5D6] py-3 sm:py-5 px-4 lg:px-16 xl:px-20 w-full fixed top-0 z-30"
         }
       >
         {open && session?.user && (
@@ -75,7 +75,7 @@ export default function NavBar(): React.ReactElement {
                 {/*TODO: Fix next auth types*/}
                 <Image
                     // @ts-ignore
-                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`}
+                  src={`${session?.user.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`}`}
                     // @ts-ignore
                   alt={session.user.name as string}
                   width={28}

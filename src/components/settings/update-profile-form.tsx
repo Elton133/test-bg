@@ -22,7 +22,6 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { Input } from "@components/ui/input";
 import { updateUserProfile, getUserSession } from "@/actions/auth";
-import { ChangeEvent } from "react";
 import { toast } from "sonner";
 
 interface UpdateProfileFormProps {
@@ -75,10 +74,9 @@ export default function UpdateProfileForm({
     data.append("email", values.email);
     data.append("fname", values.fname);
     data.append("lname", values.lname);
-    if (values.avatar) {
-      data.append("avatar", values.avatar);
+    if (values.avatar?.length > 0) {
+      data.append("avatar", values.avatar[0]);
     }
-
     const res = await updateUserProfile(data);
     if (res) {
       const user = await getUserSession();
@@ -115,8 +113,8 @@ export default function UpdateProfileForm({
                     }
                     src={
                       form.getValues("avatar")
-                        ? URL.createObjectURL(form.getValues("avatar"))
-                        : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${image}`
+                        ? URL.createObjectURL(form.getValues("avatar")?.[0])
+                        : `${image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${image}` : `https://ui-avatars.com/api/?name=${firstName}+${lastName}&background=063231&color=fff`}`
                     }
                     alt={"user avatar"}
                     width={300}
@@ -132,12 +130,9 @@ export default function UpdateProfileForm({
                   <Input
                     id={"avatar"}
                     type={"file"}
+                    formEncType={"multipart/form-data"}
                     accept={"image/*"}
-                    onChange={(e: ChangeEvent<HTMLElement>) => {
-                      // @ts-ignore
-                      const file = e.target?.files?.[0];
-                      if (file) form.setValue("avatar", file);
-                    }}
+                    {...register("avatar")}
                     className={"text-xs py-2 hidden"}
                   />
                   <Button

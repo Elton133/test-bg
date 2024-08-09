@@ -3,10 +3,8 @@
 import {
   Sheet,
   SheetContent,
-  // SheetDescription,
   SheetHeader,
   SheetTitle,
-  // SheetTrigger,
 } from "@/components/ui/sheet";
 import { Trash } from "iconsax-react";
 import { Button } from "@components/ui/button";
@@ -14,7 +12,6 @@ import { Cart, useCart } from "@/context/cart-context";
 import { useCallback, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import PayStackButton from "@components/shop/paystack-button";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { purchaseCourse } from "@/actions/courses";
 
@@ -66,10 +63,13 @@ export default function CartPanel({ open, onClose, email }: CartPanelProps) {
 
   const paystackCallback = async (reference: string) => {
     setLoading(true);
-    await purchaseCourse({
+    const res = await purchaseCourse({
       course: cart.map((item) => item.id),
       reference,
     });
+    if (res?.status) {
+      router.push("/dashboard/my-learning");
+    }
   };
 
   const paystackConfig = {
@@ -122,15 +122,6 @@ export default function CartPanel({ open, onClose, email }: CartPanelProps) {
         )}
         {cart.length === 0 && (
           <div className={"flex flex-col items-center gap-6 px-6 py-12"}>
-            {/*<Image*/}
-            {/*  src={*/}
-            {/*    "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1722470779/shopping-cart_gxsiyh.png"*/}
-            {/*  }*/}
-            {/*  alt={"cart image"}*/}
-            {/*  width={300}*/}
-            {/*  height={300}*/}
-            {/*  className={"max-w-[105px] mx-auto"}*/}
-            {/*/>*/}
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
