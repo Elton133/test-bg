@@ -1,11 +1,9 @@
 "use server";
 
-
 import axiosInstance from "@/lib/axios";
 import { cookies } from "next/headers";
 import { IUser } from "@/types/user";
 import { redirect } from "next/navigation";
-
 
 export async function getUserSession(): Promise<IUser | null> {
   try {
@@ -22,17 +20,18 @@ export async function getUserSession(): Promise<IUser | null> {
   }
 }
 
+
 export async function updateUserProfile(data: FormData): Promise<IUser | null> {
   try {
     const response = await axiosInstance.post("/api/update/profile", data, {
       headers: {
         Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        "Content-Type": "multipart/form-data",
       },
     });
     return response.data;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    console.log(err)
     return null;
   }
 }
@@ -52,5 +51,25 @@ export async function deleteUserAccount(id: string): Promise<boolean> {
     // temporary redirect
     redirect("/account-deleted");
     // return false;
+  }
+}
+
+export async function changePassword(data: {
+  old_password: string;
+  new_password: string;
+}) {
+  try {
+    const response = await axiosInstance.put(`/api/change-password`, data, {
+      headers: {
+        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    return {
+    // @ts-ignore
+        error: error?.response?.data,
+    }
   }
 }
