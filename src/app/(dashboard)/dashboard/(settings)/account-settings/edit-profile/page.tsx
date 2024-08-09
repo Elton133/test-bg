@@ -19,7 +19,7 @@ export default async function EditProfile() {
         <p className={"font-semibold"}>Close account</p>
         <p>Caution: Deleting your account is permanent and irreversible.</p>
         <div className={"py-3"}>
-          <ConfirmDeleteUserModal />
+          <ConfirmDeleteUserModal userID={session?.user?.id as string} />
         </div>
       </div>
     </section>
