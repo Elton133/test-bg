@@ -31,6 +31,7 @@ export async function updateUserProfile(data: FormData): Promise<IUser | null> {
     });
     return response.data;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err)
     return null;
   }

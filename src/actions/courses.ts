@@ -20,6 +20,7 @@ const getCourses = async (): Promise<ICourse[]> => {
   );
   // console.log(await response.json().then((data) => data))
   if (response.status !== 200) {
+    // eslint-disable-next-line no-console
     console.log(response);
     return [] as ICourse[];
   }
