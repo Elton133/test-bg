@@ -24,19 +24,6 @@ export const metadata: Metadata = {
   ],
   robots: "follow, index",
   applicationName: "BSG",
-  // openGraph: {
-  //   title: "BSG - Home",
-  //   description:
-  //     "We provide law students with a centralized platform, streamlining access to key resources for efficient bar exam preparation",
-  //   images: [
-  //     {
-  //       url: "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721666326/d76a8943c5aeb3fd7598873b5ba28604_wysvb0.png",
-  //       width: 800,
-  //       height: 600,
-  //       alt: "BSG",
-  //     },
-  //   ],
-  // }
 };
 
 export default async function Dashboard() {
@@ -51,7 +38,7 @@ export default async function Dashboard() {
           }
           style={{
             backgroundImage:
-              "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/c_fill,w_1440,h_600/v1721666326/d76a8943c5aeb3fd7598873b5ba28604_wysvb0.png)",
+              "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721828471/BSG/d76a8943c5aeb3fd7598873b5ba28604_acnd3d.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -63,7 +50,7 @@ export default async function Dashboard() {
         >
           <div className={"flex gap-4 items-center"}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`}
+              src={`${session?.user.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`}`}
               alt={"user avatar"}
               width={120}
               height={120}
@@ -89,7 +76,7 @@ export default async function Dashboard() {
           <div
             style={{
               backgroundImage:
-                "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721831113/logo_rnup6z.svg)",
+                "url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721831113/BSG/logo_rnup6z.svg)",
               backgroundPosition: "center",
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",

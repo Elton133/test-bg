@@ -32,7 +32,6 @@ export default function RegisterForm() {
     <Form {...form}>
       <form
         className={"v-stack gap-2 h-full"}
-        noValidate
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField

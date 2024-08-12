@@ -6,7 +6,7 @@ export default function Loading() {
         <div className={"v-stack stack-center h-full"}>
           <Image
             src={
-              "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721308573/64e99b60b7c54884e4fc4a3d9e6f68f1_ekfc6d.gif"
+              "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721308573/BSG/64e99b60b7c54884e4fc4a3d9e6f68f1_ekfc6d.gif"
             }
             width={72}
             height={58}

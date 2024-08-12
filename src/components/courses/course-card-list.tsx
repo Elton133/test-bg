@@ -23,7 +23,7 @@ export default function CourseCardList({
         <Image
           src={
             imageUrl ||
-            "https://res.cloudinary.com/dzpjlfcrq/image/upload/c_fill,w_300,h_300/v1721780876/c0e407a535283456f382c1a9d2c0c822_w46jpj.png"
+            "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721780876/BSG/c0e407a535283456f382c1a9d2c0c822_w46jpj.png"
           }
           alt={"course cover"}
           className={"rounded-lg"}

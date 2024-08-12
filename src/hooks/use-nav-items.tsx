@@ -71,11 +71,11 @@ const useNavItems = () => {
       icon: (
         <Setting2
           size={24}
-          variant={path === "/dashboard/account/settings" ? "Bold" : "Linear"}
-          color={path === "/dashboard/account/settings" ? "#063231" : "#706F66"}
+          variant={path === "/dashboard/account-settings" ? "Bold" : "Linear"}
+          color={path === "/dashboard/account-settings" ? "#063231" : "#706F66"}
         />
       ),
-      url: "/account/settings",
+      url: "/dashboard/account-settings",
     },
   ];
 };

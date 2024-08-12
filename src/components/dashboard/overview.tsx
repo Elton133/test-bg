@@ -27,7 +27,7 @@ export default async function Overview() {
           </p>
           <Image
             src={
-              "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721689006/a7f42597ebb9ef26eb917f88bd7c352c_nxaugi.gif"
+              "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721689006/BSG/a7f42597ebb9ef26eb917f88bd7c352c_nxaugi.gif"
             }
             alt={"flame"}
             width={30}

@@ -1,12 +1,12 @@
-import {Metadata} from "next";
+import { Metadata } from "next";
 import Faq from "@components/support/faq";
 import ContactUsModal from "@components/support/contact-us-modal";
 
 export const metadata: Metadata = {
-    title: "BSG - Support",
-    description: "Get answers to your questions or reach out to our support team",
-    robots: "follow, index",
-}
+  title: "BSG - Support",
+  description: "Get answers to your questions or reach out to our support team",
+  robots: "follow, index",
+};
 
 export default async function SupportPage() {
   return (
@@ -17,7 +17,7 @@ export default async function SupportPage() {
           "max-w-2xl w-full flex flex-col items-start mx-auto py-12 gap-6"
         }
       >
-        <div className={"w-full h-stack items-center"}>
+        <div className={"w-full flex justify-between items-center"}>
           <p>Do you have any questions? </p>
           <ContactUsModal />
         </div>

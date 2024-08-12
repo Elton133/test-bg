@@ -1,8 +1,8 @@
 import { Button } from "@components/ui/button";
-import getUserSession from "@/actions/get-user";
 import { getServerSession } from "next-auth/next"
 import Image from "next/image";
 import {authOptions} from "@/app/api/auth/[...nextauth]/options";
+import Link from "next/link";
 
 export default async function AccountPage() {
   const session = await getServerSession(authOptions);
@@ -24,7 +24,9 @@ export default async function AccountPage() {
               An overview of your achievements.
             </p>
           </div>
-          <Button className={"text-xs"}>Edit profile</Button>
+          <Button className={"text-xs"}>
+            <Link href={'/dashboard/account-settings'}>Edit profile</Link>
+          </Button>
         </div>
         <hr />
         <div className={"flex flex-col gap-"}>
@@ -32,7 +34,7 @@ export default async function AccountPage() {
             className={"flex flex-col justify-center items-center py-4 gap-3"}
           >
             <Image
-              src={session?.user ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=random&color=fff`}
+              src={`${session?.user.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`}`}
               alt={session?.user.name as string}
               className={"rounded-full"}
               width={120}
@@ -76,7 +78,7 @@ export default async function AccountPage() {
             <div className={"flex justify-start items-center gap-x-6 py-4 px-4"}>
               <Image
                 src={
-                  "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/a42885293a2f85666136f794ef551792_a84nnu.png"
+                  "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/BSG/a42885293a2f85666136f794ef551792_a84nnu.png"
                 }
                 alt={"course badges"}
                 className={"max-w-[51px]"}
@@ -85,7 +87,7 @@ export default async function AccountPage() {
               />
               <Image
                 src={
-                  "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/a42885293a2f85666136f794ef551792_a84nnu.png"
+                  "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/BSG/a42885293a2f85666136f794ef551792_a84nnu.png"
                 }
                 alt={"course badges"}
                 className={"max-w-[51px]"}
@@ -94,7 +96,7 @@ export default async function AccountPage() {
               />
               <Image
                 src={
-                  "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/a42885293a2f85666136f794ef551792_a84nnu.png"
+                  "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/BSG/a42885293a2f85666136f794ef551792_a84nnu.png"
                 }
                 alt={"course badges"}
                 className={"max-w-[51px]"}
