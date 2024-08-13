@@ -79,4 +79,10 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+  }
 }
