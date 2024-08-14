@@ -1,17 +1,20 @@
 import Image from "next/image";
 import { ArrowRight } from "iconsax-react";
 import { Progress } from "@components/ui/progress";
+import Link from "next/link";
 
 interface CourseCardProps {
   courseName?: string;
   progress?: number;
   imageUrl?: string;
+  slug?: string;
 }
 
 export default function CourseCardList({
   courseName,
   progress,
   imageUrl,
+    slug
 }: CourseCardProps) {
   return (
     <div
@@ -32,10 +35,10 @@ export default function CourseCardList({
         />
       </div>
       <div className={"v-stack justify-between w-full"}>
-        <div className={"flex justify-between w-full"}>
+        <Link href={`/dashboard/course/${slug}`} className={"flex justify-between w-full"}>
           <p className={"text-xs sm:text-sm font-semibold"}>{courseName}</p>
           <ArrowRight className={"text-muted text-base cursor-pointer"} />
-        </div>
+        </Link>
         <div className={"font-semibold text-xs sm:text-sm"}>
           <p className={""}>
             {`${progress || 0}% `}{" "}

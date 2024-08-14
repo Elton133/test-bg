@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { ITopic } from "@/types/course";
 import { Checkbox } from "@components/ui/checkbox";
+import Link from "next/link";
 
 interface TopicCardProps {
   note: ITopic;
@@ -30,7 +31,7 @@ export default function TopicCard({ note }: TopicCardProps) {
             <div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
-                <p className={"text-base text-[#3A7FA8]"}>Study Guide</p>
+                <Link href={`/dashboard/course/study-guide/${note?.slug}`} className={"text-base text-[#3A7FA8]"}>Study Guide</Link>
               </div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />

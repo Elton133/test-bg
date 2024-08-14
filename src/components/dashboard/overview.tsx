@@ -44,6 +44,7 @@ export default async function Overview() {
                     key={course.id}
                     courseName={course.title}
                     progress={50}
+                    slug={course.slug}
                     // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
                 />
             ))
