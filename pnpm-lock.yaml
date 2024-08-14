@@ -89,9 +89,6 @@ importers:
       pdfjs-dist:
         specifier: 3.4.120
         version: 3.4.120
-      process:
-        specifier: ^0.11.10
-        version: 0.11.10
       react:
         specifier: ^18
         version: 18.3.1
@@ -2200,10 +2197,6 @@ packages:
 
   pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
-
-  process@0.11.10:
-    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
-    engines: {node: '>= 0.6.0'}
 
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -4917,8 +4910,6 @@ snapshots:
   prettier@3.3.3: {}
 
   pretty-format@3.8.0: {}
-
-  process@0.11.10: {}
 
   prop-types@15.8.1:
     dependencies:
