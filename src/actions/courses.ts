@@ -2,8 +2,7 @@
 
 import axiosInstance from "@/lib/axios";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { ICourse, ICourseDetail } from "@/types/course";
+import {ICourse, ICourseDetail, ITopic} from "@/types/course";
 
 const getCourses = async (): Promise<ICourse[]> => {
   const response = await fetch(
@@ -73,4 +72,27 @@ const purchaseCourse = async (data: {
   }
 };
 
-export { getCourses, purchaseCourse, getCourse };
+const getNote = async (slug: string) : Promise<ITopic | any> => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/note/${slug}`, {
+        headers: {
+            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        },
+        cache: "no-cache",
+        next: {
+            tags: ["notes"],
+        },
+    });
+
+    if (!response.ok) {
+        return {
+            error: response.statusText
+        };
+    }
+
+    if (response.ok) {
+        return await response.json().then((data) => data?.note) as ITopic;
+    }
+    return {} as ITopic;
+}
+
+export { getCourses, purchaseCourse, getCourse, getNote };
