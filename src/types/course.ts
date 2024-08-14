@@ -23,6 +23,7 @@ export interface ITopic {
     updated_at: string;
     deleted_at: string | null;
     slug: string;
+    course?: ICourse;
 }
 
 export interface ICourseDetail extends ICourse {
