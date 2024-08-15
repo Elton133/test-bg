@@ -15,9 +15,8 @@ export default async function StudyGuidePage({
   return (
     <section className={"w-full"}>
       <NoteHeader
-        noteTitle={topic?.noteTitle}
-        courseTitle={topic?.course?.title as string}
-        userName={session?.user?.name as string}
+        topic={topic}
+        userName={session?.user.name as string}
       />
       <NoteViewer note={topic} />
     </section>

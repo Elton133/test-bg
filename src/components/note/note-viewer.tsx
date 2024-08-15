@@ -15,12 +15,15 @@ import "@react-pdf-viewer/bookmark/lib/styles/index.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
 import { ArrowDown, ArrowUp } from "iconsax-react";
+import {useNoteSidePanel} from "@/context/note-side-panel-context";
+import {cn} from "@/lib/utils";
 
 interface INoteViewerProps {
   note: ITopic;
 }
 
 export default function NoteViewer({ note }: INoteViewerProps) {
+  const {openSidePanel, toggleSidePanel} = useNoteSidePanel()
   const pageNavigationPluginInstance = pageNavigationPlugin();
   const scrollModePluginInstance = scrollModePlugin();
   const { GoToNextPage, GoToPreviousPage, CurrentPageLabel, NumberOfPages } =
@@ -60,7 +63,9 @@ export default function NoteViewer({ note }: INoteViewerProps) {
   return (
     <section
       className={
-        "h-[calc(100vh_-_250px)] max-w-[1100px] mx-auto no-scrollbar py-4 md:py-12"
+        cn("h-[calc(100vh_-_250px)] max-w-[1100px] mx-auto no-scrollbar py-4 md:py-12", {
+          "hidden md:block": openSidePanel,
+        })
       }
     >
       {/*<Viewer fileUrl={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${note?.pdf}`} />*/}
@@ -78,7 +83,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
       />
       <div
         className={
-          "fixed bottom-10 right-1 xs:px-8 w-full md:flex justify-center"
+          "fixed bottom-10 md:right-1 px-8 md:px-0 w-full md:flex justify-center"
         }
       >
         <div
@@ -86,9 +91,9 @@ export default function NoteViewer({ note }: INoteViewerProps) {
             "w-full flex justify-center items-center gap-4 font-semibold bg-[#313D3B] text-white p-4 md:p-4 max-w-[400px] rounded-[50px]"
           }
         >
-          <div
-            className={"xs:block md:hidden"}
-            // onClick={handleQuickMenu}
+          <button
+            className={"md:hidden"}
+            onClick={toggleSidePanel}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +109,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
                 strokeWidth="0.2"
               />
             </svg>
-          </div>
+          </button>
           <CurrentPageLabel>
             {(props) => (
               <p className="inline-flex justify-center items-center font-semibold xs:text-xs md:text-sm">

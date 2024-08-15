@@ -7,7 +7,6 @@ import React, {useState } from "react";
 import { useSession } from "next-auth/react";
 import { NotificationBing, ShoppingCart } from "iconsax-react";
 import MobileNav from "@components/core/mobile-nav";
-import { IUser } from "@/types/user";
 import { signOut } from "next-auth/react";
 import {Cart, useCart} from "@/context/cart-context";
 import { MenuButton } from "@components/ui/menu-button";
