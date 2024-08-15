@@ -79,7 +79,7 @@ export default function NoteSidePanel({
   return (
     <motion.div
       className={
-        "md:max-w-[250px] md:fixed left-[98px] top-[78px] border-[0.5px] z-40 min-h-[calc(100vh_-_56px)] md:min-h-full bg-white no-scrollbar overflow-y-scrol animate-fade-up md:animate-none"
+        "md:max-w-[250px] md:fixed left-[98px] top-[78px] border-[0.5px] z-40 min-h-[calc(100vh_-_56px)] md:min-h-full bg-white no-scrollbar overflow-y-scrol animate-fade-down md:animate-none"
       }
       animate={controls}
       variants={animationVariants}
@@ -150,6 +150,7 @@ export default function NoteSidePanel({
                 className={cn("h-stack p-3 rounded-[5px]", {
                   "bg-[#DAE0E0]": path === item.url,
                 })}
+                onClick={toggleSidePanel}
               >
                 {item.icon}
                 <p className={"text-sm"}>{item.name}</p>

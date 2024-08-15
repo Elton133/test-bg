@@ -7,7 +7,7 @@ export default function useLocalStorage<T>(key: string, initialValue: T) {
 
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-       return storage.get(key) || initialValue;
+      return storage.get(key) || initialValue;
     } catch (error) {
       return initialValue;
     }
@@ -19,8 +19,7 @@ export default function useLocalStorage<T>(key: string, initialValue: T) {
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       storage.save(key, valueToStore);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return [storedValue, setValue] as const;
