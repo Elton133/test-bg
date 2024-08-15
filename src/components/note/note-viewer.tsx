@@ -4,6 +4,7 @@ import {
   RenderPageProps,
   PageChangeEvent,
   Rect,
+  PdfJs,
 } from "@react-pdf-viewer/core";
 import { pageNavigationPlugin } from "@react-pdf-viewer/page-navigation";
 import { bookmarkPlugin } from "@react-pdf-viewer/bookmark";
@@ -15,15 +16,27 @@ import "@react-pdf-viewer/bookmark/lib/styles/index.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
 import { ArrowDown, ArrowUp } from "iconsax-react";
-import {useNoteSidePanel} from "@/context/note-side-panel-context";
-import {cn} from "@/lib/utils";
+import { useNoteSidePanel } from "@/context/note-side-panel-context";
+import { cn } from "@/lib/utils";
+import useLocalStorage from "@hooks/use-local-storage";
 
 interface INoteViewerProps {
   note: ITopic;
 }
 
+interface INotePreference {
+  currentPage: number;
+  doc: PdfJs.PdfDocument | null;
+}
 export default function NoteViewer({ note }: INoteViewerProps) {
-  const {openSidePanel, toggleSidePanel} = useNoteSidePanel()
+  const { openSidePanel, toggleSidePanel } = useNoteSidePanel();
+  const [notePreference, setNotePreference] = useLocalStorage<INotePreference>(
+    "__note_pref_" + note.slug,
+    {
+      currentPage: 0,
+      doc: null,
+    },
+  );
   const pageNavigationPluginInstance = pageNavigationPlugin();
   const scrollModePluginInstance = scrollModePlugin();
   const { GoToNextPage, GoToPreviousPage, CurrentPageLabel, NumberOfPages } =
@@ -42,7 +55,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
       backgroundColor: "#fff",
       // padding: "20px",
     }),
-    transformSize: ({ size }: {size: Rect}) => ({
+    transformSize: ({ size }: { size: Rect }) => ({
       height: size.height + 30,
       width: size.width,
     }),
@@ -58,15 +71,23 @@ export default function NoteViewer({ note }: INoteViewerProps) {
     );
   };
 
-  const handlePageChange = (e: PageChangeEvent) => {};
+  const handlePageChange = (e: PageChangeEvent) => {
+    if (notePreference.currentPage !== e.currentPage && e.currentPage !== 0) {
+      setNotePreference({
+        ...notePreference,
+        currentPage: e.currentPage,
+      });
+    }
+  };
 
   return (
     <section
-      className={
-        cn("h-[calc(100vh_-_250px)] max-w-[1100px] mx-auto no-scrollbar py-4 md:py-12", {
+      className={cn(
+        "h-[calc(100vh_-_250px)] max-w-[1100px] mx-auto no-scrollbar py-4 md:py-12",
+        {
           "hidden md:block": openSidePanel,
-        })
-      }
+        },
+      )}
     >
       {/*<Viewer fileUrl={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${note?.pdf}`} />*/}
       <Viewer
@@ -78,6 +99,8 @@ export default function NoteViewer({ note }: INoteViewerProps) {
           toolbarPluginInstance,
           bookmarkPluginInstance,
         ]}
+        initialPage={notePreference.currentPage}
+        onPageChange={handlePageChange}
         pageLayout={pageLayout}
         renderPage={renderPage}
       />
@@ -91,10 +114,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
             "w-full flex justify-center items-center gap-4 font-semibold bg-[#313D3B] text-white p-4 md:p-4 max-w-[400px] rounded-[50px]"
           }
         >
-          <button
-            className={"md:hidden"}
-            onClick={toggleSidePanel}
-          >
+          <button className={"md:hidden"} onClick={toggleSidePanel}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="19"
