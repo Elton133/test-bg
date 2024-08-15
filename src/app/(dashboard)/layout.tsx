@@ -1,4 +1,5 @@
 import SideBar from "@components/core/side-nav";
+import { SidePanelProvider } from "@/context/note-side-panel-context";
 
 export default function DashBoardLayout({
   children,
@@ -6,9 +7,11 @@ export default function DashBoardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className={"w-full flex h-full"}>
-      <SideBar />
-      <div className={"min-h-full h-full w-full v-stack"}>{children}</div>
-    </main>
+    <SidePanelProvider>
+      <main className={"w-full flex h-full"}>
+        <SideBar />
+        <div className={"min-h-full h-full w-full v-stack"}>{children}</div>
+      </main>
+    </SidePanelProvider>
   );
 }

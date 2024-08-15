@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { ArrowRightToLine } from "lucide-react";
 import NavLink from "@components/ui/nav-link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import useNavItems from "@hooks/use-nav-items";
+import { useNoteSidePanel } from "@/context/note-side-panel-context";
 
 const sideBarVariants = {
   close: {
@@ -23,7 +24,7 @@ const sideBarVariants = {
     minWidth: "190px",
     transition: {
       type: "spring",
-        ease: "easeInOut",
+      ease: "easeInOut",
       stiffness: 500,
       duration: 0.5,
       damping: 30,
@@ -35,7 +36,8 @@ const SideBar = () => {
   const path = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const controls = useAnimationControls();
-  const navItems = useNavItems()
+  const navItems = useNavItems();
+  const { openSidePanel } = useNoteSidePanel();
 
   const handleToggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -63,31 +65,40 @@ const SideBar = () => {
           isOpen && "items-start px-4",
         )}
       >
-        <motion.div
-          className={cn(
-            "rounded-full border flex justify-center items-center min-w-12 min-h-12", {
-              "place-self-end": isOpen,
-              }
-          )}
-        >
-          {/*{!isOpen && !sidePane && (*/}
-          {/*  <button className={"my-4"} onClick={handleToggleSidebar}>*/}
-          {/*    <Home />*/}
-          {/*  </button>*/}
-          {/*)}*/}
-          <motion.button
-            initial={false}
-            animate={{
+        {!openSidePanel && (
+          <div
+            className={cn(
+              "rounded-full border flex justify-center items-center min-w-12 min-h-12 animate-fade-up",
+              {
+                "place-self-end": isOpen,
+              },
+            )}
+            // animate={{
+            //   rotateY: isOpen ? 180 : 0,
+            //   transition: {
+            //     duration: 0.5,
+            //   },
+            // }}
+          >
+            {/*{!isOpen && !sidePane && (*/}
+            {/*  <button className={"my-4"} onClick={handleToggleSidebar}>*/}
+            {/*    <Home />*/}
+            {/*  </button>*/}
+            {/*)}*/}
+            <motion.button
+              initial={false}
+              animate={{
                 rotateY: isOpen ? 180 : 0,
                 transition: {
-                    duration: 0.5,
+                  duration: 0.5,
                 },
-            }}
-            onClick={handleToggleSidebar}
-          >
-            <ArrowRightToLine size={24} color={"#706F66 "} />
-          </motion.button>
-        </motion.div>
+              }}
+              onClick={handleToggleSidebar}
+            >
+              <ArrowRightToLine size={24} color={"#706F66 "} />
+            </motion.button>
+          </div>
+        )}
 
         <ul
           className={cn("flex flex-col gap-6 mb-12", {
