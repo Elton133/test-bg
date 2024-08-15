@@ -22,7 +22,7 @@ export default function TopicCard({ note }: TopicCardProps) {
       >
         <div className={"relative items-center"}>
           <Checkbox className={"absolute top-[20px] object-center"} />
-          <AccordionTrigger className={'text-left'}>
+          <AccordionTrigger className={"text-left"}>
             <p className={"text-base pl-6"}>{note?.noteTitle}</p>
           </AccordionTrigger>
         </div>
@@ -31,7 +31,12 @@ export default function TopicCard({ note }: TopicCardProps) {
             <div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
-                <Link href={`/dashboard/course/study-guide/${note?.slug}`} className={"text-base text-[#3A7FA8]"}>Study Guide</Link>
+                <Link
+                  href={`/dashboard/course/study-guide/${note?.slug}`}
+                  className={"text-base text-[#3A7FA8] hover:underline"}
+                >
+                  Study Guide
+                </Link>
               </div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
