@@ -40,7 +40,7 @@ export default function NavBar(): React.ReactElement {
 
 
   return (
-    <header className={"sm:h-[78px] h-[56px] z-20"}>
+    <header className={"sm:h-[78px] h-[50px] z-20"}>
       <nav
         className={
           "flex items-center justify-between bg-white sm:border-[0.5px] sm:border-[#D3D5D6] py-3 sm:py-5 px-4 lg:px-16 xl:px-20 w-full fixed top-0 z-30"
