@@ -21,7 +21,7 @@ export default async function CourseDetails({
     <section className={"w-full h-full"}>
       <div
         style={{
-          backgroundImage: `url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721780876/c0e407a535283456f382c1a9d2c0c822_w46jpj.png)`,
+          backgroundImage: `url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721780876/BSG/c0e407a535283456f382c1a9d2c0c822_w46jpj.png)`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",

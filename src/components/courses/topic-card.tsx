@@ -31,7 +31,7 @@ export default function TopicCard({ note }: TopicCardProps) {
             <div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
-                <Link href={`/dashboard/course/study-guide/${note?.slug}`} className={"text-base text-[#3A7FA8]"}>Study Guide</Link>
+                <Link href={`/dashboard/course/study-guide/${note?.slug}`} className={"text-base text-[#3A7FA8] hover:underline"}>Study Guide</Link>
               </div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
