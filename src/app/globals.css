@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root {
     --background: 179 0% 95%;
@@ -72,6 +73,15 @@
 }
 
 @layer utilities {
+  @keyframes bg-move {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -100% 0;
+    }
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
