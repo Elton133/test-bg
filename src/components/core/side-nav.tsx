@@ -8,6 +8,7 @@ import NavLink from "@components/ui/nav-link";
 import { usePathname } from "next/navigation";
 import useNavItems from "@hooks/use-nav-items";
 import { useNoteSidePanel } from "@/context/note-side-panel-context";
+import {useSideBar} from "@/context/side-bar-context";
 
 const sideBarVariants = {
   close: {
@@ -34,22 +35,18 @@ const sideBarVariants = {
 
 const SideBar = () => {
   const path = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const {openSideBar, toggleSideBar} = useSideBar()
   const controls = useAnimationControls();
   const navItems = useNavItems();
   const { openSidePanel } = useNoteSidePanel();
 
-  const handleToggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   useEffect(() => {
-    if (isOpen) {
+    if (openSideBar) {
       controls.start("open");
     } else {
       controls.start("close");
     }
-  }, [controls, isOpen]);
+  }, [controls, openSideBar]);
 
   return (
     <motion.aside
@@ -62,7 +59,7 @@ const SideBar = () => {
       <motion.div
         className={cn(
           "flex flex-col items-center fixed z-20 shadow-md h-full px-5 py-12 gap-6 bg-white overflow-y-scroll no-scrollbar",
-          isOpen && "items-start px-4",
+          openSideBar && "items-start px-4",
         )}
       >
         {!openSidePanel && (
@@ -70,7 +67,7 @@ const SideBar = () => {
             className={cn(
               "rounded-full border flex justify-center items-center min-w-12 min-h-12 animate-fade-up",
               {
-                "place-self-end": isOpen,
+                "place-self-end": openSideBar,
               },
             )}
             // animate={{
@@ -88,12 +85,12 @@ const SideBar = () => {
             <motion.button
               initial={false}
               animate={{
-                rotateY: isOpen ? 180 : 0,
+                rotateY: openSideBar ? 180 : 0,
                 transition: {
                   duration: 0.5,
                 },
               }}
-              onClick={handleToggleSidebar}
+              onClick={toggleSideBar}
             >
               <ArrowRightToLine size={24} color={"#706F66 "} />
             </motion.button>
@@ -102,7 +99,7 @@ const SideBar = () => {
 
         <ul
           className={cn("flex flex-col gap-6 mb-12", {
-            "w-full": isOpen,
+            "w-full": openSideBar,
           })}
         >
           {navItems.map((item, index) => (
@@ -113,12 +110,12 @@ const SideBar = () => {
                 {
                   "bg-[#DAE0E0]": path === item.url,
                   "bg-white": path !== item.url,
-                  "items-center": !isOpen,
-                  "px-4": isOpen,
+                  "items-center": !openSideBar,
+                  "px-4": openSideBar,
                 },
               )}
             >
-              <NavLink name={item.name} url={item.url} showTitle={isOpen}>
+              <NavLink name={item.name} url={item.url} showTitle={openSideBar}>
                 {item.icon}
               </NavLink>
             </li>

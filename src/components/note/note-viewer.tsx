@@ -83,7 +83,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
   return (
     <section
       className={cn(
-        "h-[calc(100vh_-_250px)] max-w-[1100px] mx-auto no-scrollbar py-4 md:py-12",
+        "h-[calc(100vh_-_250px)] max-w-[1100px] mx-auto no-scrollbar py-4",
         {
           "hidden md:block": openSidePanel,
         },

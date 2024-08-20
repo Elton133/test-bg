@@ -79,7 +79,7 @@ export default function NoteSidePanel({
   return (
     <motion.div
       className={
-        "md:max-w-[250px] md:fixed left-[98px] top-[78px] border-[0.5px] z-40 min-h-[calc(100vh_-_56px)] md:min-h-full bg-white no-scrollbar overflow-y-scrol animate-fade-down md:animate-none"
+        "md:max-w-[250px] md:fixed left-[96px] top-[78px] border-[0.5px] z-20 h-full bg-white animate-fade-down md:animate-none"
       }
       animate={controls}
       variants={animationVariants}
@@ -87,7 +87,7 @@ export default function NoteSidePanel({
       <button
         onClick={toggleSidePanel}
         className={cn(
-          "absolute hidden md:block -right-[34px] z-40 border-[0.5px] p-1 hover:scale-105 bg-white cursor-pointer",
+          "absolute hidden md:block -right-[34px] z-50 border-[0.5px] p-1 hover:scale-105 bg-white cursor-pointer rotate-180",
           {
           },
         )}
@@ -107,15 +107,15 @@ export default function NoteSidePanel({
           <ArrowRightToLine size={16} color={"#706F66 "} />
         </button>
       </div>
-      <div className={"v-stack gap-6 p-3"}>
-        <h1 className={"text-2xl font-semibold"}>{topic?.noteTitle}</h1>
+      <div className={"v-stack gap-6 p-3 no-scrollbar overflow-y-scroll h-full"}>
+        <h1 className={"text-lg font-semibold"}>{topic?.noteTitle}</h1>
         <hr className={"border-t border-gray-200"} />
-        <div className={"v-stack gap-y-4"}>
-          <p className={"text-sm md:text-base text-muted font-medium"}>
+        <div className={"v-stack gap-y-4 text-sm"}>
+          <p className={"text-muted font-medium"}>
             Course:{" "}
             <span className={"text-[#3A7FA8]"}>{topic?.course?.title}</span>
           </p>
-          <p className={"text-muted md:text-base"}>
+          <p className={"text-muted"}>
             Reader:{" "}
             <span className={"text-primary font-semibold"}>{userName}</span>
           </p>
@@ -125,7 +125,7 @@ export default function NoteSidePanel({
             "flex gap-x-3 items-center p-3 border-brand-yellow-primary border rounded-xl"
           }
         >
-          <div className={"p-2 bg-[#FFF9E9] rounded-[21px] animate-pulse animate-iteration-3"}>
+          <div className={"p-2 bg-[#FFF9E9] place-self-start rounded-[21px] animate-pulse animate-iteration-3"}>
             <Warning2
               variant={"Bold"}
               size={16}
@@ -157,7 +157,7 @@ export default function NoteSidePanel({
               </Link>
             ))}
           </div>
-          <div className={"v-stack gap-3"}>
+          <div className={"v-stack gap-3 md:pb-24 pb-4"}>
             <h1 className={"text-base font-semibold"}>Next Topic</h1>
             <hr className={"border-t border-gray-200"} />
             <p
