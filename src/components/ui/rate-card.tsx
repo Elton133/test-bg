@@ -14,7 +14,7 @@ const RateCard: React.FC<RateCardProps> = ({no_of_courses, price}: {no_of_course
                 <div className="h-16">
                 <Image
                 className="hidden group-hover:block"
-                src={star}
+                src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163200/wired-flat-237-star-rating_swlijs.gif"
                 width={28}
                 height={28}
                 alt="rating star flipping"
