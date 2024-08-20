@@ -39,15 +39,14 @@ export default function Faq() {
                   ( <Minus className={""} />)
               }
               <p className={"text-base font-semibold"}>
-                How do I find course materials?
+                {_.question}
               </p>
             </div>
           </CollapsibleTrigger>
           <CollapsibleContent
             className={"animate-once animate-fade transition-all px-8"}
           >
-            Yes. Free to use for personal and commercial projects. No
-            attribution required.
+            {_.answer}
           </CollapsibleContent>
         </Collapsible>
       ))}
