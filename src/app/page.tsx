@@ -1,9 +1,7 @@
 import gif from "@assets/juicy-girl-working-at-home.gif";
 import Image from "next/image";
-import books from "@assets/books.png";
 import RateCard from "@/components/ui/rate-card";
 import Faq from "@/components/support/faq";
-import logo from "@assets/BSGLogo.svg";
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
@@ -25,10 +23,10 @@ export default function Home() {
               access to key resources for efficient bar exam preparation.
             </p>
           </div>
-          <Image src={gif} width={500} height={400} alt="girl typing" />
+          <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163211/juicy-girl-working-at-home_yi3vx3.gif" width={500} height={400} alt="girl typing" />
         </div>
         <div className="absolute -bottom-60 justify-center flex w-full mx-auto z-10 overflow-hidden">
-          <div className="flex flex-col items-center justify-center w-full max-w-3xl h-80 bg-[#FFFBF0] bg-[url('../../public/assets/blob-sm.png')] lg:bg-[url('../../public/assets/blobb-bg.png')] bg-center bg-cover bg-no-repeat rounded-xl py-11 px-11 text-center shadow-lg">
+          <div className="flex flex-col items-center justify-center w-full max-w-3xl h-80 bg-[#FFFBF0] bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163200/blob-sm_l6dtgi.png')] lg:bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/blobb-bg_zvdcaj.png')] bg-center bg-cover bg-no-repeat rounded-xl py-11 px-11 text-center shadow-lg">
             <p className="font-bold text-3xl mb-4">About The Team</p>
             <p className="leading-6 text-sm lg:text-base max-w-lg">
               The Best Study Guide is compiled and edited by a group of former
@@ -42,7 +40,7 @@ export default function Home() {
       <section className="border-b border-b-border h-96 w-full"></section>
       <section className="bg-background relative py-24 px-4 lg:px-16 border-b border-b-border">
         <div className="flex flex-col-reverse lg:flex-row gap-10 lg:gap-20 items-center">
-          <Image src={books} width={300} height={400} alt="girl typing" />
+          <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163203/books_mexubf.png" width={500} height={500} alt="bsg books" />
           <div className="flex flex-col gap-4 font-medium">
             <h1 className="text-2xl lg:text-4xl font-bold">
               Explore the study guides put together by{" "}
@@ -123,7 +121,9 @@ export default function Home() {
 
       <section className=" relative py-24 px-4 lg:px-16 border-b border-b-border">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
-          <div className="flex flex-col gap-4 font-medium items-start ">
+          <div className="flex flex-col gap-6 font-medium items-start ">
+            <div className="flex flex-col gap-3">
+
             <h1 className="text-2xl lg:text-4xl font-bold">
               <span className="text-gradient bg-gradient-to-r from-[#063231] via-[#4E8E9B] to-[#063231]">
                 Take A Look At Our Rates{" "}
@@ -136,11 +136,12 @@ export default function Home() {
               <a
                 className="underline hover:text-gray-600"
                 href="mailto:thebeststudyguidegh@gmail.com"
-              >
+                >
                 thebeststudyguidegh@gmail.com
               </a>{" "}
               for assistance.
             </p>
+                </div>
             <p className="text-sm lg:text-base leading-6 font-bold text-red-600">
               All subscriptions end on 31st July {currentYear + 1}
             </p>
@@ -170,9 +171,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className=" relative py-24 px-4 lg:px-16 bg-[#FDD66D] border-b border-b-border">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
-          <div className="flex flex-col gap-4 font-medium">
+      <section className=" relative py-24 lg:ps-16 bg-[#FDD66D] border-b border-b-border">
+        <div className="flex flex-col lg:flex-row gap-4  items-center">
+          <div className="flex flex-col gap-4 px-4 font-medium">
             <h1 className="text-2xl lg:text-4xl font-bold">
               We will be your{" "}
               <span className="text-gradient bg-gradient-to-r from-[#063231] via-[#4E8E9B] to-[#063231]">
@@ -184,21 +185,33 @@ export default function Home() {
               launching your legal career with confidence.
             </p>
             <a
-              href="/signin"
+              href="/login"
               className="relative inline-flex justify-center whitespace-nowrap rounded-lg px-4 py-4 max-w-xs w-full text-center text-white bg-gradient-to-r from-[#063231] to-[#4E8E9B] shadow before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(-45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:animate-bg-move"
             >
               Join The BSG Family!
             </a>
           </div>
-          <Image src={gif} width={500} height={400} alt="girl typing" />
-        </div>
+          <video
+            className=""
+            width={800}
+            height={800}
+            autoPlay
+            muted
+            loop
+          >
+            <source
+              src="https://res.cloudinary.com/dpyjjedao/video/upload/v1724170736/ayes_video_fu6wim.mp4"
+              type="video/mp4"
+            ></source>
+          </video>        
+          </div>
       </section>
 
       <section className="relative py-8 px-4 lg:px-16 border-b border-b-border ">
         <div className="flex flex-col justify-center gap-16">
           <div className="flex flex-col gap-16 lg:flex-row items-center lg:justify-between">
             <div className="flex flex-col gap-2 max-w-sm">
-              <Image src={logo} width={200} height={70} alt="bsg logo" />
+              <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/BSGLogo_v8mxaq.svg" width={200} height={70} alt="bsg logo" />
               <p>
                 The Best Study Guide is a one-stop solution for the Ghana Bar
                 Exam preparation
