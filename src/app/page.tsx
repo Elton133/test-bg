@@ -8,8 +8,8 @@ export default function Home() {
 
   return (
     <main className="bg-white dark:bg-gray-950 dark:text-white overflow-hidden">
-      <section className="relative pt-10 pb-36 px-4 lg:px-16 border-b border-b-border ">
-        <div className=" flex flex-col lg:flex-row items-center">
+      <section className="relative pt-10 pb-36 border-b border-b-border ">
+        <div className=" flex px-4 lg:px-16 flex-col lg:flex-row items-center">
           <div className="flex flex-col gap-4 font-medium">
             <h1 className="text-3xl lg:text-7xl font-bold leading-relaxed">
               Prepare For Your{" "}
@@ -25,7 +25,7 @@ export default function Home() {
           </div>
           <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163211/juicy-girl-working-at-home_yi3vx3.gif" width={500} height={400} alt="girl typing" />
         </div>
-        <div className="absolute -bottom-60 justify-center flex w-full mx-auto z-10 overflow-hidden">
+        <div className="absolute -bottom-60 justify-center flex w-full mx-auto z-10 overflow-hidden px-4">
           <div className="flex flex-col items-center justify-center w-full max-w-3xl h-80 bg-[#FFFBF0] bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163200/blob-sm_l6dtgi.png')] lg:bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/blobb-bg_zvdcaj.png')] bg-center bg-cover bg-no-repeat rounded-xl py-11 px-11 text-center shadow-lg">
             <p className="font-bold text-3xl mb-4">About The Team</p>
             <p className="leading-6 text-sm lg:text-base max-w-lg">
@@ -203,7 +203,7 @@ export default function Home() {
               src="https://res.cloudinary.com/dpyjjedao/video/upload/v1724170736/ayes_video_fu6wim.mp4"
               type="video/mp4"
             ></source>
-          </video>        
+          </video>
           </div>
       </section>
 
@@ -214,7 +214,7 @@ export default function Home() {
               <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/BSGLogo_v8mxaq.svg" width={200} height={70} alt="bsg logo" />
               <p>
                 The Best Study Guide is a one-stop solution for the Ghana Bar
-                Exam preparation
+                Exams preparation
               </p>
             </div>
             <div className="max-w-sm flex flex-col gap-4">
