@@ -108,8 +108,8 @@ const SideBar = () => {
               className={cn(
                 "hover:bg-[#E6EBEA] h-14 min-w-14 flex flex-col justify-center rounded-[12px] cursor-pointer",
                 {
-                  "bg-[#DAE0E0]": path === item.url,
-                  "bg-white": path !== item.url,
+                  "bg-[#DAE0E0]": item.isFocused,
+                  "bg-white": !item.isFocused,
                   "items-center": !openSideBar,
                   "px-4": openSideBar,
                 },
