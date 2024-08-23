@@ -3,7 +3,6 @@
 import { NotePanelNavItem } from "@components/note/note-side-panel";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { useNoteSidePanel } from "@/context/note-side-panel-context";
 import {
   Accordion,
   AccordionContent,
@@ -15,12 +14,13 @@ import Link from "next/link";
 
 interface CaseBriefsMenuProps {
   navItem: NotePanelNavItem;
-  caseBriefs?: ICaseBrief[]
+  caseBriefs?: ICaseBrief[];
+  topicSlug: string;
 }
 
-export default function CaseBriefsMenu({ navItem, caseBriefs }: CaseBriefsMenuProps) {
+export default function CaseBriefsMenu({ navItem, caseBriefs, topicSlug }: CaseBriefsMenuProps) {
   const path = usePathname();
-  const { toggleSidePanel } = useNoteSidePanel();
+
   return (
     <div className={"v-stack gap-2 w-full"}>
       <Accordion
@@ -49,9 +49,9 @@ export default function CaseBriefsMenu({ navItem, caseBriefs }: CaseBriefsMenuPr
           <AccordionContent
             className={"animate-once animate-fade transition-all px-"}
           >
-            <div>
+            <div className={'v-stack'}>
                 {caseBriefs?.map((caseBrief) => (
-                    <Link href={`/dashboard/case-briefs/${caseBrief.slug}`} key={caseBrief.id} className={cn("h-stack rounded-[5px]", {
+                    <Link href={`/dashboard/course/case-briefs/${caseBrief.slug}?topic=${topicSlug}`} key={caseBrief.id} className={cn("h-stack rounded-[5px]", {
                       "bg-[#DAE0E0]": path === `/case-briefs/${caseBrief.id}`,
                     })}>
                       <p className={"text-sm truncate text-[#3A7FA8] hover:underline"}>{caseBrief.title}</p>
