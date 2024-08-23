@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useSideBar } from "@/context/side-bar-context";
 import { useNoteSidePanel } from "@/context/note-side-panel-context";
 import NoteSidePanel from "@components/note/note-side-panel";
+import ExitQuizModal from "@components/quiz/exit-quiz-modal";
 
 export default function QuizSession({
   topic,
@@ -59,13 +60,13 @@ export default function QuizSession({
           >{`${currentQuestion + 1}/${quiz?.questions?.length}`}</p>
           <p className={"text-sm font-Bold text-[#70787C]"}>{quiz?.title}</p>
         </div>
-        <button
+        <div
           className={
             "absolute right-3 md:right-[100px] top-[14px] cursor-pointer"
           }
         >
-          <X />
-        </button>
+          <ExitQuizModal />
+        </div>
       </div>
       {quizEnded && <QuizResults />}
       {!quizEnded && (
