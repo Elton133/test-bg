@@ -42,12 +42,12 @@ export default function NoteHeader({ topic, userName }: INoteHeaderProps) {
               className={"text-brand-yellow-primary"}
             />
           </div>
-          <div className={"w-[90%] sm:w-full"}>
-            <p className={"text-xs text-muted text-ellipsis truncate "}>
-              Capturing or sharing content from the Guides in any form is
-              STRICTLY PROHIBITED.
-            </p>
-          </div>
+            <div className={"w-[90%] sm:w-full"}>
+              <p className={"text-xs text-muted text-ellipsis truncate "}>
+                Capturing or sharing content from the Guides in any form is
+                STRICTLY PROHIBITED.
+              </p>
+            </div>
         </div>
         {/*<div>*/}
         {/*  <h1 className={"text-base font-semibold"}>*/}
@@ -59,13 +59,13 @@ export default function NoteHeader({ topic, userName }: INoteHeaderProps) {
           className={"flex flex-col md:flex-row gap-3 md:items-center text-sm"}
         >
           <div>
-            <p className={"text-muted"}>
+            <p className={"text-muted truncate"}>
               Topic: <span className={"text-[#3A7FA8]"}>{topic.noteTitle}</span>
             </p>
           </div>
           <Dot className={"hidden md:block"} />
 
-          <p className={"text-muted"}>
+          <p className={"text-muted truncate"}>
             Course:{" "}
             <span className={"text-[#3A7FA8]"}>{topic.course?.title}</span>
           </p>
@@ -83,8 +83,8 @@ export default function NoteHeader({ topic, userName }: INoteHeaderProps) {
             }
           >
             <ArrowRightToLine />
-          </button>)
-        }
+          </button>
+        )}
       </div>
       {openSidePanel && <NoteSidePanel topic={topic} userName={userName} />}
     </section>
