@@ -11,7 +11,13 @@ import SparklingIcon from "@components/icons/sparkling";
 import CaseBriefIcon from "@components/icons/case-brief";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import CaseBriefsMenu from "@components/case-briefs/case-briefs-menu";
 
+export type NotePanelNavItem = {
+  name: string;
+  icon: JSX.Element;
+  url: string;
+};
 const animationVariants = {
   open: {
     minWidth: "250px",
@@ -46,6 +52,8 @@ export default function NoteSidePanel({
   const controls = useAnimationControls();
   const path = usePathname();
 
+  console.log(topic)
+
   useEffect(() => {
     if (openSidePanel) {
       controls.start("open");
@@ -71,7 +79,7 @@ export default function NoteSidePanel({
       url: `/dashboard/course/quiz/${topic?.slug}`,
     },
     {
-      name: "Case Brief",
+      name: "Case Briefs",
       icon: <CaseBriefIcon />,
       url: `/dashboard/course/case-briefs/${topic?.slug}`,
     },
@@ -88,13 +96,12 @@ export default function NoteSidePanel({
         onClick={toggleSidePanel}
         className={cn(
           "absolute hidden md:block -right-[34px] z-50 border-[0.5px] p-1 hover:scale-105 bg-white cursor-pointer rotate-180",
-          {
-          },
+          {},
         )}
       >
         <ArrowRightToLine />
       </button>
-      <div className={'md:hidden w-full flex justify-end px-4 py-2'}>
+      <div className={"md:hidden w-full flex justify-end px-4 py-2"}>
         <button
           className={cn(
             "rounded-full border right-4 flex justify-center items-center min-w-8 min-h-8",
@@ -107,7 +114,9 @@ export default function NoteSidePanel({
           <ArrowRightToLine size={16} color={"#706F66 "} />
         </button>
       </div>
-      <div className={"v-stack gap-6 p-3 no-scrollbar overflow-y-scroll h-full"}>
+      <div
+        className={"v-stack gap-6 p-3 no-scrollbar overflow-y-scroll h-full"}
+      >
         <h1 className={"text-lg font-semibold"}>{topic?.noteTitle}</h1>
         <hr className={"border-t border-gray-200"} />
         <div className={"v-stack gap-y-4 text-sm"}>
@@ -125,7 +134,11 @@ export default function NoteSidePanel({
             "flex gap-x-3 items-center p-3 border-brand-yellow-primary border rounded-xl"
           }
         >
-          <div className={"p-2 bg-[#FFF9E9] place-self-start rounded-[21px] animate-pulse animate-iteration-3"}>
+          <div
+            className={
+              "p-2 bg-[#FFF9E9] place-self-start rounded-[21px] animate-pulse animate-iteration-3"
+            }
+          >
             <Warning2
               variant={"Bold"}
               size={16}
@@ -143,26 +156,33 @@ export default function NoteSidePanel({
           <h1 className={"text-base font-semibold"}>Resources</h1>
           <hr className={"border-t border-gray-200"} />
           <div className={"v-stack py-2"}>
-            {resources.map((item, index) => (
-              <Link
-                href={item.url}
-                key={index}
-                className={cn("h-stack p-3 rounded-[5px]", {
-                  "bg-[#DAE0E0]": path === item.url,
-                })}
-                onClick={toggleSidePanel}
-              >
-                {item.icon}
-                <p className={"text-sm"}>{item.name}</p>
-              </Link>
-            ))}
+            {resources.map((item, index) => {
+              if (item.name === "Case Briefs") {
+                return (
+                    <CaseBriefsMenu navItem={item} key={index} caseBriefs={topic?.case_briefs} />
+                )
+              }
+              return (
+                <Link
+                  href={item.url}
+                  key={index}
+                  className={cn("h-stack p-3 rounded-[5px]", {
+                    "bg-[#FEF2D2]": path === item.url,
+                  })}
+                  onClick={toggleSidePanel}
+                >
+                  {item.icon}
+                  <p className={"text-sm"}>{item.name}</p>
+                </Link>
+              );
+            })}
           </div>
           <div className={"v-stack gap-3 md:pb-24 pb-4"}>
             <h1 className={"text-base font-semibold"}>Next Topic</h1>
             <hr className={"border-t border-gray-200"} />
             <p
               className={
-                "text-[#3A7FA8] inline-flex items-center text-sm gap-1"
+                "text-[#3A7FA8] inline-flex items-start text-sm gap-1"
               }
             >
               <DocumentText variant={"Bold"} size={16} /> Commencement of
