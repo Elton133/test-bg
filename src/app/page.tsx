@@ -1,4 +1,3 @@
-import gif from "@assets/juicy-girl-working-at-home.gif";
 import Image from "next/image";
 import RateCard from "@/components/ui/rate-card";
 import Faq from "@/components/support/faq";
@@ -7,9 +6,9 @@ export default function Home() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <main className="bg-white dark:bg-gray-950 dark:text-white overflow-hidden">
+    <main className="bg-white dark:bg-gray-950 dark:text-white overflow-hidden ">
       <section className="relative pt-10 pb-36 border-b border-b-border ">
-        <div className=" flex px-4 lg:px-16 flex-col lg:flex-row items-center">
+        <div className=" flex px-4 lg:px-16 flex-col lg:flex-row items-center max-w-screen-xl mx-auto">
           <div className="flex flex-col gap-4 font-medium">
             <h1 className="text-3xl lg:text-7xl font-bold leading-relaxed">
               Prepare For Your{" "}
@@ -23,10 +22,18 @@ export default function Home() {
               access to key resources for efficient bar exam preparation.
             </p>
           </div>
-          <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163211/juicy-girl-working-at-home_yi3vx3.gif" width={500} height={400} alt="girl typing" />
+          <Image
+            src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163211/juicy-girl-working-at-home_yi3vx3.gif"
+            width={500}
+            height={400}
+            alt="girl typing"
+          />
         </div>
-        <div className="absolute -bottom-60 justify-center flex w-full mx-auto z-10 overflow-hidden px-4">
-          <div className="flex flex-col items-center justify-center w-full max-w-3xl h-80 bg-[#FFFBF0] bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163200/blob-sm_l6dtgi.png')] lg:bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/blobb-bg_zvdcaj.png')] bg-center bg-cover bg-no-repeat rounded-xl py-11 px-11 text-center shadow-lg">
+        <div className="absolute -bottom-60 justify-center flex w-full mx-auto z-10 overflow-hidden">
+          <div
+            id="about"
+            className="flex flex-col items-center justify-center w-full max-w-sm lg:max-w-3xl h-80 bg-[rgb(255,251,240)] bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163200/blob-sm_l6dtgi.png')] lg:bg-[url('https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/blobb-bg_zvdcaj.png')] bg-center bg-cover bg-no-repeat rounded-xl py-11 px-11 text-center shadow-lg"
+          >
             <p className="font-bold text-3xl mb-4">About The Team</p>
             <p className="leading-6 text-sm lg:text-base max-w-lg">
               The Best Study Guide is compiled and edited by a group of former
@@ -38,9 +45,14 @@ export default function Home() {
         </div>
       </section>
       <section className="border-b border-b-border h-96 w-full"></section>
-      <section className="bg-background relative py-24 px-4 lg:px-16 border-b border-b-border">
-        <div className="flex flex-col-reverse lg:flex-row gap-10 lg:gap-20 items-center">
-          <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163203/books_mexubf.png" width={500} height={500} alt="bsg books" />
+      <section className="bg-background relative py-24 px-4 lg:px-16 border-b border-b-border ">
+        <div className="flex flex-col-reverse lg:flex-row gap-10 lg:gap-20 items-center max-w-screen-xl mx-auto">
+          <Image
+            src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163203/books_mexubf.png"
+            width={400}
+            height={400}
+            alt="bsg books"
+          />
           <div className="flex flex-col gap-4 font-medium">
             <h1 className="text-2xl lg:text-4xl font-bold">
               Explore the study guides put together by{" "}
@@ -87,8 +99,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className=" relative py-24 px-4 lg:px-16 border-b border-b-border">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
+      <section className=" relative py-24 px-4 lg:px-16 border-b border-b-border ">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center max-w-screen-xl mx-auto">
           <div className="flex flex-col gap-4 font-medium">
             <h1 className="text-2xl lg:text-4xl font-bold">
               Put Your{" "}
@@ -119,35 +131,37 @@ export default function Home() {
         </div>
       </section>
 
-      <section className=" relative py-24 px-4 lg:px-16 border-b border-b-border">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
-          <div className="flex flex-col gap-6 font-medium items-start ">
+      <section
+        id="pricing"
+        className=" relative py-24 px-4 lg:px-16 border-b border-b-border"
+      >
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center max-w-screen-xl mx-auto">
+          <div className="flex flex-col gap-6 font-medium items-start">
             <div className="flex flex-col gap-3">
-
-            <h1 className="text-2xl lg:text-4xl font-bold">
-              <span className="text-gradient bg-gradient-to-r from-[#063231] via-[#4E8E9B] to-[#063231]">
-                Take A Look At Our Rates{" "}
-              </span>
-            </h1>
-            <p className="text-sm lg:text-base leading-6">
-              🔐 Processed securely by Paystack.
-              <br />
-              Having challenges paying? Please send an email to{" "}
-              <a
-                className="underline hover:text-gray-600"
-                href="mailto:thebeststudyguidegh@gmail.com"
+              <h1 className="text-2xl lg:text-4xl font-bold">
+                <span className="text-gradient bg-gradient-to-r from-[#063231] via-[#4E8E9B] to-[#063231]">
+                  Take A Look At Our Rates{" "}
+                </span>
+              </h1>
+              <p className="text-sm lg:text-base leading-6">
+                🔐 Processed securely by Paystack.
+                <br />
+                Having challenges paying? Please send an email to{" "}
+                <a
+                  className="underline hover:text-gray-600"
+                  href="mailto:thebeststudyguidegh@gmail.com"
                 >
-                thebeststudyguidegh@gmail.com
-              </a>{" "}
-              for assistance.
-            </p>
-                </div>
+                  thebeststudyguidegh@gmail.com
+                </a>{" "}
+                for assistance.
+              </p>
+            </div>
             <p className="text-sm lg:text-base leading-6 font-bold text-red-600">
               All subscriptions end on 31st July {currentYear + 1}
             </p>
 
             <a
-              href="/signin"
+              href="/login"
               className="relative inline-flex justify-center whitespace-nowrap rounded-lg px-4 py-4 max-w-xs w-full text-center text-white bg-gradient-to-r from-[#063231] to-[#4E8E9B] shadow before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(-45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:animate-bg-move"
             >
               Get me started
@@ -162,8 +176,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 px-4 lg:px-16 xl:px-32 border-b border-b-border">
-        <div className="flex flex-col gap-10 items-center">
+      <section
+        id="faq"
+        className="py-24 px-4 lg:px-16 xl:px-32 border-b border-b-border"
+      >
+        <div className="flex flex-col gap-10 items-center max-w-screen-xl mx-auto">
           <h1 className="text-2xl lg:text-4xl font-bold">
             Frequently Asked Questions
           </h1>
@@ -172,7 +189,7 @@ export default function Home() {
       </section>
 
       <section className=" relative py-24 lg:ps-16 bg-[#FDD66D] border-b border-b-border">
-        <div className="flex flex-col lg:flex-row gap-4  items-center">
+        <div className="flex flex-col lg:flex-row gap-4  items-center max-w-screen-xl mx-auto">
           <div className="flex flex-col gap-4 px-4 font-medium">
             <h1 className="text-2xl lg:text-4xl font-bold">
               We will be your{" "}
@@ -191,27 +208,25 @@ export default function Home() {
               Join The BSG Family!
             </a>
           </div>
-          <video
-            className=""
-            width={800}
-            height={800}
-            autoPlay
-            muted
-            loop
-          >
+          <video className="" width={800} height={800} autoPlay muted loop>
             <source
               src="https://res.cloudinary.com/dpyjjedao/video/upload/v1724170736/ayes_video_fu6wim.mp4"
               type="video/mp4"
             ></source>
           </video>
-          </div>
+        </div>
       </section>
 
       <section className="relative py-8 px-4 lg:px-16 border-b border-b-border ">
-        <div className="flex flex-col justify-center gap-16">
+        <div className="flex flex-col justify-center gap-16 max-w-screen-xl mx-auto">
           <div className="flex flex-col gap-16 lg:flex-row items-center lg:justify-between">
             <div className="flex flex-col gap-2 max-w-sm">
-              <Image src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/BSGLogo_v8mxaq.svg" width={200} height={70} alt="bsg logo" />
+              <Image
+                src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163199/BSGLogo_v8mxaq.svg"
+                width={200}
+                height={70}
+                alt="bsg logo"
+              />
               <p>
                 The Best Study Guide is a one-stop solution for the Ghana Bar
                 Exams preparation
@@ -219,18 +234,17 @@ export default function Home() {
             </div>
             <div className="max-w-sm flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-
-              <p className="font-semibold">Get in touch</p>
-              <p>
-                For all enquiries, contact us through{" "}
-                <a
-                  className="underline font-medium hover:text-gray-600"
-                  href="mailto:thebeststudyguidegh@gmail.com"
+                <p className="font-semibold">Get in touch</p>
+                <p>
+                  For all enquiries, contact us through{" "}
+                  <a
+                    className="underline font-medium hover:text-gray-600"
+                    href="mailto:thebeststudyguidegh@gmail.com"
                   >
-                  thebeststudyguidegh@gmail.com
-                </a>
-              </p>
-                  </div>
+                    thebeststudyguidegh@gmail.com
+                  </a>
+                </p>
+              </div>
               <div className="flex gap-3">
                 <a href="https://x.com">
                   <svg
