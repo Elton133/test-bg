@@ -13,6 +13,7 @@ export default function QuizNavigation() {
     quizEnded,
     submitQuiz,
     isSubmitting,
+    totalQuestions,
   } = useQuiz();
 
   return (
@@ -38,12 +39,10 @@ export default function QuizNavigation() {
         <p className={"font-Regular text-[#70787C]"}>
           {currentQuestion + 1 === quiz?.questions?.length
             ? "All done!"
-            : `${quiz?.questions?.length - 1 - currentQuestion} questions left`}
+            : `${totalQuestions - 1 - currentQuestion} questions left`}
         </p>
         <button
-          disabled={
-            currentQuestion === quiz?.questions?.length - 1 || quizEnded
-          }
+          disabled={currentQuestion === totalQuestions - 1 || quizEnded}
           onClick={() => handleQuestionChange("next")}
           className={
             "border-[0.5px] border-[#70787C] rounded-full p-1 w-8 h-8 flex justify-center items-center hover:scale-125"
@@ -52,10 +51,10 @@ export default function QuizNavigation() {
           <ArrowRight size={12} />
         </button>
       </div>
-      {quiz?.questions?.length - 1 === currentQuestion && (
+      {totalQuestions - 1 === currentQuestion && (
         <Button
           onClick={submitQuiz}
-          disabled={currentQuestion < quiz?.questions?.length - 1 || quizEnded}
+          disabled={currentQuestion < totalQuestions - 1 || quizEnded}
           className={"h-stack gap-2"}
         >
           {isSubmitting && <LoaderCircle className={"animate-spin"} />}

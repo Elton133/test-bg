@@ -30,6 +30,7 @@ interface QuizContextProps {
   submitQuiz: () => void;
   isSubmitting: boolean;
   results: number;
+  totalQuestions: number;
 }
 
 const QuizContext = createContext<QuizContextProps | null>(null);
@@ -149,7 +150,8 @@ export const QuizProvider = ({
         correctAnswers: correctAnswers(),
         isSubmitting,
         submitQuiz,
-        results
+        results,
+        totalQuestions: quiz?.questions.length as number,
       }}
     >
       {children}
