@@ -29,6 +29,7 @@ export default function QuizResults() {
             Correct: {correctAnswers}
           </p>
           <p className={"text-base text-[#E61509]"}>
+            {/*@ts-ignore*/}
             Incorrect: {quiz?.questions?.length - correctAnswers}
           </p>
         </div>
@@ -51,7 +52,7 @@ export default function QuizResults() {
             <p className={"font-semibold text-base"}>{question?.question}</p>
           </div>
           <div className={"flex flex-col gap-4"}>
-            {question?.answers.map((option) => (
+            {question?.answers?.map((option) => (
               <div
                 key={option?.id}
                 className={"flex items-center gap-6 animate-fade-up"}

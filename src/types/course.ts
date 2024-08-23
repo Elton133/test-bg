@@ -37,7 +37,7 @@ export interface ITopic {
   slug: string;
   course?: ICourse;
   case_briefs?: ICaseBrief[];
-  quiz?: IQuiz[];
+  quiz?: IQuiz;
 }
 
 export interface ICourseDetail extends ICourse {

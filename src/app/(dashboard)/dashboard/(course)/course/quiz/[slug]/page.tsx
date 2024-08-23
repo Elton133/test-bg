@@ -13,11 +13,10 @@ export default async function PastQuestionPage({
   params: { slug: string };
 }) {
   const topic: ITopic = await getNote(params.slug);
-  const quiz: IQuiz = await getQuiz("bghcytc-72");
   const session = await getServerSession(authOptions);
 
   return (
-    <QuizProvider quiz={quiz}>
+    <QuizProvider quiz={topic?.quiz}>
       <section className={"w-full relative"}>
         <div className={"py-1"}>
           <QuizSession topic={topic} username={session?.user?.name as string} />

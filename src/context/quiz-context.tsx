@@ -19,7 +19,7 @@ type Action = {
 };
 
 interface QuizContextProps {
-  quiz: IQuiz;
+  quiz?: IQuiz;
   answers: IAnswer[];
   dispatch: React.Dispatch<Action>;
   currentQuestion: number;
@@ -66,7 +66,7 @@ export const QuizProvider = ({
   quiz,
 }: {
   children: ReactNode;
-  quiz: IQuiz;
+  quiz?: IQuiz;
 }) => {
   const [answers, dispatch] = useReducer(quizReducer, []);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -126,7 +126,7 @@ export const QuizProvider = ({
   const submitQuiz = async () => {
     setIsSubmitting(true);
     const res = await submitQuizResults({
-      quiz_id: quiz?.id,
+      quiz_id: quiz?.id as number,
       grade: correctAnswers(),
     });
     if (res?.status) {

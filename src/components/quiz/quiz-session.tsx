@@ -82,7 +82,7 @@ export default function QuizSession({
                 </p>
               </div>
               <div className={"flex flex-col gap-4"}>
-                {quiz?.questions[currentQuestion]?.answers.map((option) => (
+                {quiz?.questions[currentQuestion]?.answers?.map((option) => (
                   <div
                     key={option?.id}
                     className={"flex items-center gap-6 animate-fade-up"}
