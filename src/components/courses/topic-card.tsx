@@ -40,15 +40,21 @@ export default function TopicCard({ note }: TopicCardProps) {
               </div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
-                <p className={"text-base text-[#3A7FA8]"}>
+                <Link
+                  href={`/dashboard/course/quiz/${note?.slug}`}
+                  className={"text-base text-[#3A7FA8] hover:underline"}
+                >
                   Multiple Choice Questions
-                </p>
+                </Link>
               </div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
-                <p className={"text-base text-[#3A7FA8]"}>
+                <Link
+                  href={`/dashboard/course/past-question/${note?.slug}`}
+                  className={"text-base text-[#3A7FA8] hover:underline"}
+                >
                   Past Question Index
-                </p>
+                </Link>
               </div>
               <div className={"h-stack w-full items-center"}>
                 <Checkbox className={"rounded-sm"} />
