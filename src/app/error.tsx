@@ -17,7 +17,7 @@ export default function Error({
   }, [error])
 
   return (
-    <div className={'v-stack mx-auto my-auto h-screen w-screen gap-12 items-center justify-center'}>
+    <div className={'v-stack mx-auto my-auto min-h-[calc(100vh_-_80px)] w-full gap-12 items-center justify-center'}>
       <h2 className={'text-2xl font-semibold'}>Something went wrong!</h2>
         {/*<p>*/}
         {/*    {error.message}*/}
