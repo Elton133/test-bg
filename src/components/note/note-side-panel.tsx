@@ -159,7 +159,7 @@ export default function NoteSidePanel({
             {resources.map((item, index) => {
               if (item.name === "Case Briefs") {
                 return (
-                    <CaseBriefsMenu navItem={item} key={index} caseBriefs={topic?.case_briefs} />
+                    <CaseBriefsMenu navItem={item} key={index} caseBriefs={topic?.case_briefs} topicSlug={topic?.slug} />
                 )
               }
               return (

@@ -9,7 +9,7 @@ export default function EmailVerified() {
         <div className={"v-stack stack-center"}>
           <Image
             src={
-              "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721229538/qlwm2s5rqxxcusaxiego.gif"
+              "https://res.cloudinary.com/dpyjjedao/image/upload/v1724423326/d37a0064cf4083d6dec48dc62a2f1881_phleei.gif"
             }
             width={86}
             height={78}
