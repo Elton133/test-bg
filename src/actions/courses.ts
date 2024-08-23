@@ -2,7 +2,7 @@
 
 import axiosInstance from "@/lib/axios";
 import { cookies } from "next/headers";
-import {ICourse, ICourseDetail, ITopic} from "@/types/course";
+import {ICourse, ICourseDetail, IQuiz, ITopic} from "@/types/course";
 
 const getCourses = async (): Promise<ICourse[]> => {
   const response = await fetch(
@@ -95,4 +95,49 @@ const getNote = async (slug: string) : Promise<ITopic | any> => {
     return {} as ITopic;
 }
 
-export { getCourses, purchaseCourse, getCourse, getNote };
+const getQuiz = async (slug: string) : Promise<IQuiz | any> => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${slug}`, {
+        headers: {
+            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        },
+        cache: "no-cache",
+        next: {
+            tags: ["quiz"],
+        },
+    });
+
+    if (!response.ok) {
+        return {
+            error: response.statusText
+        };
+    }
+
+    if (response.ok) {
+        return await response.json().then((data) => data?.quiz) as IQuiz;
+    }
+    return {} as IQuiz;
+}
+
+const submitQuizResults = async (data: {quiz_id: number; grade: number}) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/submit/quiz/result`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+   if (!response.ok) {
+       return {
+           error: response.json()
+       };
+   }
+
+   if (response.ok) {
+         return await response.json().then((data) => data);
+   }
+
+}
+
+export { getCourses, purchaseCourse, getCourse, getNote, getQuiz, submitQuizResults };
