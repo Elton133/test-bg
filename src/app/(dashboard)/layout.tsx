@@ -10,10 +10,10 @@ export default function DashBoardLayout({
   return (
     <SidePanelProvider>
       <SideBarProvider>
-        <main className={"w-full flex h-full"}>
-          <SideBar />
-          <div className={"min-h-full h-full w-full v-stack"}>{children}</div>
-        </main>
+          <main className={"w-full flex h-full"}>
+            <SideBar />
+            <div className={"min-h-full h-full w-full v-stack"}>{children}</div>
+          </main>
       </SideBarProvider>
     </SidePanelProvider>
   );
