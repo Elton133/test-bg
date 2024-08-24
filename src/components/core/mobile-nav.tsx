@@ -6,7 +6,6 @@ import NavLink from '@components/ui/nav-link';
 import useNavItems from '@hooks/use-nav-items';
 import Link from 'next/link';
 import { Button } from '@components/ui/button';
-import { on } from 'next/dist/client/components/react-dev-overlay/pages/bus';
 
 interface MobileNavProps {
   open: boolean;
@@ -39,7 +38,7 @@ const MobileNav = ({
   return (
     <motion.div
       className={cn(
-        'h-screen bg-white absolute top-[50px] left-0 py-4 px-4 z-50 sm:hidden',
+        'h-screen bg-white absolute top-[43px] left-0 py-4 px-4 z-50 sm:hidden',
         {
           'w-64': open,
         }
