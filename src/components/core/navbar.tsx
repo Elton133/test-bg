@@ -1,15 +1,15 @@
 'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import Logo from "@assets/logo.jpg";
-import React, {useState } from "react";
-import { useSession } from "next-auth/react";
-import { NotificationBing, ShoppingCart } from "iconsax-react";
-import MobileNav from "@components/core/mobile-nav";
-import { signOut } from "next-auth/react";
-import {Cart, useCart} from "@/context/cart-context";
-import { MenuButton } from "@components/ui/menu-button";
+import Image from 'next/image';
+import Link from 'next/link';
+import Logo from '@assets/logo.jpg';
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { NotificationBing, ShoppingCart } from 'iconsax-react';
+import MobileNav from '@components/core/mobile-nav';
+import { signOut } from 'next-auth/react';
+import { Cart, useCart } from '@/context/cart-context';
+import { MenuButton } from '@components/ui/menu-button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +19,6 @@ import { Button } from '@components/ui/button';
 import CartPanel from '@components/shop/cart-panel';
 
 export default function NavBar(): React.ReactElement {
-  const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [activeHash, setActiveHash] = useState('');
@@ -64,7 +63,7 @@ export default function NavBar(): React.ReactElement {
   // };
 
   return (
-    <header className={"sm:h-[78px] h-[50px] z-20"}>
+    <header className={'sm:h-[78px] h-[50px] z-20'}>
       <nav
         className={
           ' flex items-center justify-between bg-white sm:border-[0.5px] sm:border-[#D3D5D6] py-3 sm:py-5 px-4 lg:px-16 xl:px-20 w-full fixed top-0 z-30'
@@ -95,7 +94,7 @@ export default function NavBar(): React.ReactElement {
             />
           </Link>
         </div>
-        {pathname === '/' && (
+        {!session?.user && (
           <>
             <div>
               <ul className="flex gap-4 ">
