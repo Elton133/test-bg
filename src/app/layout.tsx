@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className="scroll-smooth" lang="en">
       <body className={`${poppins.className} min-h-screen h-full relative antialiased scroll-smooth bg-gray-50`}>
         <SessionWrapper>
           <CartProvider>
