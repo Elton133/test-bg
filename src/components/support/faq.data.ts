@@ -2,47 +2,22 @@ const faq = [
   {
     question: "How do I find course materials?",
     answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
+      "All course materials can be found under the ‘BSG shop’ in the navbar.",
   },
   {
-    question: "How do I find course materials?",
+    question: "What are the courses available?",
     answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
+      "Civil Procedure, Constitutional Law, Criminal Procedure, Law of Evidence, Family Law, Ghana Legal System, Law of Interpretation",
   },
   {
-    question: "How do I find course materials?",
+    question: "Can I download the Guides?",
     answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
+      "Downloading, screengrabbing, screenshotting, copying and pasting, or otherwise capturing the content in the Guides is STRICTLY PROHIBITED. Sharing the content after capturing it is also STRICTLY PROHIBITED. You can access the Guides online when you sign up/sign in to the website",
   },
   {
-    question: "How do I find course materials?",
+    question: "Where can I find the MCQs?",
     answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
-  },
-  {
-    question: "How do I find course materials?",
-    answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
-  },
-  {
-    question: "How do I find course materials?",
-    answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
-  },
-  {
-    question: "How do I find course materials?",
-    answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
-  },
-  {
-    question: "How do I find course materials?",
-    answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
-  },
-  {
-    question: "How do I find course materials?",
-    answer:
-      "Yes. Free to use for personal and commercial projects. No attribution required.",
+      "MCQs for each topic can be found under the topics menu.",
   },
 ];
 

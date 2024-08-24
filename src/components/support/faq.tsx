@@ -23,13 +23,13 @@ export default function Faq() {
     });
   };
   return (
-    <div className={"v-stack gap-4 w-full"}>
+    <div className={"v-stack gap-2 w-full"}>
       {faq.map((_, index) => (
         <Collapsible
           open={openStates[index]}
           onOpenChange={() => toggleState(index)}
           key={index}
-          className={"bg-gray-100 min-w-full p-3 rounded-[12px]"}
+          className={"bg-gray-100 min-w-full p-3 rounded-xl"}
         >
           <CollapsibleTrigger className={""}>
             <div className={"flex gap-2"}>
@@ -39,15 +39,14 @@ export default function Faq() {
                   ( <Minus className={""} />)
               }
               <p className={"text-base font-semibold"}>
-                How do I find course materials?
+                {_.question}
               </p>
             </div>
           </CollapsibleTrigger>
           <CollapsibleContent
             className={"animate-once animate-fade transition-all px-8"}
           >
-            Yes. Free to use for personal and commercial projects. No
-            attribution required.
+            {_.answer}
           </CollapsibleContent>
         </Collapsible>
       ))}

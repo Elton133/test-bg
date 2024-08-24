@@ -1,8 +1,11 @@
-import { ITopic } from "@/types/course";
-import { getNote } from "@/actions/courses";
+import { IQuiz, ITopic } from "@/types/course";
+import { getNote, getQuiz } from "@/actions/courses";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import NoteHeader from "@components/note/note-header";
+
+import QuizSession from "@components/quiz/quiz-session";
+import { QuizProvider } from "@/context/quiz-context";
+import StartQuizModal from "@components/quiz/start-quiz-modal";
 
 export default async function PastQuestionPage({
   params,
@@ -11,15 +14,15 @@ export default async function PastQuestionPage({
 }) {
   const topic: ITopic = await getNote(params.slug);
   const session = await getServerSession(authOptions);
+
   return (
-    <section className={"w-full"}>
-      <NoteHeader topic={topic} userName={session?.user.name as string} />
-      <section className={"p-4 max-w-[1100px] mx-auto flex justify-center overflow-hidden"}>
-        <div
-          className={"prose bg-white min-h-[600px] rounded-[20px] p-4 min-w-full prose-h1:w-full"}
-          dangerouslySetInnerHTML={{ __html: topic?.pqi }}
-        />
+    <QuizProvider quiz={topic?.quiz}>
+      <section className={"w-full relative"}>
+        <div className={"py-1"}>
+          <QuizSession topic={topic} username={session?.user?.name as string} />
+        </div>
+        <StartQuizModal />
       </section>
-    </section>
+    </QuizProvider>
   );
 }

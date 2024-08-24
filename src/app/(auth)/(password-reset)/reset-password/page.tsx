@@ -1,22 +1,21 @@
 "use client";
-
 import SendResetPasswordForm from "@/components/forms/reset-password-form";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import axiosInstance from "@/lib/axios";
 
-export default function ResetPassword() {
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email");
-
+export default function ResetPassword({
+  searchParams,
+}: {
+  searchParams: { email: string };
+}) {
   const resendLink = () => {
     toast.promise(
       async () => {
         try {
           const res = await axiosInstance.post("/api/auth/forgot-password", {
-            email,
+            email: searchParams.email,
           });
           return res.data;
         } catch (error) {
@@ -42,7 +41,7 @@ export default function ResetPassword() {
 
   return (
     <main className="max-w-[455px] h-[calc(100vh_-_80px)] w-full px-4 lg:px-8 py-2 sm:py-[2%]">
-      {!email && (
+      {!searchParams.email && (
         <div className={"v-stack gap-6 h-full"}>
           <div className={"v-stack"}>
             <h1 className="text-2xl font-semibold">Reset password</h1>
@@ -54,19 +53,19 @@ export default function ResetPassword() {
           <SendResetPasswordForm />
         </div>
       )}
-      {email && (
+      {searchParams.email && (
         <div className={"v-stack gap-6 h-full py-[15%]"}>
           <div className={"v-stack stack-center"}>
             <Image
               src={
-                "https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721229538/qlwm2s5rqxxcusaxiego.gif"
+                "https://res.cloudinary.com/dpyjjedao/image/upload/v1724423613/48e4a41f537f121857078d0c4b002f45_nq9utc.gif"
               }
               width={110}
               height={83}
               alt={"loader"}
             />
             <p className={"text-xs font-medium"}>
-              We have sent a reset link to {email}
+              We have sent a reset link to {searchParams.email}
             </p>
             <p className={"text-muted text-xs"}>
               Didn&apos;t get the email?{" "}
