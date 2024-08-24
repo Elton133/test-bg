@@ -19,8 +19,15 @@ import { Button } from '@components/ui/button';
 import CartPanel from '@components/shop/cart-panel';
 import { usePathname } from 'next/navigation';
 import { publicRoutes } from '@/middleware';
+import { Session } from 'next-auth';
 
-export default function NavBar(): React.ReactElement {
+interface NavBarProps {
+  session: Session | null;
+}
+
+export default function NavBar({
+  session: ses,
+}: NavBarProps): React.ReactElement {
   const path = usePathname();
   const [open, setOpen] = React.useState(false);
   const [openCart, setOpenCart] = useState(false);
@@ -98,7 +105,8 @@ export default function NavBar(): React.ReactElement {
             />
           </Link>
         </div>
-        {!session?.user && (
+        {session === null &&
+        (path === '/' || !publicRoutes.includes(path)) ? (
           <>
             <div>
               <ul className="hidden md:flex gap-4 ">
@@ -139,7 +147,7 @@ export default function NavBar(): React.ReactElement {
               </Link>
             </div>
           </>
-        )}
+        ) : null}
         {session?.user && (
           <div
             className={'flex gap-2 items-center justify-start w-max'}
@@ -148,7 +156,7 @@ export default function NavBar(): React.ReactElement {
               <DropdownMenuTrigger>
                 <Image
                   src={`${
-                    session?.user.image
+                    session?.user?.image
                       ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`
                       : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`
                   }`}
