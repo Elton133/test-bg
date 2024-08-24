@@ -17,11 +17,14 @@ import {
 } from '@components/ui/dropdown-menu';
 import { Button } from '@components/ui/button';
 import CartPanel from '@components/shop/cart-panel';
+import { usePathname } from 'next/navigation';
+import { publicRoutes } from '@/middleware';
 
 export default function NavBar(): React.ReactElement {
+  const path = usePathname();
   const [open, setOpen] = React.useState(false);
   const [openCart, setOpenCart] = useState(false);
-  const [activeHash, setActiveHash] = useState('');
+  // const [activeHash, setActiveHash] = useState('');
   const { data: session } = useSession();
   const { dispatch, cart } = useCart();
 
@@ -69,19 +72,20 @@ export default function NavBar(): React.ReactElement {
           ' flex items-center justify-between bg-white sm:border-[0.5px] sm:border-[#D3D5D6] py-3 sm:py-5 px-4 lg:px-16 xl:px-20 w-full fixed top-0 z-30'
         }
       >
-        {open && session?.user && (
-          <MobileNav open={open} onClose={handleToggleSidebar} />
+        {open && (
+          <MobileNav
+            open={open}
+            onClose={handleToggleSidebar}
+            authenticated={session?.user && true}
+          />
         )}
 
         <div className={'flex gap-4 items-center'}>
-          {session?.user && (
+          {(path === '/' || !publicRoutes.includes(path)) && (
             <div className={'sm:hidden'}>
               <MenuButton isOpen={open} onClick={handleToggleSidebar} />
             </div>
           )}
-          <div className={'sm:hidden'}>
-            <MenuButton isOpen={open} onClick={handleToggleSidebar} />
-          </div>
           <Link href="/">
             <Image
               loading={'lazy'}
@@ -97,7 +101,7 @@ export default function NavBar(): React.ReactElement {
         {!session?.user && (
           <>
             <div>
-              <ul className="flex gap-4 ">
+              <ul className="hidden md:flex gap-4 ">
                 <li>
                   <a
                     href="#about"
@@ -124,7 +128,7 @@ export default function NavBar(): React.ReactElement {
                 </li>
               </ul>
             </div>
-            <div className="flex gap-2 text-sm font-semibold">
+            <div className="hidden md:flex gap-2 text-sm font-semibold">
               <Link href="/login">
                 <button className="h-10 px-4 py-2 text-primary bg-[#E6EBEA] rounded-lg hover:bg-[#DAE0E0]">
                   Sign in
@@ -143,14 +147,12 @@ export default function NavBar(): React.ReactElement {
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Image
-                  // @ts-ignore
                   src={`${
                     session?.user.image
                       ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`
                       : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`
                   }`}
-                  // @ts-ignore
-                  alt={session.user.name as string}
+                  alt={session.user.name}
                   width={28}
                   height={28}
                   className={
@@ -195,7 +197,6 @@ export default function NavBar(): React.ReactElement {
         <CartPanel
           open={openCart}
           onClose={handleToggleCart}
-          // @ts-ignore
           email={session?.user.email as string}
         />
       )}
