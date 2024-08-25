@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import Lottie from 'react-lottie';
+import GirlTyping from '@assets/lottie-files/juicy-girl.json';
 
 export default function Hero() {
   return (
@@ -18,12 +22,25 @@ export default function Hero() {
             preparation.
           </p>
         </div>
-        <Image
-          src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163211/juicy-girl-working-at-home_yi3vx3.gif"
-          width={500}
+        {/*<Image*/}
+        {/*  src="https://res.cloudinary.com/dpyjjedao/image/upload/v1724163211/juicy-girl-working-at-home_yi3vx3.gif"*/}
+        {/*  width={500}*/}
+        {/*  height={400}*/}
+        {/*  className={'animate-fade-left'}*/}
+        {/*  alt="girl typing"*/}
+        {/*/>*/}
+        <Lottie
+          options={{
+            animationData: GirlTyping,
+            loop: true,
+            autoplay: true,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice',
+              className: 'animate-fade-left',
+            },
+          }}
           height={400}
-          className={'animate-fade-left'}
-          alt="girl typing"
+          width={500}
         />
       </div>
       <div className="absolute -bottom-60 justify-center flex w-full mx-auto z-10 overflow-hidden animate-jump-in animate-delay-300">
