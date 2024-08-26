@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   description:
     'We provide law students with a centralized platform, streamlining access to key resources for efficient bar exam preparation',
   keywords: [
+    'the best study guide',
+    'the best study guide for law students',
+    'study guide for law students',
+    'ghana bar exam',
+    'best study guide',
+    'thebeststudyguide',
+    'bsg law',
     'law',
     'bar exam',
     'study',
@@ -29,6 +36,16 @@ export const metadata: Metadata = {
     'students',
     'legal',
     'resources',
+  ],
+  authors: [
+    {
+      name: 'The Best Study Guide',
+      url: 'https://thebeststudyguide.com',
+    },
+    {
+      name: 'TouchStack Technologies',
+      url: 'https://touchstacktechnologies.com',
+    },
   ],
   robots: 'follow, index',
 };
