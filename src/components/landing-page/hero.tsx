@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Lottie from 'react-lottie';
 import GirlTyping from '@assets/lottie-files/juicy-girl.json';
 
