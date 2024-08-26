@@ -4,12 +4,12 @@ import { Warning2 } from 'iconsax-react';
 import { ArrowRightToLine, Dot } from 'lucide-react';
 import NoteSidePanel from '@components/note/note-side-panel';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
-import { ITopic } from '@/types/course';
+import { ITopic, ITopicDetail } from '@/types/course';
 import { cn } from '@/lib/utils';
 import { useSideBar } from '@/context/side-bar-context';
 
 interface INoteHeaderProps {
-  topic: ITopic;
+  topic: ITopicDetail;
   userName: string;
 }
 
@@ -68,7 +68,7 @@ export default function NoteHeader({
             <p className={'text-muted truncate'}>
               Topic:{' '}
               <span className={'text-[#3A7FA8]'}>
-                {topic.noteTitle}
+                {topic?.noteTitle}
               </span>
             </p>
           </div>

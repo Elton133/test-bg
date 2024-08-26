@@ -1,21 +1,27 @@
-"use server";
+'use server';
 
-import axiosInstance from "@/lib/axios";
-import { cookies } from "next/headers";
-import {ICourse, ICourseDetail, IQuiz, ITopic} from "@/types/course";
+import axiosInstance from '@/lib/axios';
+import { cookies } from 'next/headers';
+import {
+  ICourse,
+  ICourseDetail,
+  IQuiz,
+  ITopic,
+  ITopicDetail,
+} from '@/types/course';
 
 const getCourses = async (): Promise<ICourse[]> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/courses`,
     {
       headers: {
-        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
       },
-      cache: "no-cache",
+      cache: 'no-cache',
       next: {
-        tags: ["courses"],
+        tags: ['courses'],
       },
-    },
+    }
   );
   // console.log(await response.json().then((data) => data))
   if (response.status !== 200) {
@@ -29,21 +35,25 @@ const getCourses = async (): Promise<ICourse[]> => {
 
 const getCourse = async (slug: string): Promise<ICourseDetail> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/course-details/${slug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/course/${slug}`,
     {
       headers: {
-        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
       },
-      cache: "no-cache",
+      cache: 'no-cache',
       next: {
-        tags: ["courses"],
+        tags: ['courses'],
       },
-    },
+    }
   );
+
   if (response.status !== 200) {
     return {} as ICourseDetail;
   }
-  return await response.json().then((data) => data?.course);
+
+  // if (response.ok) {
+  // }
+  return await response.json().then((data) => data);
 };
 
 const purchaseCourse = async (data: {
@@ -56,9 +66,9 @@ const purchaseCourse = async (data: {
       data,
       {
         headers: {
-          Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
         },
-      },
+      }
     );
     return response.data;
   } catch (error) {
@@ -72,72 +82,90 @@ const purchaseCourse = async (data: {
   }
 };
 
-const getNote = async (slug: string) : Promise<ITopic | any> => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/note/${slug}`, {
-        headers: {
-            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-        },
-        cache: "no-cache",
-        next: {
-            tags: ["notes"],
-        },
-    });
-
-    if (!response.ok) {
-        return {
-            error: response.statusText
-        };
+const getNote = async (slug: string): Promise<ITopicDetail | any> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/note/${slug}`,
+    {
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+      },
+      cache: 'no-cache',
+      next: {
+        tags: ['notes'],
+      },
     }
+  );
 
-    if (response.ok) {
-        return await response.json().then((data) => data?.note) as ITopic;
+  if (!response.ok) {
+    return {
+      error: response.statusText,
+    };
+  }
+
+  if (response.ok) {
+    return (await response.json().then((data) => data?.note)) as ITopic;
+  }
+  return {} as ITopic;
+};
+
+const getQuiz = async (slug: string): Promise<IQuiz | any> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${slug}`,
+    {
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+      },
+      cache: 'no-cache',
+      next: {
+        tags: ['quiz'],
+      },
     }
-    return {} as ITopic;
-}
+  );
 
-const getQuiz = async (slug: string) : Promise<IQuiz | any> => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${slug}`, {
-        headers: {
-            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-        },
-        cache: "no-cache",
-        next: {
-            tags: ["quiz"],
-        },
-    });
+  if (!response.ok) {
+    return {
+      error: response.statusText,
+    };
+  }
 
-    if (!response.ok) {
-        return {
-            error: response.statusText
-        };
+  if (response.ok) {
+    return (await response.json().then((data) => data?.quiz)) as IQuiz;
+  }
+  return {} as IQuiz;
+};
+
+const submitQuizResults = async (data: {
+  quiz_id: number;
+  grade: number;
+}) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/submit/quiz/result`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     }
+  );
 
-    if (response.ok) {
-        return await response.json().then((data) => data?.quiz) as IQuiz;
-    }
-    return {} as IQuiz;
-}
+  if (!response.ok) {
+    return {
+      error: response.json(),
+    };
+  }
 
-const submitQuizResults = async (data: {quiz_id: number; grade: number}) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/submit/quiz/result`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
+  if (response.ok) {
+    return await response.json().then((data) => data);
+  }
+};
 
-   if (!response.ok) {
-       return {
-           error: response.json()
-       };
-   }
-
-   if (response.ok) {
-         return await response.json().then((data) => data);
-   }
-
-}
-
-export { getCourses, purchaseCourse, getCourse, getNote, getQuiz, submitQuizResults };
+export {
+  getCourses,
+  purchaseCourse,
+  getCourse,
+  getNote,
+  getQuiz,
+  submitQuizResults,
+};

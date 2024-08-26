@@ -1,6 +1,6 @@
 import { ArrowRightToLine } from 'lucide-react';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
-import { ITopic } from '@/types/course';
+import { ITopicDetail } from '@/types/course';
 import { useEffect } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 import { DocumentText, Warning2 } from 'iconsax-react';
@@ -45,7 +45,7 @@ export default function NoteSidePanel({
   topic,
   userName,
 }: {
-  topic: ITopic;
+  topic: ITopicDetail;
   userName: string;
 }) {
   const { toggleSidePanel, openSidePanel } = useNoteSidePanel();
