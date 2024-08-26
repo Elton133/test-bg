@@ -35,13 +35,28 @@ export interface ITopic {
   updated_at: string;
   deleted_at: string | null;
   slug: string;
+}
+
+export interface ITopicDetail extends ITopic {
   course?: ICourse;
   case_briefs?: ICaseBrief[];
   quiz?: IQuiz;
 }
 
-export interface ICourseDetail extends ICourse {
-  notes: ITopic[];
+export interface ICourseDetail {
+  course: ICourse;
+  progress_percentage: number;
+  notes: {
+    note: ITopic;
+    quiz: IQuiz;
+    case_briefs: ICaseBrief[];
+    note_status: boolean;
+    quiz_status: boolean;
+    study_guide_status: boolean;
+    pqi_status: boolean;
+    case_brief_status: boolean;
+  }[];
+  enroll_status: 'active' | null;
 }
 
 export interface IAnswer {

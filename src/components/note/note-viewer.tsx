@@ -110,12 +110,12 @@ export default function NoteViewer({ note }: INoteViewerProps) {
         onPageChange={handlePageChange}
         pageLayout={pageLayout}
         renderPage={renderPage}
-        httpHeaders={{
-          AllowedHeaders: ['*'],
-          AllowedMethods: ['GET', 'POST'],
-          AllowedOrigins: ['*'],
-          ExposeHeaders: [],
-        }}
+        // httpHeaders={{
+        //   AllowedHeaders: ['*'],
+        //   AllowedMethods: ['GET', 'HEAD'],
+        //   AllowedOrigins: ['*', 'http://localhost:3000'],
+        //   ExposeHeaders: [],
+        // }}
       />
       <div
         className={
