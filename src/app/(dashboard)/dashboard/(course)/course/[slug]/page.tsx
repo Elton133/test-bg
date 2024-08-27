@@ -51,7 +51,17 @@ export default async function CourseDetails({
         <div className={'v-stack gap-3'}>
           {course?.notes &&
             course?.notes.map((note) => (
-              <TopicCard key={note?.note?.slug} note={note?.note} />
+              <TopicCard
+                key={note?.note?.slug}
+                note={note?.note}
+                noteStatuses={{
+                  note_status: note?.note_status,
+                  quiz_status: note?.quiz_status,
+                  study_guide_status: note?.study_guide_status,
+                  pqi_status: note?.pqi_status,
+                  case_brief_status: note?.case_brief_status,
+                }}
+              />
             ))}
         </div>
       </div>
