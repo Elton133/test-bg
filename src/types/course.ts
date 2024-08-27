@@ -59,6 +59,14 @@ export interface ICourseDetail {
   enroll_status: 'active' | null;
 }
 
+export interface INoteStatuses {
+  note_status: boolean;
+  quiz_status: boolean;
+  study_guide_status: boolean;
+  pqi_status: boolean;
+  case_brief_status: boolean;
+}
+
 export interface IAnswer {
   id: number;
   quiz_id: number;
