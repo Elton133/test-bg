@@ -9,6 +9,7 @@ import {
   ITopic,
   ITopicDetail,
 } from '@/types/course';
+import { revalidatePath } from 'next/cache';
 
 const getCourses = async (): Promise<ICourse[]> => {
   const response = await fetch(
@@ -161,6 +162,64 @@ const submitQuizResults = async (data: {
   }
 };
 
+interface IResourcesCompleted {
+  study_guide_completed?: boolean;
+  pqi_completed?: boolean;
+  quiz_completed?: boolean;
+  case_brief_completed?: boolean;
+}
+
+const markResourceAsCompleted = async (
+  id: string,
+  data: IResourcesCompleted
+) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/mark-item/${id}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!response.ok) {
+    return {
+      error: response.json(),
+    };
+  }
+
+  if (response.ok) {
+    revalidatePath('/dashboard/course/[slug]');
+    return await response.json().then((data) => data);
+  }
+};
+
+const markNoteAsCompleted = async (id: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/note-completed/${id}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  if (!response.ok) {
+    return {
+      error: response.json(),
+    };
+  }
+
+  if (response.ok) {
+    revalidatePath('/dashboard/course/[slug]');
+    return await response.json().then((data) => data);
+  }
+};
+
 export {
   getCourses,
   purchaseCourse,
@@ -168,4 +227,6 @@ export {
   getNote,
   getQuiz,
   submitQuizResults,
+  markNoteAsCompleted,
+  markResourceAsCompleted,
 };
