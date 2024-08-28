@@ -1,4 +1,9 @@
-import { getCourse } from '@/actions/courses';
+import {
+  getCourse,
+  markNoteAsCompleted,
+  markResourceAsCompleted,
+  resetCourseProgress,
+} from '@/actions/courses';
 import { Progress } from '@components/ui/progress';
 import { cn } from '@/lib/utils';
 import TopicCard from '@components/courses/topic-card';
@@ -42,7 +47,10 @@ export default async function CourseDetails({
                 })}
               />
             </div>
-            <ConfirmResetModal />
+            <ConfirmResetModal
+              resetCourse={resetCourseProgress}
+              courseID={course?.course?.id}
+            />
           </div>
         </div>
         <div className={'py-6'}>
@@ -61,6 +69,8 @@ export default async function CourseDetails({
                   pqi_status: note?.pqi_status,
                   case_brief_status: note?.case_brief_status,
                 }}
+                markNoteAsCompleted={markNoteAsCompleted}
+                markResourceAsCompleted={markResourceAsCompleted}
               />
             ))}
         </div>

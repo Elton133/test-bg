@@ -27,7 +27,6 @@ const getCourses = async (): Promise<ICourse[]> => {
   // console.log(await response.json().then((data) => data))
   if (response.status !== 200) {
     // eslint-disable-next-line no-console
-    console.log(response);
     return [] as ICourse[];
   }
 
@@ -162,7 +161,7 @@ const submitQuizResults = async (data: {
   }
 };
 
-interface IResourcesCompleted {
+export interface IResourcesCompleted {
   study_guide_completed?: boolean;
   pqi_completed?: boolean;
   quiz_completed?: boolean;
@@ -192,7 +191,7 @@ const markResourceAsCompleted = async (
   }
 
   if (response.ok) {
-    revalidatePath('/dashboard/course/[slug]');
+    revalidatePath('/dashboard/course/[slug]', 'page');
     return await response.json().then((data) => data);
   }
 };
@@ -215,7 +214,31 @@ const markNoteAsCompleted = async (id: string) => {
   }
 
   if (response.ok) {
-    revalidatePath('/dashboard/course/[slug]');
+    revalidatePath('/dashboard/course/[slug]', 'page');
+    return await response.json().then((data) => data);
+  }
+};
+
+const resetCourseProgress = async (id: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/reset-progress/${id}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  if (!response.ok) {
+    return {
+      error: response.json(),
+    };
+  }
+
+  if (response.ok) {
+    revalidatePath('/dashboard/course/[slug]', 'page');
     return await response.json().then((data) => data);
   }
 };
@@ -229,4 +252,5 @@ export {
   submitQuizResults,
   markNoteAsCompleted,
   markResourceAsCompleted,
+  resetCourseProgress,
 };

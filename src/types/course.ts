@@ -11,6 +11,7 @@ export interface ICourse {
   quizzes_count: number;
   question_count: number;
   enroll_status: string;
+  progress: number;
 }
 
 export interface ICaseBrief {
