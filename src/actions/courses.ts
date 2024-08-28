@@ -6,7 +6,7 @@ import {
   IQuiz,
   ITopicDetail,
 } from '@/types/course';
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import fetchWrapper from '@/lib/fetch-wrapper';
 
 interface ICoursesRes {
@@ -101,6 +101,9 @@ const submitQuizResults = async (data: {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/submit/quiz/result`;
   const response = await fetchWrapper<any>(url, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data),
   });
 
@@ -125,6 +128,9 @@ const markResourceAsCompleted = async (
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/mark-item/${id}`;
   const response = await fetchWrapper<any>(url, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data),
   });
 
@@ -132,7 +138,8 @@ const markResourceAsCompleted = async (
     return response;
   }
 
-  revalidatePath('/dashboard/course/[slug]', 'page');
+  // revalidatePath('/dashboard/course/[slug]', 'page');
+  revalidateTag('courses');
   return response;
 };
 
@@ -146,7 +153,7 @@ const markNoteAsCompleted = async (id: string) => {
     return response;
   }
 
-  revalidatePath('/dashboard/course/[slug]', 'page');
+  revalidateTag('courses');
   return response;
 };
 
@@ -160,7 +167,8 @@ const resetCourseProgress = async (id: string) => {
     return response;
   }
 
-  revalidatePath('/dashboard/course/[slug]', 'page');
+  // revalidatePath('/dashboard/course/[slug]', 'page');
+  revalidateTag('courses');
   return response;
 };
 
