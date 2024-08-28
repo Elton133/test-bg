@@ -9,20 +9,24 @@ import {
 import { INoteStatuses, ITopic } from '@/types/course';
 import { Checkbox } from '@components/ui/checkbox';
 import Link from 'next/link';
-import {
-  markNoteAsCompleted,
-  markResourceAsCompleted,
-} from '@/actions/courses';
+import { IResourcesCompleted } from '@/actions/courses';
 
 interface TopicCardProps {
   note: ITopic;
   type?: string;
   noteStatuses: INoteStatuses;
+  markNoteAsCompleted: (id: string) => void;
+  markResourceAsCompleted: (
+    id: string,
+    data: IResourcesCompleted
+  ) => void;
 }
 
 export default function TopicCard({
   note,
   noteStatuses,
+  markNoteAsCompleted,
+  markResourceAsCompleted,
 }: TopicCardProps) {
   return (
     <Accordion type={'single'} collapsible>
@@ -56,6 +60,7 @@ export default function TopicCard({
                           !noteStatuses?.study_guide_status,
                       }
                     );
+                    console.log(res);
                   }}
                   defaultChecked={noteStatuses?.study_guide_status}
                 />

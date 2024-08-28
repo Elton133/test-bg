@@ -48,7 +48,7 @@ export default async function Overview() {
                 <CourseCardList
                   key={course.id}
                   courseName={course.title}
-                  progress={50}
+                  progress={course?.progress}
                   slug={course.slug}
                   // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
                 />
