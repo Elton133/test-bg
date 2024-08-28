@@ -11,6 +11,7 @@ export interface ICourse {
   quizzes_count: number;
   question_count: number;
   enroll_status: string;
+  progress: number;
 }
 
 export interface ICaseBrief {
@@ -57,6 +58,14 @@ export interface ICourseDetail {
     case_brief_status: boolean;
   }[];
   enroll_status: 'active' | null;
+}
+
+export interface INoteStatuses {
+  note_status: boolean;
+  quiz_status: boolean;
+  study_guide_status: boolean;
+  pqi_status: boolean;
+  case_brief_status: boolean;
 }
 
 export interface IAnswer {

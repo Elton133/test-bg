@@ -1,15 +1,21 @@
-import { getCourse } from '@/actions/courses';
+import {
+  getCourse,
+  markNoteAsCompleted,
+  markResourceAsCompleted,
+  resetCourseProgress,
+} from '@/actions/courses';
 import { Progress } from '@components/ui/progress';
 import { cn } from '@/lib/utils';
 import TopicCard from '@components/courses/topic-card';
 import ConfirmResetModal from '@components/courses/reset-course-modal';
+import { ICourseDetail } from '@/types/course';
 
 export default async function CourseDetails({
   params,
 }: {
   params: { slug: string };
 }) {
-  const course = await getCourse(params.slug);
+  const course: ICourseDetail = await getCourse(params.slug);
   return (
     <section className={'w-full h-full'}>
       <div
@@ -33,7 +39,7 @@ export default async function CourseDetails({
           >
             <div className={'max-w-[400px] w-full space-y-2'}>
               <p className={'font-semibold text-base'}>
-                {course?.progress_percentage}% complete
+                {course?.progress_percentage?.toFixed(0)}% complete
               </p>
               <Progress
                 value={course?.progress_percentage}
@@ -42,7 +48,10 @@ export default async function CourseDetails({
                 })}
               />
             </div>
-            <ConfirmResetModal />
+            <ConfirmResetModal
+              resetCourse={resetCourseProgress}
+              courseID={course?.course?.id}
+            />
           </div>
         </div>
         <div className={'py-6'}>
@@ -51,7 +60,19 @@ export default async function CourseDetails({
         <div className={'v-stack gap-3'}>
           {course?.notes &&
             course?.notes.map((note) => (
-              <TopicCard key={note?.note?.slug} note={note?.note} />
+              <TopicCard
+                key={note?.note?.slug}
+                note={note?.note}
+                noteStatuses={{
+                  note_status: note?.note_status,
+                  quiz_status: note?.quiz_status,
+                  study_guide_status: note?.study_guide_status,
+                  pqi_status: note?.pqi_status,
+                  case_brief_status: note?.case_brief_status,
+                }}
+                markNoteAsCompleted={markNoteAsCompleted}
+                markResourceAsCompleted={markResourceAsCompleted}
+              />
             ))}
         </div>
       </div>
