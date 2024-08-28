@@ -8,13 +8,14 @@ import { Progress } from '@components/ui/progress';
 import { cn } from '@/lib/utils';
 import TopicCard from '@components/courses/topic-card';
 import ConfirmResetModal from '@components/courses/reset-course-modal';
+import { ICourseDetail } from '@/types/course';
 
 export default async function CourseDetails({
   params,
 }: {
   params: { slug: string };
 }) {
-  const course = await getCourse(params.slug);
+  const course: ICourseDetail = await getCourse(params.slug);
   return (
     <section className={'w-full h-full'}>
       <div
@@ -38,7 +39,7 @@ export default async function CourseDetails({
           >
             <div className={'max-w-[400px] w-full space-y-2'}>
               <p className={'font-semibold text-base'}>
-                {course?.progress_percentage}% complete
+                {course?.progress_percentage?.toFixed(0)}% complete
               </p>
               <Progress
                 value={course?.progress_percentage}

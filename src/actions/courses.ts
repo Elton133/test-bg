@@ -1,164 +1,114 @@
 'use server';
 
-import axiosInstance from '@/lib/axios';
-import { cookies } from 'next/headers';
 import {
   ICourse,
   ICourseDetail,
   IQuiz,
-  ITopic,
   ITopicDetail,
 } from '@/types/course';
 import { revalidatePath } from 'next/cache';
+import fetchWrapper from '@/lib/fetch-wrapper';
 
-const getCourses = async (): Promise<ICourse[]> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/courses`,
-    {
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-      },
-      cache: 'no-cache',
-      next: {
-        tags: ['courses'],
-      },
-    }
+interface ICoursesRes {
+  courses: ICourse[];
+}
+
+const getCourses = async (): Promise<any> => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/courses`;
+  const response = await fetchWrapper<ICoursesRes>(
+    url,
+    {},
+    { tags: ['courses'] }
   );
-  // console.log(await response.json().then((data) => data))
-  if (response.status !== 200) {
-    // eslint-disable-next-line no-console
-    return [] as ICourse[];
+  if ('error' in response) {
+    console.error(response.error);
+    return [];
   }
-
-  return await response.json().then((data) => data?.courses);
+  return response.courses;
 };
 
-const getCourse = async (slug: string): Promise<ICourseDetail> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/course/${slug}`,
+const getCourse = async (
+  slug: string
+): Promise<ICourseDetail | any> => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/course/${slug}`;
+  const response = await fetchWrapper<ICourseDetail>(
+    url,
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-      },
-      cache: 'no-cache',
-      next: {
-        tags: ['courses'],
-      },
+      tags: ['courses'],
     }
   );
-
-  if (response.status !== 200) {
-    return {} as ICourseDetail;
+  if ('error' in response) {
+    return response;
   }
-
-  // if (response.ok) {
-  // }
-  return await response.json().then((data) => data);
+  return response;
 };
 
 const purchaseCourse = async (data: {
   course: string[];
   reference: string;
 }) => {
-  try {
-    const response = await axiosInstance.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/callback-page`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    // @ts-ignore
-    // console.log('error', error);
-    // // @ts-ignore
-    // if (error?.response?.data) {
-    //   return error?.response?.data;
-    // }
-    return null;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/callback-page`;
+  const response = await fetchWrapper<any>(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if ('error' in response) {
+    return response;
   }
+  return response;
 };
 
 const getNote = async (slug: string): Promise<ITopicDetail | any> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/note/${slug}`,
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/note/${slug}`;
+  const response = await fetchWrapper<{ note: ITopicDetail }>(
+    url,
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-      },
-      cache: 'no-cache',
-      next: {
-        tags: ['notes'],
-      },
+      tags: ['notes'],
     }
   );
 
-  if (!response.ok) {
-    return {
-      error: response.statusText,
-    };
+  if ('error' in response) {
+    return response;
   }
-
-  if (response.ok) {
-    return (await response.json().then((data) => data?.note)) as ITopic;
-  }
-  return {} as ITopic;
+  return response?.note;
 };
 
 const getQuiz = async (slug: string): Promise<IQuiz | any> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${slug}`,
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${slug}`;
+  const response = await fetchWrapper<{ quiz: IQuiz }>(
+    url,
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-      },
-      cache: 'no-cache',
-      next: {
-        tags: ['quiz'],
-      },
+      tags: ['quiz'],
     }
   );
 
-  if (!response.ok) {
-    return {
-      error: response.statusText,
-    };
+  if ('error' in response) {
+    return response;
   }
-
-  if (response.ok) {
-    return (await response.json().then((data) => data?.quiz)) as IQuiz;
-  }
-  return {} as IQuiz;
+  return response?.quiz;
 };
 
 const submitQuizResults = async (data: {
   quiz_id: number;
   grade: number;
 }) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/submit/quiz/result`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/submit/quiz/result`;
+  const response = await fetchWrapper<any>(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
 
-  if (!response.ok) {
-    return {
-      error: response.json(),
-    };
+  if ('error' in response) {
+    return response;
   }
 
-  if (response.ok) {
-    return await response.json().then((data) => data);
-  }
+  return response;
 };
 
 export interface IResourcesCompleted {
@@ -172,75 +122,46 @@ const markResourceAsCompleted = async (
   id: string,
   data: IResourcesCompleted
 ) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/mark-item/${id}`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/mark-item/${id}`;
+  const response = await fetchWrapper<any>(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
 
-  if (!response.ok) {
-    return {
-      error: response.json(),
-    };
+  if ('error' in response) {
+    return response;
   }
 
-  if (response.ok) {
-    revalidatePath('/dashboard/course/[slug]', 'page');
-    return await response.json().then((data) => data);
-  }
+  revalidatePath('/dashboard/course/[slug]', 'page');
+  return response;
 };
 
 const markNoteAsCompleted = async (id: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/note-completed/${id}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  if (!response.ok) {
-    return {
-      error: response.json(),
-    };
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/note-completed/${id}`;
+  const response = await fetchWrapper<any>(url, {
+    method: 'GET',
+  });
+
+  if ('error' in response) {
+    return response;
   }
 
-  if (response.ok) {
-    revalidatePath('/dashboard/course/[slug]', 'page');
-    return await response.json().then((data) => data);
-  }
+  revalidatePath('/dashboard/course/[slug]', 'page');
+  return response;
 };
 
 const resetCourseProgress = async (id: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reset-progress/${id}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/reset-progress/${id}`;
+  const response = await fetchWrapper<any>(url, {
+    method: 'GET',
+  });
 
-  if (!response.ok) {
-    return {
-      error: response.json(),
-    };
+  if ('error' in response) {
+    return response;
   }
 
-  if (response.ok) {
-    revalidatePath('/dashboard/course/[slug]', 'page');
-    return await response.json().then((data) => data);
-  }
+  revalidatePath('/dashboard/course/[slug]', 'page');
+  return response;
 };
 
 export {

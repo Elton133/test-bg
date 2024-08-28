@@ -37,8 +37,8 @@ export default function TopicCard({
         <div className={'relative items-center'}>
           <Checkbox
             className={'absolute top-[20px] object-center'}
-            onCheckedChange={async () => {
-              const res = await markNoteAsCompleted(note?.id);
+            onCheckedChange={() => {
+              markNoteAsCompleted(note?.id);
             }}
             defaultChecked={noteStatuses?.note_status}
           />
@@ -52,15 +52,11 @@ export default function TopicCard({
               <div className={'h-stack w-full items-center'}>
                 <Checkbox
                   className={'rounded-sm'}
-                  onCheckedChange={async () => {
-                    const res = await markResourceAsCompleted(
-                      note?.id,
-                      {
-                        study_guide_completed:
-                          !noteStatuses?.study_guide_status,
-                      }
-                    );
-                    console.log(res);
+                  onCheckedChange={() => {
+                    markResourceAsCompleted(note?.id, {
+                      study_guide_completed:
+                        !noteStatuses?.study_guide_status,
+                    });
                   }}
                   defaultChecked={noteStatuses?.study_guide_status}
                 />
@@ -74,13 +70,10 @@ export default function TopicCard({
               <div className={'h-stack w-full items-center'}>
                 <Checkbox
                   className={'rounded-sm'}
-                  onCheckedChange={async () => {
-                    const res = await markResourceAsCompleted(
-                      note?.id,
-                      {
-                        quiz_completed: !noteStatuses?.quiz_status,
-                      }
-                    );
+                  onCheckedChange={() => {
+                    markResourceAsCompleted(note?.id, {
+                      quiz_completed: !noteStatuses?.quiz_status,
+                    });
                   }}
                   defaultChecked={noteStatuses?.quiz_status}
                 />
@@ -94,13 +87,10 @@ export default function TopicCard({
               <div className={'h-stack w-full items-center'}>
                 <Checkbox
                   className={'rounded-sm'}
-                  onCheckedChange={async () => {
-                    const res = await markResourceAsCompleted(
-                      note?.id,
-                      {
-                        pqi_completed: !noteStatuses?.pqi_status,
-                      }
-                    );
+                  onCheckedChange={() => {
+                    markResourceAsCompleted(note?.id, {
+                      pqi_completed: !noteStatuses?.pqi_status,
+                    });
                   }}
                   defaultChecked={noteStatuses?.pqi_status}
                 />
@@ -114,14 +104,11 @@ export default function TopicCard({
               <div className={'h-stack w-full items-center'}>
                 <Checkbox
                   className={'rounded-sm'}
-                  onCheckedChange={async () => {
-                    const res = await markResourceAsCompleted(
-                      note?.id,
-                      {
-                        case_brief_completed:
-                          !noteStatuses?.case_brief_status,
-                      }
-                    );
+                  onCheckedChange={() => {
+                    markResourceAsCompleted(note?.id, {
+                      case_brief_completed:
+                        !noteStatuses?.case_brief_status,
+                    });
                   }}
                   defaultChecked={noteStatuses?.case_brief_status}
                 />

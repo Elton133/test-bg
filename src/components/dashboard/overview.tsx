@@ -3,9 +3,10 @@ import CourseCardList from '@components/courses/course-card-list';
 import { Button } from '@components/ui/button';
 import { getCourses } from '@/actions/courses';
 import Link from 'next/link';
+import { ICourse } from '@/types/course';
 
 export default async function Overview() {
-  const courses = await getCourses();
+  const courses: ICourse[] = await getCourses();
 
   const purchasedCourses =
     courses &&
