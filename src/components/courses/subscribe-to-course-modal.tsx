@@ -17,14 +17,8 @@ interface ConfirmResetModalProps {
 const SubscribeToCourseModal = ({
   buttonText,
 }: ConfirmResetModalProps) => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleOpenChange = () => {
-    setOpen(!open);
-  };
-
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog>
       <DialogTrigger
         className={'text-base text-[#3A7FA8] hover:underline'}
       >
