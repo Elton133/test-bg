@@ -6,7 +6,7 @@ import {
   IQuiz,
   ITopicDetail,
 } from '@/types/course';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import fetchWrapper from '@/lib/fetch-wrapper';
 
 interface ICoursesRes {
@@ -167,7 +167,7 @@ const resetCourseProgress = async (id: string) => {
     return response;
   }
 
-  // revalidatePath('/dashboard/course/[slug]', 'page');
+  revalidatePath('/dashboard/course/[slug]', 'page');
   revalidateTag('courses');
   return response;
 };
