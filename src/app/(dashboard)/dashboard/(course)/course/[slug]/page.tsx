@@ -63,6 +63,7 @@ export default async function CourseDetails({
               <TopicCard
                 key={note?.note?.slug}
                 note={note?.note}
+                enrolled={course?.enroll_status === 'active'}
                 noteStatuses={{
                   note_status: note?.note_status,
                   quiz_status: note?.quiz_status,

@@ -20,9 +20,15 @@ const ConfirmResetModal = ({
   resetCourse,
   courseID,
 }: ConfirmResetModalProps) => {
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleOpenChange = () => {
+    setOpen(!open);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger
         className={
           'border border-primary text-sm sm:text-base rounded-lg px-4 py-2 font-semibold'
@@ -48,6 +54,7 @@ const ConfirmResetModal = ({
                 setLoading(true);
                 await resetCourse(courseID);
                 setLoading(false);
+                handleOpenChange();
               }}
             >
               {loading && <LoaderCircle className={'animate-spin'} />}
