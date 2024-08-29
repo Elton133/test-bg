@@ -57,12 +57,16 @@ export default async function Page() {
             >
               {courses &&
                 courses
-                  .filter((item) => item.enroll_status === 'active')
+                  .filter(
+                    (item) =>
+                      item.enroll_status === 'active' &&
+                      item.progress === 100
+                  )
                   .map((course) => (
                     <CourseCardGrid
                       key={course.slug}
                       courseName={course.title}
-                      progress={100}
+                      progress={course?.progress}
                       slug={course.slug}
                       // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
                     />

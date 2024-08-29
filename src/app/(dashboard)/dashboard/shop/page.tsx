@@ -100,6 +100,7 @@ export default async function ShopPage() {
               key={course.id}
               courseName={course.title}
               courseID={course.id}
+              slug={course.slug}
               purchased={course.enroll_status === 'active'}
               // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
               progress={20}
