@@ -1,0 +1,43 @@
+'use client';
+
+import { IAnnouncement } from '@/types/course';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
+
+const AnnouncementItem = ({
+  announcement,
+}: {
+  announcement: IAnnouncement;
+}) => {
+  return (
+    <div
+      className={
+        'min-h-[80px] h-full bg-[#D0EFE9] rounded-lg p-3 relative cursor-pointer'
+      }
+    >
+      <svg
+        className={
+          'top-3 right-3 absolute animate-iteration-3 animate-pulse'
+        }
+        xmlns="http://www.w3.org/2000/svg"
+        width="8"
+        height="8"
+        viewBox="0 0 8 8"
+        fill="none"
+      >
+        <circle cx="4" cy="4" r="4" fill="#E57A5A" />
+      </svg>
+      <div className={'flex flex-col gap-2'}>
+        <p className={'text-sm font-bold'}>{announcement?.title}</p>
+        <p className={'text-xs text-muted'}>{announcement?.content}</p>
+        <p className={'text-xs text-muted place-self-end'}>
+          {dayjs(announcement?.created_at).fromNow()}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default AnnouncementItem;
