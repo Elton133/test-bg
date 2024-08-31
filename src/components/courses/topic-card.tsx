@@ -35,7 +35,9 @@ export default function TopicCard({
     <Accordion type={'single'} collapsible>
       <AccordionItem
         value={note?.slug}
-        className={'bg-[#F1F2F2] px-4 md:px-8 py-2 rounded-lg'}
+        className={
+          'bg-[#F1F2F2] px-4 md:px-8 py-2 rounded-lg animate-once animate-fade-up'
+        }
       >
         <div className={'relative items-center'}>
           {enrolled && (

@@ -101,3 +101,11 @@ export interface IQuiz {
   note: ITopic;
   questions: IQuestion[];
 }
+
+export interface IAnnouncement {
+  id: number;
+  title: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}

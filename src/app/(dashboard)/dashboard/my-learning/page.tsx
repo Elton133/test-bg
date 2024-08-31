@@ -37,7 +37,11 @@ export default async function Page() {
             >
               {courses &&
                 courses
-                  .filter((item) => item.enroll_status === 'active')
+                  .filter(
+                    (item) =>
+                      item.enroll_status === 'active' &&
+                      parseInt(String(item.progress)) < 100
+                  )
                   .map((course) => (
                     <CourseCardGrid
                       key={course.slug}
@@ -60,7 +64,7 @@ export default async function Page() {
                   .filter(
                     (item) =>
                       item.enroll_status === 'active' &&
-                      item.progress === 100
+                      parseInt(String(item.progress)) === 100
                   )
                   .map((course) => (
                     <CourseCardGrid
