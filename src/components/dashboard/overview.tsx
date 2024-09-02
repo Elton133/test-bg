@@ -44,7 +44,7 @@ export default async function Overview() {
               : `${streak?.streak_count} day`}
           </p>
           <p className={'text-muted text-sm'}>
-            {streak?.first_streak_date}
+            {streak?.first_streak_date} - present
           </p>
         </div>
         <div className={'sm:w-full'}>
