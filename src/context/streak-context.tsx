@@ -12,7 +12,8 @@ import dayjs from 'dayjs';
 import LocalStorage from '@/lib/local-storage';
 import { markStreakAsCompleted } from '@/actions/streak';
 
-const STREAK_DURATION = 1;
+const STREAK_DURATION =
+  parseInt(process.env.NEXT_PUBLIC_STREAK_LIMIT as string) || 1;
 
 export interface Streak {
   id?: string;
