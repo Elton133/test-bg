@@ -1,3 +1,5 @@
+'use server';
+
 import { revalidatePath, revalidateTag } from 'next/cache';
 import fetchWrapper from '@/lib/fetch-wrapper';
 
@@ -15,8 +17,8 @@ export const getAnnouncements = async (): Promise<any> => {
   return response?.announcement;
 };
 
-export const markAnnouncementAsRead = async (userID: number) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/announcements/${userID}`;
+export const markAnnouncementAsRead = async (id: number) => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/announcements/${id}`;
   const response = await fetchWrapper<any>(
     url,
     {
@@ -27,7 +29,6 @@ export const markAnnouncementAsRead = async (userID: number) => {
   if ('error' in response) {
     return response;
   }
-  revalidatePath('/dashboard');
   revalidateTag('announcements');
   return response;
 };

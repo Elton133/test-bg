@@ -109,3 +109,8 @@ export interface IAnnouncement {
   created_at: string;
   updated_at: string;
 }
+
+export type Streak = {
+  streak_count: number;
+  first_streak_date: string;
+};

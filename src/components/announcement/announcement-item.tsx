@@ -3,6 +3,7 @@
 import { IAnnouncement } from '@/types/course';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { markAnnouncementAsRead } from '@/actions/announcements';
 
 dayjs.extend(relativeTime);
 
@@ -12,10 +13,11 @@ const AnnouncementItem = ({
   announcement: IAnnouncement;
 }) => {
   return (
-    <div
+    <button
       className={
-        'min-h-[80px] h-full bg-[#D0EFE9] rounded-lg p-3 relative cursor-pointer'
+        'min-h-[80px] h-full w-full text-left bg-[#D0EFE9] rounded-lg p-3 relative cursor-pointer'
       }
+      onClick={() => markAnnouncementAsRead(announcement.id)}
     >
       <svg
         className={
@@ -36,7 +38,7 @@ const AnnouncementItem = ({
           {dayjs(announcement?.created_at).fromNow()}
         </p>
       </div>
-    </div>
+    </button>
   );
 };
 
