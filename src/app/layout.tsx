@@ -71,7 +71,7 @@ export default async function RootLayout({
               unstyled: true,
               classNames: {
                 toast:
-                  'bg-[#D0EFE9]  flex items-center gap-4 px-4 py-4 pr-1 shadow-md border-l-4 border-primary',
+                  'bg-[#D0EFE9] w-full  flex items-center gap-4 px-4 py-4 pr-1 shadow-md border-l-4 border-primary',
                 closeButton:
                   'text-[#063231] top-1/2 right-[20px] hover:text-[#FF170A] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50',
                 error: 'bg-[#FED7D7] border-[#FECACA]',
