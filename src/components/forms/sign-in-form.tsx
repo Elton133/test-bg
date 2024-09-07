@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,20 +8,20 @@ import {
   FormItem,
   // FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 import {
   FloatingInput,
   FloatingLabel,
-} from "@components/ui/floating-label-input";
-import { useState } from "react";
-import { EyeSlash, Eye } from "iconsax-react";
-import Link from "next/link";
+} from '@components/ui/floating-label-input';
+import { useState } from 'react';
+import { EyeSlash, Eye } from 'iconsax-react';
+import Link from 'next/link';
 // import Image from "next/image";
 // import GoogleLogo from "@assets/google_logo.png";
-import { LoaderCircle } from "lucide-react";
-import useLogin from "@hooks/use-login";
-import { cn } from "@/lib/utils";
+import useLogin from '@hooks/use-login';
+import { cn } from '@/lib/utils';
+import LoaderButton from '@components/ui/loader-button';
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -31,25 +30,32 @@ export default function SignInForm() {
   return (
     <Form {...form}>
       <form
-        className={"v-stack gap-2 h-full"}
+        className={'v-stack gap-2 h-full'}
         noValidate
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
-          name={"email"}
+          name={'email'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
-                  <FloatingInput type={"email"} placeholder={""} {...field} />
+                  <FloatingInput
+                    type={'email'}
+                    placeholder={''}
+                    {...field}
+                  />
                 </FormControl>
-                <FloatingLabel className={cn("", {
-                    "peer-focus:text-destructive":
-                      errors.email,
-                  })}>Email</FloatingLabel>
+                <FloatingLabel
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
+                  })}
+                >
+                  Email
+                </FloatingLabel>
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.email?.message}
               </FormMessage>
             </FormItem>
@@ -57,76 +63,89 @@ export default function SignInForm() {
         />
         <FormField
           control={form.control}
-          name={"password"}
+          name={'password'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
                   <FloatingInput
-                    type={showPassword ? "text" : "password"}
-                    placeholder={""}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={''}
                     {...field}
                   />
                 </FormControl>
-                <FloatingLabel className={cn("", {
-                    "peer-focus:text-destructive":
-                      errors.email,
-                  })}>Password</FloatingLabel>
+                <FloatingLabel
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
+                  })}
+                >
+                  Password
+                </FloatingLabel>
                 {showPassword ? (
                   <Eye
-                    variant={"Bold"}
-                    color={"#292D32"}
+                    variant={'Bold'}
+                    color={'#292D32'}
                     onClick={() => setShowPassword(false)}
-                    className={"absolute right-2 top-0 translate-y-1/2"}
+                    className={'absolute right-2 top-0 translate-y-1/2'}
                   />
                 ) : (
                   <EyeSlash
-                    variant={"Bold"}
-                    color={"#292D32"}
+                    variant={'Bold'}
+                    color={'#292D32'}
                     onClick={() => setShowPassword(true)}
-                    className={"absolute right-2 top-0 translate-y-1/2"}
+                    className={'absolute right-2 top-0 translate-y-1/2'}
                   />
                 )}
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.password?.message}
               </FormMessage>
             </FormItem>
           )}
         />
         <Link
-          href={"/reset-password"}
-          className={"text-[#3A7FA8] place-self-end text-xs"}
+          href={'/reset-password'}
+          className={'text-[#3A7FA8] place-self-end text-xs'}
         >
           Forgot password?
         </Link>
-        <div className={"v-stack h-full justify-end sm:justify-start"}>
-          <div className={"v-stack gap-4"}>
-            <Button type={"submit"}>
-              {loading ? (
-                <LoaderCircle className={"animate-spin"} />
-              ) : (
-                "Sign in"
-              )}
-            </Button>
-            <p className={"text-xs text-center font-medium"}>
-              Don&apos;t have an account?{" "}
-              <Link className={"text-[#3A7FA8] font-medium"} href={"/register"}>
+        <div className={'v-stack h-full justify-end sm:justify-start'}>
+          <div className={'v-stack gap-4'}>
+            {/*<Button type={"submit"}>*/}
+            {/*  {loading ? (*/}
+            {/*    <LoaderCircle className={"animate-spin"} />*/}
+            {/*  ) : (*/}
+            {/*    "Sign in"*/}
+            {/*  )}*/}
+            {/*</Button>*/}
+            <LoaderButton loading={loading} type={'submit'}>
+              Sign in
+            </LoaderButton>
+            <p className={'text-xs text-center font-medium'}>
+              Don&apos;t have an account?{' '}
+              <Link
+                className={'text-[#3A7FA8] font-medium'}
+                href={'/register'}
+              >
                 Sign up
               </Link>
             </p>
             <div
               className={
-                "flex justify-between items-center gap-12 text-[#ABB3BF]"
+                'flex justify-between items-center gap-12 text-[#ABB3BF]'
               }
             >
-              <hr className={"border-[#ABB3BF] w-full my-4"} />
-              <p className={"text-xs"}>OR</p>
-              <hr className={"border-[#ABB3BF] w-full my-4"} />
+              <hr className={'border-[#ABB3BF] w-full my-4'} />
+              <p className={'text-xs'}>OR</p>
+              <hr className={'border-[#ABB3BF] w-full my-4'} />
             </div>
             <Link
-              href={'https://api.thebeststudyguide.com/api/auth/google/redirect'}
-              className={"h-stack w-full stack-center py-2 border rounded-lg"}
+              href={
+                'https://api.thebeststudyguide.com/api/auth/google/redirect'
+              }
+              className={
+                'h-stack w-full stack-center py-2 border rounded-lg'
+              }
             >
               {/* <Image
                 src={GoogleLogo}
@@ -158,7 +177,7 @@ export default function SignInForm() {
                   fill="#1976D2"
                 />
               </svg>
-              <p className={"text-sm"}>Continue with Google</p>
+              <p className={'text-sm'}>Continue with Google</p>
             </Link>
           </div>
         </div>

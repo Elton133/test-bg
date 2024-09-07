@@ -42,6 +42,7 @@ export const StreakProvider = ({
     const curTime = dayjs();
     if (savedStreak) {
       if (curTime.isAfter(dayjs(savedStreak.currentTime))) {
+        console.log('Streak updated');
         storage.save('streak', {
           currentTime: curTime.toISOString(),
         });

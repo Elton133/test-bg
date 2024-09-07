@@ -7,9 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@components/ui/dialog';
-import { Button } from '@components/ui/button';
 import { useState } from 'react';
-import { LoaderCircle } from 'lucide-react';
+import LoaderButton from '@components/ui/loader-button';
 
 interface ConfirmResetModalProps {
   resetCourse: (id: string) => Promise<any>;
@@ -47,9 +46,22 @@ const ConfirmResetModal = ({
             <p>Are you sure you want to reset your course progress?</p>
           </div>
           <div className={'w-full flex justify-end items-center gap-3'}>
-            <Button
+            {/*<Button*/}
+            {/*  variant={'outline'}*/}
+            {/*  className={'font-semibold flex items-center gap-2'}*/}
+            {/*  onClick={async () => {*/}
+            {/*    setLoading(true);*/}
+            {/*    await resetCourse(courseID);*/}
+            {/*    setLoading(false);*/}
+            {/*    handleOpenChange();*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  {loading && <LoaderCircle className={'animate-spin'} />}*/}
+            {/*  Reset it*/}
+            {/*</Button>*/}
+            <LoaderButton
+              loading={loading}
               variant={'outline'}
-              className={'font-semibold flex items-center gap-2'}
               onClick={async () => {
                 setLoading(true);
                 await resetCourse(courseID);
@@ -57,9 +69,8 @@ const ConfirmResetModal = ({
                 handleOpenChange();
               }}
             >
-              {loading && <LoaderCircle className={'animate-spin'} />}
               Reset it
-            </Button>
+            </LoaderButton>
             <DialogTrigger
               className={
                 'bg-primary px-4 py-2 rounded-lg text-white font-semibold'
