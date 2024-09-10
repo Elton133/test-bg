@@ -108,6 +108,8 @@ export interface IAnnouncement {
   content: string;
   created_at: string;
   updated_at: string;
+  type: string;
+  url: string | null;
 }
 
 export type Streak = {
