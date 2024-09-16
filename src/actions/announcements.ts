@@ -14,7 +14,7 @@ export const getAnnouncements = async (): Promise<any> => {
     console.error(response.error);
     return [];
   }
-  return response?.announcement;
+  return response?.announcements;
 };
 
 export const markAnnouncementAsRead = async (id: number) => {

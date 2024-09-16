@@ -6,7 +6,6 @@ import { Fragment } from 'react';
 
 export default async function Announcement() {
   const announcements: IAnnouncement[] = await getAnnouncements();
-
   return (
     <section
       className={
@@ -27,12 +26,10 @@ export default async function Announcement() {
         {/*<EmptyAnnouncement />*/}
 
         {announcements.length > 0 &&
-          announcements.map((announcement, index) => (
+          announcements.slice(0, 2).map((announcement, index) => (
             <Fragment key={announcement.id}>
               <AnnouncementItem announcement={announcement} />
-              {index !== announcements.length - 1 && (
-                <hr className={'my-2'} />
-              )}
+              {index !== 1 && <hr className={'my-2'} />}
             </Fragment>
           ))}
         {announcements.length === 0 && <EmptyAnnouncement />}
