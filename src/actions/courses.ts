@@ -172,6 +172,20 @@ const resetCourseProgress = async (id: string) => {
   return response;
 };
 
+const getAchievements = async () => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/achievements`;
+  const response = await fetchWrapper<any>(
+    url,
+    {},
+    { tags: ['achievements'] }
+  );
+  if ('error' in response) {
+    console.error(response.error);
+    return [];
+  }
+  return response;
+};
+
 export {
   getCourses,
   purchaseCourse,
@@ -182,4 +196,5 @@ export {
   markNoteAsCompleted,
   markResourceAsCompleted,
   resetCourseProgress,
+  getAchievements,
 };
