@@ -11,11 +11,13 @@ import { useSideBar } from '@/context/side-bar-context';
 interface INoteHeaderProps {
   topic: ITopicDetail;
   userName: string;
+  nextTopic?: ITopic | null;
 }
 
 export default function NoteHeader({
   topic,
   userName,
+  nextTopic,
 }: INoteHeaderProps) {
   const { openSidePanel, toggleSidePanel } = useNoteSidePanel();
   const { openSideBar } = useSideBar();
@@ -100,7 +102,11 @@ export default function NoteHeader({
         )}
       </div>
       {openSidePanel && (
-        <NoteSidePanel topic={topic} userName={userName} />
+        <NoteSidePanel
+          topic={topic}
+          userName={userName}
+          nextTopic={nextTopic}
+        />
       )}
     </section>
   );
