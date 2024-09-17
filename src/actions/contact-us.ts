@@ -9,11 +9,14 @@ const sendMessage = async (data: { message: string }): Promise<any> => {
     {
       method: 'POST',
       body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-    { tags: ['contact-us'] }
+    { tags: ['contact-us'] },
   );
+
   if ('error' in response) {
-    console.error(response.error);
     return [];
   }
   return response;
