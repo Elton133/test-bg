@@ -4,6 +4,8 @@ import { getCourses } from '@/actions/courses';
 import { Metadata } from 'next';
 import { ICourse } from '@/types/course';
 
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
 export const metadata: Metadata = {
   title: 'BSG - Shop',
   description:
@@ -102,7 +104,7 @@ export default async function ShopPage() {
               courseID={course.id}
               slug={course.slug}
               purchased={course.enroll_status === 'active'}
-              // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+              imageUrl={`${STORAGE_URL}/${course.image}`}
               progress={20}
             />
           ))}
