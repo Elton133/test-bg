@@ -7,6 +7,8 @@ import TopicCard from '@components/courses/topic-card';
 import { ICourseDetail } from '@/types/course';
 import CourseDetailHeader from '@components/courses/course-detail-header';
 
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
 export default async function CourseDetails({
   params,
 }: {
@@ -18,7 +20,7 @@ export default async function CourseDetails({
     <section className={'w-full h-full'}>
       <div
         style={{
-          backgroundImage: `url(https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721780876/BSG/c0e407a535283456f382c1a9d2c0c822_w46jpj.png)`,
+          backgroundImage: `url(${STORAGE_URL}/${course?.course?.image})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',

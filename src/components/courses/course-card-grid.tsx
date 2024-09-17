@@ -23,7 +23,7 @@ export default function CourseCardGrid({
 }: CourseCardProps) {
   const parsedProgress = parseInt(String(progress), 10);
   const animatedProgress = useAnimatedProgress(parsedProgress);
-
+  
   return (
     <div
       className={
@@ -33,7 +33,7 @@ export default function CourseCardGrid({
       <div className={'v-stack stack-center'}>
         <Image
           src={
-            imageUrl ||
+            `${imageUrl}` ||
             'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721780876/BSG/c0e407a535283456f382c1a9d2c0c822_w46jpj.png'
           }
           alt={'course cover'}

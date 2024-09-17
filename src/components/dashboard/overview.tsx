@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { ICourse, Streak } from '@/types/course';
 import { getStreak } from '@/actions/streak';
 
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
 export default async function Overview() {
   const courses: ICourse[] = await getCourses();
   const streak: Streak = await getStreak();
@@ -59,7 +61,7 @@ export default async function Overview() {
                   courseName={course.title}
                   progress={course?.progress}
                   slug={course.slug}
-                  // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+                  imageUrl={`${STORAGE_URL}/${course.image}`}
                 />
               ))}
           </div>

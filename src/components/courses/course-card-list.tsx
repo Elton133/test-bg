@@ -53,13 +53,6 @@ export default function CourseCardList({
             className={'text-muted text-base cursor-pointer'}
           />
         </Link>
-        {/*<div className={"font-semibold text-xs sm:text-sm"}>*/}
-        {/*  <p className={""}>*/}
-        {/*    {`${progress || 0}% `}{" "}*/}
-        {/*    <span className={"text-muted"}>complete</span>*/}
-        {/*  </p>*/}
-        {/*  <Progress value={progress || 0} className={"h-2"} />*/}
-        {/*</div>*/}
         <div className={'font-semibold text-xs sm:text-sm v-stack'}>
           <div className={'flex items-center justify-between'}>
             <p className={''}>

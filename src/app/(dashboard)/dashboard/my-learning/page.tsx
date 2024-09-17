@@ -10,6 +10,8 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { ICourse } from '@/types/course';
 
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
 export default async function Page() {
   const session = await getServerSession(authOptions);
   const courses: ICourse[] = await getCourses();
@@ -48,7 +50,7 @@ export default async function Page() {
                       courseName={course.title}
                       progress={course?.progress}
                       slug={course.slug}
-                      // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+                      imageUrl={`${STORAGE_URL}/${course.image}`}
                     />
                   ))}
             </div>
@@ -72,7 +74,7 @@ export default async function Page() {
                       courseName={course.title}
                       progress={course?.progress}
                       slug={course.slug}
-                      // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+                      imageUrl={`${STORAGE_URL}/${course.image}`}
                     />
                   ))}
             </div>
