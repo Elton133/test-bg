@@ -5,11 +5,15 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import Link from 'next/link';
 import { Streak } from '@/types/course';
 import { getStreak } from '@/actions/streak';
+import { getAchievements } from '@/actions/courses';
+
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
 
 export default async function AccountPage() {
   const session = await getServerSession(authOptions);
   const streak: Streak = await getStreak();
-  console.log(streak);
+  const achievements = await getAchievements();
+
   return (
     <section className={'py-6 lg:px-8'}>
       <div className={'v-stack px-4'}>
@@ -75,13 +79,13 @@ export default async function AccountPage() {
               <p className={'text-xs md:text-sm text-muted'}>
                 Badges earned
               </p>
-              <p className={'text-base'}>2</p>
+              <p className={'text-base'}>{achievements?.length}</p>
             </div>
             <div className={'flex flex-col gap-2'}>
               <p className={'text-xs md:text-sm text-muted'}>
                 Completed courses
               </p>
-              <p className={'text-base'}>2</p>
+              <p className={'text-base'}>{achievements?.length}</p>
             </div>
           </div>
           <hr />
@@ -95,37 +99,47 @@ export default async function AccountPage() {
             </div>
             <div
               className={
-                'flex justify-start items-center gap-x-6 py-4 px-4'
+                'flex justify-start items-center gap-x-6 py-4 px-4 max-w-[55px] w-full'
               }
             >
-              <Image
-                src={
-                  'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/BSG/a42885293a2f85666136f794ef551792_a84nnu.png'
-                }
-                alt={'course badges'}
-                className={'max-w-[51px]'}
-                width={300}
-                height={300}
-              />
-              <Image
-                src={
-                  'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/BSG/a42885293a2f85666136f794ef551792_a84nnu.png'
-                }
-                alt={'course badges'}
-                className={'max-w-[51px]'}
-                width={300}
-                height={300}
-              />
-              <Image
-                src={
-                  'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721922927/BSG/a42885293a2f85666136f794ef551792_a84nnu.png'
-                }
-                alt={'course badges'}
-                className={'max-w-[51px]'}
-                width={300}
-                height={300}
-              />
+              {achievements?.length > 0 &&
+                achievements
+                  ?.slice(0, 2)
+                  .map((achievement, index) => (
+                    <Image
+                      key={`${achievement.course}-${index}`}
+                      src={`${STORAGE_URL}/${achievement.badge}`}
+                      alt={achievement.course}
+                      width={50}
+                      height={50}
+                    />
+                  ))}
             </div>
+            {achievements?.length === 0 && (
+              <div className="v-stack items-center gap-4 text-sm">
+                <div
+                  className={
+                    'h-stack gap-3 flex-wrap stack-center items-center'
+                  }
+                >
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <Image
+                      key={index}
+                      src={
+                        'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721859469/BSG/Frame_2_olaoiv.svg'
+                      }
+                      alt={'badge'}
+                      width={38}
+                      height={50}
+                    />
+                  ))}
+                </div>
+                <p className="text-[#70787C] max-w-[280px] w-full text-center">
+                  Your achievements will appear here when you complete a
+                  course
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
