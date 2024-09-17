@@ -112,6 +112,11 @@ export interface IAnnouncement {
   url: string | null;
 }
 
+export interface IAchievement {
+  course: string;
+  badge: string;
+}
+
 export type Streak = {
   streak_count: number;
   first_streak_date: string;

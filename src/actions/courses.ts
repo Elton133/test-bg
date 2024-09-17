@@ -1,6 +1,7 @@
 'use server';
 
 import {
+  IAchievement,
   ICourse,
   ICourseDetail,
   IQuiz,
@@ -174,7 +175,7 @@ const resetCourseProgress = async (id: string) => {
 
 const getAchievements = async () => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/achievements`;
-  const response = await fetchWrapper<any>(
+  const response = await fetchWrapper<IAchievement[]>(
     url,
     {},
     { tags: ['achievements'] }
