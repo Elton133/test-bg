@@ -29,14 +29,16 @@ export default function CourseCardList({
         'h-stack p-[12.9px] lg:max-w-[460px] shadow-md w-full rounded-[18px] animate-once animate-fade-up'
       }
     >
-      <div className={'v-stack stack-center'}>
+      <div className={'v-stack stack-center max-w-[70px] max-h-[70px]'}>
         <Image
           src={
             imageUrl ||
             'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721780876/BSG/c0e407a535283456f382c1a9d2c0c822_w46jpj.png'
           }
           alt={'course cover'}
-          className={'rounded-lg'}
+          className={
+            'rounded-lg max-w-[70px] max-h-[70px] w-full h-full object-cover'
+          }
           width={70}
           height={70}
         />

@@ -9,7 +9,7 @@ export default async function Announcement() {
   return (
     <section
       className={
-        'max-w-[920px] mx-auto w-full min-h-[120px] rounded-xl border border-[#D3D5D6] py-6 px-3'
+        'max-w-[920px] mx-auto w-full min-h-[120px] rounded-xl border border-[#D3D5D6] py-6 px-3 animate-fade-up'
       }
     >
       <div

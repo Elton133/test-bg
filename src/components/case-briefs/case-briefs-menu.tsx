@@ -39,7 +39,7 @@ export default function CaseBriefsMenu({
           <AccordionTrigger className={''}>
             <div
               className={cn(
-                'h-stack rounded-[5px] items-center justify-between',
+                'h-stack rounded-[5px] items-center justify-between hover:scale-105 transition-all',
                 {
                   'bg-[#DAE0E0]': path === navItem.url,
                 }

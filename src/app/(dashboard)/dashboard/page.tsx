@@ -31,7 +31,7 @@ export default async function Dashboard() {
 
   return (
     <main className="h-full v-stack gap-6 pb-8 lg:px-8 lg:py-6">
-      <div className="max-w-screen-[1440px] mx-auto w-full 2xl:w-[75%] lg:h-[220px] relative bg-brand-yellow-primary lg:rounded-[20px] flex flex-col justify-center items-center">
+      <div className="max-w-screen-[1440px] mx-auto w-full 2xl:w-[75%] lg:h-[220px] relative bg-brand-yellow-primary lg:rounded-[20px] flex flex-col justify-center items-center animate-fade-down">
         <div
           className={
             'w-full h-full absolute top-0 left-0 bg-blend-overlay opacity-40'

@@ -29,7 +29,6 @@ export default async function StudyGuidePage({
   );
   const hasNext = nextTopicIndex(course, currentTopicIndex);
 
-  console.log('topic =>', hasNext);
   return (
     <section className={'w-full'}>
       <NoteHeader

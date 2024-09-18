@@ -26,7 +26,7 @@ export default function NoteHeader({
     <section>
       <div
         className={cn(
-          'max-h-[180px] flex flex-col gap-y-3 w-full shadow-md px-4 lg:px-24 pt-4 pb-2 relative bg-white',
+          'max-h-[180px] flex flex-col gap-y-3 w-full shadow-md px-4 lg:px-24 pt-4 pb-2 relative bg-white animate-fade-down',
           {
             'hidden md:flex': openSidePanel,
           }

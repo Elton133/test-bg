@@ -178,9 +178,13 @@ export default function NoteSidePanel({
                 <Link
                   href={item.url}
                   key={index}
-                  className={cn('h-stack p-3 rounded-[5px]', {
-                    'bg-[#FEF2D2]': path === item.url,
-                  })}
+                  className={cn(
+                    'h-stack p-3 rounded-[5px] hover:scale-105 transition-all',
+                    {
+                      'bg-[#FEF2D2] hover:scale-0 transition-none':
+                        path === item.url,
+                    }
+                  )}
                   onClick={toggleSidePanel}
                 >
                   {item.icon}
@@ -197,7 +201,7 @@ export default function NoteSidePanel({
                 href={`/dashboard/course/study-guide/${nextTopic?.slug}`}
                 onClick={toggleSidePanel}
                 className={
-                  'text-[#3A7FA8] inline-flex items-center text-sm gap-1'
+                  'text-[#3A7FA8] inline-flex items-center text-sm gap-1 hover:underline'
                 }
               >
                 <DocumentText variant={'Bold'} size={16} />

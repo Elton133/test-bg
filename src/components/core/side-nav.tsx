@@ -34,7 +34,6 @@ const sideBarVariants = {
 };
 
 const SideBar = () => {
-  const path = usePathname();
   const { openSideBar, toggleSideBar } = useSideBar();
   const controls = useAnimationControls();
   const navItems = useNavItems();
