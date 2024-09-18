@@ -25,7 +25,9 @@ export default async function CourseDetails({
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
-        className={'min-h-[180px] md:min-h-[380px] w-full'}
+        className={
+          'min-h-[180px] md:min-h-[380px] w-full animate-fade-down'
+        }
       />
       <div className={'py-8 md:py-12 px-4 sm:px-6 lg:px-16 min-h-full'}>
         <CourseDetailHeader course={course} />
