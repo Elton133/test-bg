@@ -99,21 +99,22 @@ export default async function AccountPage() {
             </div>
             <div
               className={
-                'flex justify-start items-center gap-x-6 py-4 px-4 max-w-[55px] w-full'
+                'flex justify-start items-center gap-x-6 py-4 px-4 max-w-[50px] w-full'
               }
             >
               {achievements?.length > 0 &&
-                achievements
-                  ?.slice(0, 2)
-                  .map((achievement, index) => (
-                    <Image
-                      key={`${achievement.course}-${index}`}
-                      src={`${STORAGE_URL}/${achievement.badge}`}
-                      alt={achievement.course}
-                      width={50}
-                      height={50}
-                    />
-                  ))}
+                achievements.map((achievement, index) => (
+                  <Image
+                    key={`${achievement.course}-${index}`}
+                    src={`${STORAGE_URL}/${achievement.badge}`}
+                    alt={achievement.course}
+                    width={70}
+                    height={70}
+                    // className={
+                    //   'max-w-[70px] w-full max-h-[70px] h-full'
+                    // }
+                  />
+                ))}
             </div>
             {achievements?.length === 0 && (
               <div className="v-stack items-center gap-4 text-sm">
