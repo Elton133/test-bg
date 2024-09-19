@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import { getAchievements } from '@/actions/courses';
-// import {getServerSession} from "next-auth/next";
-// import {authOptions} from "@/app/api/auth/[...nextauth]/options";
 
 const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
 
@@ -37,26 +35,31 @@ export default async function Achievement() {
             'h-stack gap-6 flex-wrap stack-center items-center'
           }
         >
-          {achievements?.length === 0 && Array.from({ length: 3 }).map((_, index) => (
-            <Image
-              key={index}
-              src={
-                'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721859469/BSG/Frame_2_olaoiv.svg'
-              }
-              alt={'badge'}
-              width={100}
-              height={129}
-            />
-          ))}
-          {achievements?.length > 0 && achievements?.slice(0,2).map((achievement, index) => (
-            <Image
-              key={`${achievement.course}-${index}`}
-              src={`${STORAGE_URL}/${achievement.badge}`}
-              alt={achievement.course}
-              width={100}
-              height={129}
-            />
-          ))}
+          {achievements?.length === 0 &&
+            Array.from({ length: 3 }).map((_, index) => (
+              <Image
+                key={index}
+                src={
+                  'https://res.cloudinary.com/dzpjlfcrq/image/upload/v1721859469/BSG/Frame_2_olaoiv.svg'
+                }
+                alt={'badge'}
+                width={100}
+                height={129}
+              />
+            ))}
+          {achievements?.length > 0 &&
+            achievements.map((achievement, index) => (
+              <Image
+                key={`${achievement.course}-${index}`}
+                src={`${STORAGE_URL}/${achievement.badge}`}
+                alt={achievement.course}
+                width={100}
+                height={129}
+                className={
+                  'max-w-[120px] max-h-[120px] w-full h-full object-cover'
+                }
+              />
+            ))}
         </div>
       </div>
     </div>
