@@ -32,7 +32,7 @@ export default async function Achievement() {
         </p>
         <div
           className={
-            'h-stack gap-6 flex-wrap stack-center items-center'
+            'h-stack gap-6 flex-wrap stack-center items-center w-full'
           }
         >
           {achievements?.length === 0 &&
