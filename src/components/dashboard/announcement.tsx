@@ -22,7 +22,11 @@ export default async function Announcement() {
         </div>
         <p className={'text-lg font-semibold'}>Announcements</p>
       </div>
-      <div className={'w-full pt-8 overflow-x-scroll max-h-[330px] h-full'}>
+      <div
+        className={
+          'w-full pt-8 overflow-x-scroll no-scrollbar max-h-[330px] h-full'
+        }
+      >
         {/*<EmptyAnnouncement />*/}
 
         {announcements.length > 0 &&
