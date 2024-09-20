@@ -2,10 +2,9 @@
 
 import { motion, useAnimationControls } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ArrowRightToLine } from 'lucide-react';
 import NavLink from '@components/ui/nav-link';
-import { usePathname } from 'next/navigation';
 import useNavItems from '@hooks/use-nav-items';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
 import { useSideBar } from '@/context/side-bar-context';

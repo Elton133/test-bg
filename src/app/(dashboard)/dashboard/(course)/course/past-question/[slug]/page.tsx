@@ -1,4 +1,4 @@
-import { ITopic, ITopicDetail } from '@/types/course';
+import { ITopicDetail } from '@/types/course';
 import { getNote } from '@/actions/courses';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';

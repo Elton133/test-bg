@@ -15,7 +15,6 @@ export default async function CourseDetails({
   params: { slug: string };
 }) {
   const course: ICourseDetail = await getCourse(params.slug);
-
   return (
     <section className={'w-full h-full'}>
       <div
@@ -39,7 +38,7 @@ export default async function CourseDetails({
             course?.notes.map((note) => (
               <TopicCard
                 key={note?.note?.slug}
-                note={note?.note}
+                note={note}
                 enrolled={course?.enroll_status === 'active'}
                 noteStatuses={{
                   note_status: note?.note_status,

@@ -6,12 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import {
-  ICaseBrief,
-  INoteStatuses,
-  ITopic,
-  ITopicDetail,
-} from '@/types/course';
+import { ICaseBrief, INoteStatuses, ITopic } from '@/types/course';
 import { Checkbox } from '@components/ui/checkbox';
 import Link from 'next/link';
 import { IResourcesCompleted } from '@/actions/courses';

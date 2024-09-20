@@ -6,7 +6,7 @@ export default async function TermsAndConditionsPage() {
 
   return (
     <section
-      className={'w-full max-h-[80vh] overflow-scroll no-scrollbar'}
+      className={'w-full max-h-[80vh] overflow-y-scroll no-scrollbar mx-auto'}
     >
       <div className={'mb-8'}>
         <h1 className={'font-bold underline text-2xl text-center pb-6'}>

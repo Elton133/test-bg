@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
-import { Progress } from '@components/ui/progress';
 
 const useAnimatedProgress = (progress: number) => {
   const [animatedProgress, setAnimatedProgress] = useState(0);

@@ -1,18 +1,10 @@
-"use client";
+'use client';
 
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
-import { IUser } from "@/types/user";
-import swr from "swr";
-import axiosInstance from "@/lib/axios";
-import { useSession } from "next-auth/react";
+import { createContext, ReactNode, useContext } from 'react';
+import { IUser } from '@/types/user';
+import swr from 'swr';
+import axiosInstance from '@/lib/axios';
+import { useSession } from 'next-auth/react';
 
 interface UserProps {
   user: IUser | null | undefined;
@@ -23,9 +15,9 @@ const UserContext = createContext<UserProps | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const { data: session } = useSession();
   const { data: user } = swr<IUser>(
-    session?.user ? "/auth/me" : null,
+    session?.user ? '/auth/me' : null,
     async () => {
-      const data = await axiosInstance.get("/api/auth-user", {
+      const data = await axiosInstance.get('/api/auth-user', {
         headers: {
           // @ts-ignore
           Authorization: `Bearer ${session?.user?.access_token}`,
@@ -44,7 +36,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       //   }
       // }
       return data.data?.user;
-    },
+    }
   );
   return (
     <UserContext.Provider
@@ -60,7 +52,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUser must be used within a UserProvider");
+    throw new Error('useUser must be used within a UserProvider');
   }
   return context;
 };
