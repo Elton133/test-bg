@@ -10,19 +10,24 @@ dayjs.extend(relativeTime);
 
 const AnnouncementItem = ({
   announcement,
+  cb,
 }: {
   announcement: IAnnouncement;
+  cb?: () => void;
 }) => {
   return (
     <button
       className={
         'min-h-[80px] h-full w-full text-left bg-[#D0EFE9] rounded-lg p-3 relative cursor-pointer'
       }
-      onClick={() => markAnnouncementAsRead(announcement.id)}
+      onClick={async () => {
+        await markAnnouncementAsRead(announcement?.id)
+        cb && cb();
+      }}
     >
       <svg
         className={
-          'top-3 right-3 absolute animate-iteration-3 animate-pulse'
+          'top-3 right-3 absolute animate-thrice animate-pulse animate-duration-500 animate-delay-200'
         }
         xmlns="http://www.w3.org/2000/svg"
         width="8"
