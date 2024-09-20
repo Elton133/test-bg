@@ -42,7 +42,6 @@ export default function TopicCard({
     setOpenCaseBriefs(!openCaseBriefs);
   };
 
-  console.log(note?.case_brief);
   return (
     <Accordion type={'single'} collapsible>
       <AccordionItem
