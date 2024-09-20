@@ -35,7 +35,7 @@ const navItems = [
     id: 5,
     title: 'Terms & Conditions',
     icon: <Edit2 size={24} strokeWidth={1.5} />,
-    url: '/dashboard/account-settings/billing',
+    url: '/dashboard/account-settings/terms-and-conditions',
   },
 ];
 
