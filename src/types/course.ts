@@ -40,7 +40,7 @@ export interface ITopic {
 
 export interface ITopicDetail extends ITopic {
   course?: ICourse;
-  case_briefs?: ICaseBrief[];
+  case_brief?: ICaseBrief[];
   quiz?: IQuiz;
 }
 
@@ -50,7 +50,7 @@ export interface ICourseDetail {
   notes: {
     note: ITopic;
     quiz: IQuiz;
-    case_briefs: ICaseBrief[];
+    case_brief: ICaseBrief[];
     note_status: boolean;
     quiz_status: boolean;
     study_guide_status: boolean;
