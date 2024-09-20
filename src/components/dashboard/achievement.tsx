@@ -7,7 +7,7 @@ export default async function Achievement() {
   const achievements = await getAchievements();
 
   return (
-    <div className="w-full 2xl:w-[75%] mx-auto lg:min-h-[240px] relative bg-[#063231] lg:rounded-[20px] flex flex-col justify-center items-center p-6 lg:mt-24">
+    <div className="w-full 2xl:w-[75%] mx-auto lg:min-h-[240px] relative bg-[#063231] lg:rounded-[20px] flex flex-col justify-center items-center p-6 lg:mt-24 shadow-md shadow-primary">
       <div
         className={
           'w-full h-full absolute top-0 left-0 bg-blend-overlay opacity-20'
