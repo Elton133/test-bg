@@ -201,7 +201,7 @@ export default function RegisterForm() {
         <div className={'place-self-center text-xs text-muted'}>
           By signing up, you agree to our{' '}
           <Link
-            href={'/#'}
+            href={'/terms-and-conditions'}
             className={'text-[#CAAB57] hover:underline'}
           >
             terms & conditions
@@ -235,7 +235,7 @@ export default function RegisterForm() {
                 Sign in
               </Link>
             </p>
-            <div
+            {/* <div
               className={
                 'flex justify-between items-center gap-12 text-[#ABB3BF]'
               }
@@ -243,7 +243,7 @@ export default function RegisterForm() {
               <hr className={'border-[#ABB3BF] w-full my-4'} />
               <p className={'text-xs'}>OR</p>
               <hr className={'border-[#ABB3BF] w-full my-4'} />
-            </div>
+            </div> */}
             {/* <Link
               href={
                 'https://api.thebeststudyguide.com/api/auth/google/redirect'

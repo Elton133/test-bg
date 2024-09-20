@@ -130,7 +130,7 @@ export default function SignInForm() {
                 Sign up
               </Link>
             </p>
-            <div
+            {/* <div
               className={
                 'flex justify-between items-center gap-12 text-[#ABB3BF]'
               }
@@ -138,7 +138,7 @@ export default function SignInForm() {
               <hr className={'border-[#ABB3BF] w-full my-4'} />
               <p className={'text-xs'}>OR</p>
               <hr className={'border-[#ABB3BF] w-full my-4'} />
-            </div>
+            </div> */}
             {/* <Link
               href={
                 'https://api.thebeststudyguide.com/api/auth/google/redirect'
