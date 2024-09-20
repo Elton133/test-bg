@@ -22,14 +22,15 @@ export default async function Announcement() {
         </div>
         <p className={'text-lg font-semibold'}>Announcements</p>
       </div>
-      <div className={'w-full pt-8'}>
+      <div className={'w-full pt-8 overflow-x-scroll max-h-[330px] h-full'}>
         {/*<EmptyAnnouncement />*/}
 
         {announcements.length > 0 &&
-          announcements.slice(0, 2).map((announcement, index) => (
+          announcements.map((announcement, index) => (
             <Fragment key={announcement.id}>
               <AnnouncementItem announcement={announcement} />
-              {index !== 1 && <hr className={'my-2'} />}
+              {/* {index !== 1 && index !== announcements.length && <hr className={'my-2'} />} */}
+              <hr className={'my-2'} />
             </Fragment>
           ))}
         {announcements.length === 0 && <EmptyAnnouncement />}
