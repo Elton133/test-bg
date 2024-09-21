@@ -54,8 +54,6 @@ export default function NoteSidePanel({
   const controls = useAnimationControls();
   const path = usePathname();
 
-  console.log(topic);
-
   useEffect(() => {
     if (openSidePanel) {
       controls.start('open');
