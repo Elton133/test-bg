@@ -54,6 +54,8 @@ export default function NoteSidePanel({
   const controls = useAnimationControls();
   const path = usePathname();
 
+  console.log(topic);
+
   useEffect(() => {
     if (openSidePanel) {
       controls.start('open');
@@ -169,7 +171,7 @@ export default function NoteSidePanel({
                   <CaseBriefsMenu
                     navItem={item}
                     key={index}
-                    caseBriefs={topic?.case_brief}
+                    caseBriefs={topic?.case_briefs}
                     topicSlug={topic?.slug}
                   />
                 );
@@ -210,6 +212,7 @@ export default function NoteSidePanel({
             </div>
           )}
         </div>
+        <div className={'min-h-[100px]'}></div>
       </div>
     </motion.div>
   );

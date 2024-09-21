@@ -41,6 +41,7 @@ export interface ITopic {
 export interface ITopicDetail extends ITopic {
   course?: ICourse;
   case_brief?: ICaseBrief[];
+  case_briefs?: ICaseBrief[];
   quiz?: IQuiz;
 }
 

@@ -15,7 +15,7 @@ export default async function PastQuestionPage({
   const session = await getServerSession(authOptions);
   const caseBrief =
     topic &&
-    topic?.case_brief?.find((brief) => brief.slug === params.slug);
+    topic?.case_briefs?.find((brief) => brief.slug === params.slug);
   return (
     <section className={'w-full'}>
       <NoteHeader
