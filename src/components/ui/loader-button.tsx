@@ -22,10 +22,10 @@ export default function LoaderButton({
   return (
     <Button
       variant={variant}
-      className={'font-semibold flex items-center gap-2'}
+      className={'font-semibold flex items-center'}
       {...rest}
     >
-      {loading && <LoaderCircle className={'animate-spin'} />}
+      {loading && <LoaderCircle className={'animate-spin mr-2'} />}
       {children}
     </Button>
   );
