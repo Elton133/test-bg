@@ -169,7 +169,7 @@ export default function NoteSidePanel({
                   <CaseBriefsMenu
                     navItem={item}
                     key={index}
-                    caseBriefs={topic?.case_briefs}
+                    caseBriefs={topic?.case_brief}
                     topicSlug={topic?.slug}
                   />
                 );
