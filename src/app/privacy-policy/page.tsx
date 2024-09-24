@@ -14,17 +14,18 @@ export default function PrivacyPolicyPage() {
           </div>
           <div className={'px-2 md:px-4 v-stack'}>
             <p>
-              BSG (<b>"us"</b>, <b>"we"</b>, or <b>"our"</b>) operates{' '}
-              <b>"The Best Study Guide"</b> website (the{' '}
-              <b>"Service"</b>). This Privacy Policy explains how we
-              collect, use, and disclose personal data when you use our
-              Service, as well as the choices you have regarding that
-              data. <b>'Personal Data'</b> refers to any information
-              that identifies you as an individual, such as your name,
-              email address, or payment details. We are committed to
-              safeguarding your privacy and security by ensuring you
-              understand how your Personal Data is handled and what
-              rights you have concerning its use.
+              BSG (<b>&quot;us&quot;</b>, <b>&quot;we&quot;</b>, or{' '}
+              <b>&quot;our&quot;</b>) operates{' '}
+              <b>&quot;The Best Study Guide&quot;</b> website (the{' '}
+              <b>&quot;Service&quot;</b>). This Privacy Policy explains
+              how we collect, use, and disclose personal data when you
+              use our Service, as well as the choices you have regarding
+              that data. <b>&quot;Personal Data&quot;</b> refers to any
+              information that identifies you as an individual, such as
+              your name, email address, or payment details. We are
+              committed to safeguarding your privacy and security by
+              ensuring you understand how your Personal Data is handled
+              and what rights you have concerning its use.
             </p>
             <p>
               Unless we link to a different policy or state otherwise,
@@ -81,13 +82,14 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <p>
                     <b>Usage Data:</b> We may also collect information
-                    about how the Service is accessed and used ("Usage
-                    Data"). This Usage Data may include information such
-                    as your computer's Internet Protocol address (e.g.
-                    IP address), browser type, browser version, the
-                    pages of our Service that you visit, the time and
-                    date of your visit, the time spent on those pages,
-                    unique device identifiers and other diagnostic data.
+                    about how the Service is accessed and used
+                    (&quot;Usage Data&quot;). This Usage Data may
+                    include information such as your computer&quot;s
+                    Internet Protocol address (e.g. IP address), browser
+                    type, browser version, the pages of our Service that
+                    you visit, the time and date of your visit, the time
+                    spent on those pages, unique device identifiers and
+                    other diagnostic data.
                   </p>
                 </li>
               </ul>
