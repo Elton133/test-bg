@@ -323,7 +323,9 @@ export default function PrivacyPolicyPage() {
             <p>
               This policy should be read and applied together with our{' '}
               <Link
-                href={'/terms-and-conditions'}
+                href={
+                  '/dashboard/account-settings/terms-and-conditions'
+                }
                 className={'text-blue-400 font-semibold'}
               >
                 Terms and Conditions
