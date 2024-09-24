@@ -208,7 +208,7 @@ export default function RegisterForm() {
           </Link>{' '}
           and{' '}
           <Link
-            href={'/#'}
+            href={'/privacy-policy'}
             className={'text-[#CAAB57] hover:underline'}
           >
             privacy policy
@@ -252,7 +252,7 @@ export default function RegisterForm() {
                 'h-stack w-full stack-center py-2 border rounded-lg'
               }
             >
-          
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

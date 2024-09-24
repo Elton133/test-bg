@@ -29,7 +29,7 @@ const navItems = [
     id: 4,
     title: 'Privacy policy',
     icon: <BookOpen size={24} strokeWidth={1.5} />,
-    url: '/dashboard/account-settings/privacy',
+    url: '/dashboard/account-settings/privacy-policy',
   },
   {
     id: 5,

@@ -23,6 +23,7 @@ import { useSession } from 'next-auth/react';
 import { Input } from '@components/ui/input';
 import { updateUserProfile, getUserSession } from '@/actions/auth';
 import { toast } from 'sonner';
+import LoaderButton from '@components/ui/loader-button';
 
 interface UpdateProfileFormProps {
   name?: string;
@@ -245,17 +246,24 @@ export default function UpdateProfileForm({
           )}
         />
         <div className={'flex justify-start py-6'}>
-          <Button
+          {/*<Button*/}
+          {/*  type={'submit'}*/}
+          {/*  className={'w-full md:w-auto rounded-xl'}*/}
+          {/*  disabled={form.formState.isSubmitting}*/}
+          {/*>*/}
+          {/*  {form.formState.isSubmitting ? (*/}
+          {/*    <LoaderCircle className={'animate-spin'} />*/}
+          {/*  ) : (*/}
+          {/*    'Save changes'*/}
+          {/*  )}*/}
+          {/*</Button>*/}
+          <LoaderButton
+            loading={form.formState.isSubmitting}
             type={'submit'}
             className={'w-full md:w-auto rounded-xl'}
-            disabled={form.formState.isSubmitting}
           >
-            {form.formState.isSubmitting ? (
-              <LoaderCircle className={'animate-spin'} />
-            ) : (
-              'Save changes'
-            )}
-          </Button>
+            Save changes
+          </LoaderButton>
         </div>
       </form>
     </Form>
