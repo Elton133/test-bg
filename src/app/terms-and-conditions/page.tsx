@@ -1,5 +1,14 @@
 import Terms from '@/lib/terms-and-condtions';
 import { cn } from '@/lib/utils';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - Terms and Conditions',
+  description:
+    'Read the terms and conditions of the Best Study Guide Ghana.',
+  keywords: ['terms', 'conditions', 'legal', 'privacy', 'policy'],
+  robots: 'follow, index',
+};
 
 export default async function TermsAndConditionsPage() {
   const { termsAndConditions } = Terms;
