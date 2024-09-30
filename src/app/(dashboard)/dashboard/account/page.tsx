@@ -6,8 +6,26 @@ import Link from 'next/link';
 import { Streak } from '@/types/course';
 import { getStreak } from '@/actions/streak';
 import { getAchievements } from '@/actions/courses';
+import { Metadata } from 'next';
 
 const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
+export const metadata: Metadata = {
+  title: 'BSG - Account',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'account',
+    'the best account',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+};
 
 export default async function AccountPage() {
   const session = await getServerSession(authOptions);

@@ -5,9 +5,28 @@ import {
 } from '@/actions/courses';
 import TopicCard from '@components/courses/topic-card';
 import { ICourseDetail } from '@/types/course';
+import { Metadata } from 'next';
 import CourseDetailHeader from '@components/courses/course-detail-header';
 
 const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
+export const metadata: Metadata = {
+  title: 'BSG - Course',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'study guide',
+    'the best study guide',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+  robots: 'follow, index',
+};
 
 export default async function CourseDetails({
   params,
