@@ -24,6 +24,7 @@ import { Session } from 'next-auth';
 import useSWR from 'swr';
 import { IAnnouncement } from '@/types/course';
 import AnnouncementPanel from '@components/announcement/announcement-panel';
+import { logout } from '@/actions/auth';
 
 interface NavBarProps {
   session: Session | null;
@@ -44,13 +45,13 @@ export default function NavBar({
     return response;
   });
 
-
   const handleToggleSidebar = () => {
     setOpen(!open);
   };
 
   const handleLogout = async () => {
     dispatch({ type: 'CLEAR_CART', payload: {} as Cart });
+    await logout();
     await signOut();
   };
 
@@ -61,7 +62,6 @@ export default function NavBar({
   const handleAnnouncement = () => {
     setOpenAnnouncement(!openAnnouncement);
   };
-
 
   return (
     <header className={'sm:h-[78px] h-[50px] z-20 relative'}>

@@ -8,10 +8,10 @@ import { IUser } from '@/types/user';
 export const authOptions: AuthOptions = {
   session: {
     strategy: 'jwt',
-    maxAge: 3 * 24 * 60 * 60,
+    maxAge: 24 * 60 * 60,
   },
   jwt: {
-    maxAge: 3 * 24 * 60 * 60,
+    maxAge: 24 * 60 * 60,
   },
   // useSecureCookies: true,
   // cookies: {
@@ -41,7 +41,7 @@ export const authOptions: AuthOptions = {
           if (res.status) {
             // console.log(res.data)
             cookies().set('__bsg_session', res.data.token, {
-              expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+              expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
               httpOnly: true,
               secure: process.env.NODE_ENV === 'production',
               sameSite: 'strict',
