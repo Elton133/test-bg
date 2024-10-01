@@ -1,12 +1,23 @@
 import Terms from '@/lib/terms-and-condtions';
 import { cn } from '@/lib/utils';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - Terms and Conditions',
+  description:
+    'Read the terms and conditions of the Best Study Guide Ghana.',
+  keywords: ['terms', 'conditions', 'legal', 'privacy', 'policy'],
+  robots: 'follow, index',
+};
 
 export default async function TermsAndConditionsPage() {
   const { termsAndConditions } = Terms;
 
   return (
     <section
-      className={'w-full max-h-[80vh] overflow-y-scroll no-scrollbar mx-auto'}
+      className={
+        'w-full max-h-[80vh] overflow-y-scroll no-scrollbar mx-auto'
+      }
     >
       <div className={'mb-8'}>
         <h1 className={'font-bold underline text-2xl text-center pb-6'}>
@@ -18,16 +29,16 @@ export default async function TermsAndConditionsPage() {
         <div className={'v-stack py-6'}>
           <p className={'text-sm'}>
             The Best Study Guide Ghana (“<b>BSG</b>”) operates this
-            website. These Terms and Conditions (“<b>Terms”</b>) represent a
-            legally binding contract between you BSG. These Terms govern
-            your use of any BSG related content including; using our
-            website, and purchasing and/or accessing our Study Guides,
-            Study Café, Multiple Choice Questions (“<b>MCQ</b>”), and
-            Past Question Indices (“<b>PQI</b>”) (“<b>Services</b>” or “
-            <b>Service</b>”). By visiting our website, purchasing Study
-            Guides from us, using our MCQs, BSG Shop or PQIs you engage
-            our Services and therefore agree to be bound by these Terms,
-            as well as our Privacy Policy.
+            website. These Terms and Conditions (“<b>Terms”</b>)
+            represent a legally binding contract between you BSG. These
+            Terms govern your use of any BSG related content including;
+            using our website, and purchasing and/or accessing our Study
+            Guides, Study Café, Multiple Choice Questions (“<b>MCQ</b>
+            ”), and Past Question Indices (“<b>PQI</b>”) (“
+            <b>Services</b>” or “<b>Service</b>”). By visiting our
+            website, purchasing Study Guides from us, using our MCQs,
+            BSG Shop or PQIs you engage our Services and therefore agree
+            to be bound by these Terms, as well as our Privacy Policy.
           </p>
           <p className={'text-sm'}>
             Any new features or updates to the website are subject to
