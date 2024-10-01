@@ -9,6 +9,25 @@ import { getCourses } from '@/actions/courses';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { ICourse } from '@/types/course';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - My Learning',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'learning',
+    'the best learning',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+  robots: 'follow, index',
+};
 
 const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
 

@@ -6,6 +6,24 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import QuizSession from '@components/quiz/quiz-session';
 import { QuizProvider } from '@/context/quiz-context';
 import StartQuizModal from '@components/quiz/start-quiz-modal';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - Quiz',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'quiz',
+    'the best quiz',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+};
 
 export default async function PastQuestionPage({
   params,

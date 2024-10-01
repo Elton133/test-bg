@@ -4,6 +4,25 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import NoteViewer from '@components/note/note-viewer';
 import NoteHeader from '@components/note/note-header';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - Study Guide',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'study guide',
+    'the best study guide',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+  robots: 'follow, index',
+};
 
 function nextTopicIndex(
   course: ICourseDetail,
