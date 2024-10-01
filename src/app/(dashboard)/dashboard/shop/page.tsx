@@ -122,7 +122,7 @@ const PriceCard = ({ amount, price }: PriceCardProps) => {
   return (
     <div className={'flex flex-col gap-2'}>
       <p className={'text-[#B2BFBF] text-sm'}>
-        {amount > 1 ? `${amount} subjects` : `${amount} subject`}{' '}
+        {amount > 1 ? `${amount} courses` : `${amount} course`}{' '}
       </p>
       <p className={'text-white font-bold'}>GHS {price}</p>
     </div>

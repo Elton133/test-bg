@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - Terms and Conditions',
+  description: 'Read the privacy policy of the Best Study Guide Ghana.',
+  keywords: ['terms', 'conditions', 'legal', 'privacy', 'policy'],
+  robots: 'follow, index',
+};
 export default function PrivacyPolicyPage() {
   return (
     <main className={'py-4 md:py-10 bg-white'}>
