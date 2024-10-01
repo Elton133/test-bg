@@ -1,15 +1,15 @@
-"use server";
+'use server';
 
-import axiosInstance from "@/lib/axios";
-import { cookies } from "next/headers";
-import { IUser } from "@/types/user";
-import { redirect } from "next/navigation";
+import axiosInstance from '@/lib/axios';
+import { cookies } from 'next/headers';
+import { IUser } from '@/types/user';
+import { redirect } from 'next/navigation';
 
 export async function getUserSession(): Promise<IUser | null> {
   try {
-    const { data } = await axiosInstance.get("/api/auth-user", {
+    const { data } = await axiosInstance.get('/api/auth-user', {
       headers: {
-        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
       },
     });
     return data?.user;
@@ -20,37 +20,45 @@ export async function getUserSession(): Promise<IUser | null> {
   }
 }
 
-
-export async function updateUserProfile(data: FormData): Promise<IUser | null> {
+export async function updateUserProfile(
+  data: FormData
+): Promise<IUser | null> {
   try {
-    const response = await axiosInstance.post("/api/update/profile", data, {
-      headers: {
-        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axiosInstance.post(
+      '/api/update/profile',
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     return response.data;
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(err)
+    console.log(err);
     return null;
   }
 }
 
 export async function deleteUserAccount(id: string): Promise<boolean> {
   try {
-    const response = await axiosInstance.delete(`/api/delete/account/${id}`, {
-      headers: {
-        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-      },
-    });
+    const response = await axiosInstance.delete(
+      `/api/delete/account/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        },
+      }
+    );
     if (response.data) {
-      redirect("/account-deleted");
+      redirect('/account-deleted');
     }
     return response.data;
   } catch (err) {
     // temporary redirect
-    redirect("/account-deleted");
+    redirect('/account-deleted');
     // return false;
   }
 }
@@ -60,17 +68,41 @@ export async function changePassword(data: {
   new_password: string;
 }) {
   try {
-    const response = await axiosInstance.put(`/api/change-password`, data, {
-      headers: {
-        Authorization: `Bearer ${cookies().get("__bsg_session")?.value}`,
-      },
-    });
+    const response = await axiosInstance.put(
+      `/api/change-password`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     // eslint-disable-next-line no-console
     return {
-    // @ts-ignore
-        error: error?.response?.data,
-    }
+      // @ts-ignore
+      error: error?.response?.data,
+    };
+  }
+}
+
+export async function logout() {
+  try {
+    const response = await axiosInstance.post(
+      '/api/logout',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+        },
+      }
+    );
+    console.log(response?.data);
+    return response.data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+    return null;
   }
 }
