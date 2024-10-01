@@ -61,7 +61,7 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.2 },
               }}
             >
-              <RateCard no_of_courses="3 course" price={300} />
+              <RateCard no_of_courses="3 courses" price={300} />
             </motion.div>
 
             <motion.div
@@ -72,7 +72,7 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.3 },
               }}
             >
-              <RateCard no_of_courses="5 course" price={450} />
+              <RateCard no_of_courses="5 courses" price={450} />
             </motion.div>
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
@@ -82,7 +82,7 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.4 },
               }}
             >
-              <RateCard no_of_courses="7 course" price={600} />
+              <RateCard no_of_courses="7 courses" price={600} />
             </motion.div>
           </div>
         </div>
