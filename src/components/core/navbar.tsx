@@ -52,7 +52,7 @@ export default function NavBar({
   const handleLogout = async () => {
     dispatch({ type: 'CLEAR_CART', payload: {} as Cart });
     await logout();
-    await signOut();
+    await signOut({ redirect: true, callbackUrl: '/' });
   };
 
   const handleToggleCart = () => {
@@ -84,7 +84,7 @@ export default function NavBar({
               <MenuButton isOpen={open} onClick={handleToggleSidebar} />
             </div>
           )}
-          <Link href="/">
+          <Link href="/dashboard">
             <Image
               loading={'lazy'}
               className={'w-7 sm:w-9'}
