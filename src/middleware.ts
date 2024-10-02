@@ -28,9 +28,24 @@ export async function middleware(req: NextRequest) {
       new URL('/login', req.nextUrl).toString()
     );
   }
-  if (token && isPublic) {
+  // @ts-ignore
+  if (token?.user?.email_verified_at && isPublic) {
     return NextResponse.redirect(
       new URL('/dashboard', req.nextUrl).toString()
+    );
+  }
+  if (
+    token &&
+    // @ts-ignore
+    !token?.user?.email_verified_at &&
+    req.nextUrl.pathname.startsWith('/dashboard')
+  ) {
+    return NextResponse.redirect(
+      new URL(
+        // @ts-ignore
+        `/verify-email?email=${token?.user?.email}`,
+        req.nextUrl
+      ).toString()
     );
   }
   return NextResponse.next();
