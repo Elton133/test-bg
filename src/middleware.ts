@@ -14,7 +14,7 @@ export const publicRoutes = [
   '/reset-password',
   '/welcome',
   '/verify-email',
-  '/email-verified',
+  // '/email-verified',
   '/',
 ];
 
