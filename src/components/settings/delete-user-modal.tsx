@@ -36,7 +36,14 @@ const ConfirmDeleteUserModal = ({ userID }: { userID: string }) => {
         return;
       }
       setLoading(true);
-      await deleteUserAccount();
+      const res = await deleteUserAccount({ password });
+      // @ts-ignore
+      if (!res?.status) {
+        // @ts-ignore
+        setError(res?.message);
+        setLoading(false);
+        return;
+      }
       setLoading(false);
     } catch (error) {
       setError('An error occurred');

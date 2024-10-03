@@ -45,21 +45,26 @@ export async function updateUserProfile(
   }
 }
 
-export async function deleteUserAccount(): Promise<boolean> {
-  try {
-    const response = await axiosInstance.delete(`/api/delete/account`, {
+export async function deleteUserAccount({
+  password,
+}: {
+  password: string;
+}): Promise<any> {
+  const response = await axiosInstance
+    .delete(`/api/delete/account`, {
+      data: { password },
       headers: {
         Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
       },
-    });
-    if (response.data) {
-      redirect('/account-deleted');
-    }
-    return response.data;
-  } catch (err) {
-    // temporary redirect
+    })
+    .then((res) => res.data)
+    .catch((e) => e.response.data);
+  if (!response.status) {
+    return response;
+  }
+
+  if (response.status) {
     redirect('/account-deleted');
-    // return false;
   }
 }
 

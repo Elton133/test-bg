@@ -30,6 +30,7 @@ export default function EmailVerified() {
           return res;
         }
       }
+      setLoading(false);
       return res;
     };
     // toast.promise(updateSession(), {
