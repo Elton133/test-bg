@@ -40,6 +40,7 @@ export default function useLogin() {
           email: values.email,
           password: values.password,
           redirect: false,
+          callbackUrl: '/dashboard',
         }).then((res) => {
           // console.log(res);
           if (res?.ok) {

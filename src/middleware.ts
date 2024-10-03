@@ -28,12 +28,7 @@ export async function middleware(req: NextRequest) {
       new URL('/login', req.nextUrl).toString()
     );
   }
-  // @ts-ignore
-  if (token?.user?.email_verified_at && isPublic) {
-    return NextResponse.redirect(
-      new URL('/dashboard', req.nextUrl).toString()
-    );
-  }
+
   if (
     token &&
     // @ts-ignore
@@ -46,6 +41,12 @@ export async function middleware(req: NextRequest) {
         `/verify-email?email=${token?.user?.email}`,
         req.nextUrl
       ).toString()
+    );
+  }
+  // @ts-ignore
+  if (token?.user?.email_verified_at && isPublic) {
+    return NextResponse.redirect(
+      new URL('/dashboard', req.nextUrl).toString()
     );
   }
   return NextResponse.next();
