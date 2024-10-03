@@ -46,10 +46,21 @@ export const authOptions: AuthOptions = {
               secure: process.env.NODE_ENV === 'production',
               sameSite: 'strict',
             });
+            cookies().set(
+              '__verified',
+              res.data.user.email_verified_at,
+              {
+                expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+              }
+            );
             return res.data;
           }
         } catch (error) {
           // @ts-ignore
+          // console.log(error);
           throw new Error(error?.response.data.message);
         }
         return null;
@@ -75,6 +86,7 @@ export const authOptions: AuthOptions = {
         firstName: user.fname,
         id: user?.id + '',
         lastName: user.lname,
+        verified: user.email_verified_at,
         name: `${user.fname} ${user.lname}`,
         image: user.avatar,
         email: user.email,
@@ -91,8 +103,11 @@ export const authOptions: AuthOptions = {
       token = { ...token, ...user };
       return token;
     },
-    async signIn({ account, profile }) {
-      console.log(account, profile);
+    async signIn({ account, profile, user }) {
+      // console.log({ user });
+      // if (!user?.user?.email_verified_at) {
+      //   return redirect('/verify-email');
+      // }
       return true;
     },
   },

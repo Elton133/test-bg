@@ -16,7 +16,6 @@ import {
   FloatingLabel,
 } from '@components/ui/floating-label-input';
 import { cn } from '@/lib/utils';
-import { LoaderCircle } from 'lucide-react';
 import { Button } from '@components/ui/button';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';

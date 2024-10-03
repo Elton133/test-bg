@@ -12,6 +12,9 @@ export async function getUserSession(): Promise<IUser | null> {
         Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
       },
     });
+    if (data?.user) {
+      cookies().set('__verified', data?.user?.user?.email_verified_at);
+    }
     return data?.user;
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -98,11 +101,28 @@ export async function logout() {
         },
       }
     );
-    console.log(response?.data);
+    cookies().delete('__bsg_session');
+    cookies().delete('__verified');
     return response.data;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
     return null;
+  }
+}
+
+export async function resendVerificationEmail(email?: string) {
+  try {
+    const response = await axiosInstance.get('/api/resend/verify', {
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // @ts-ignore
+    console.log(error?.response?.data);
+    // @ts-ignore
+    return error?.response?.data;
   }
 }
