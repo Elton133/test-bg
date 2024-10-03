@@ -52,10 +52,10 @@ export default function useLogin() {
       {
         loading: 'Signing in...',
         success: (data) => {
+          router.push('/dashboard');
           if (data) {
             // form.reset();
             // some stuff
-            router.push('/dashboard');
             return 'Signed in successfully';
           }
         },
