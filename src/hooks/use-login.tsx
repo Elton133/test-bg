@@ -52,10 +52,15 @@ export default function useLogin() {
       {
         loading: 'Signing in...',
         success: (data) => {
-          router.push('/dashboard');
+          // router.push('/dashboard', {
+          //
+          // });
           if (data) {
             // form.reset();
             // some stuff
+            if (typeof window !== 'undefined') {
+              window.location.href = '/dashboard';
+            }
             return 'Signed in successfully';
           }
         },
