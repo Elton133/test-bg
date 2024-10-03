@@ -45,16 +45,13 @@ export async function updateUserProfile(
   }
 }
 
-export async function deleteUserAccount(id: string): Promise<boolean> {
+export async function deleteUserAccount(): Promise<boolean> {
   try {
-    const response = await axiosInstance.delete(
-      `/api/delete/account/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
-        },
-      }
-    );
+    const response = await axiosInstance.delete(`/api/delete/account`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+      },
+    });
     if (response.data) {
       redirect('/account-deleted');
     }
@@ -124,5 +121,21 @@ export async function resendVerificationEmail(email?: string) {
     console.log(error?.response?.data);
     // @ts-ignore
     return error?.response?.data;
+  }
+}
+
+export async function deleteUser() {
+  try {
+    const response = await axiosInstance.delete(`/api/delete/account`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('__bsg_session')?.value}`,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    // @ts-ignore
+    console.log(e?.response?.data);
+    // @ts-ignore
+    return e?.response?.data;
   }
 }
