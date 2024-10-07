@@ -34,7 +34,9 @@ export default function NoteHeader({
         <Button
           onClick={() => router.back()}
           variant={'link'}
-          className={'h-stack gap-2 text-brand-text font-semibold'}
+          className={
+            'h-stack md:hidden gap-2 text-brand-text font-semibold'
+          }
         >
           <ArrowLeft /> Past Questions
         </Button>
