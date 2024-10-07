@@ -1,12 +1,16 @@
 'use client';
 
-import { Warning2 } from 'iconsax-react';
+import { ArrowLeft, Warning2 } from 'iconsax-react';
 import { ArrowRightToLine, Dot } from 'lucide-react';
 import NoteSidePanel from '@components/note/note-side-panel';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
 import { ITopic, ITopicDetail } from '@/types/course';
 import { cn } from '@/lib/utils';
 import { useSideBar } from '@/context/side-bar-context';
+import { Button } from '@components/ui/button';
+import { useRouter, usePathname } from 'next/navigation';
+
+const bypassBackButton = ['past-question', 'case-brief'];
 
 interface INoteHeaderProps {
   topic: ITopicDetail;
@@ -21,9 +25,20 @@ export default function NoteHeader({
 }: INoteHeaderProps) {
   const { openSidePanel, toggleSidePanel } = useNoteSidePanel();
   const { openSideBar } = useSideBar();
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <section>
+      {pathname.includes('past-question') && (
+        <Button
+          onClick={() => router.back()}
+          variant={'link'}
+          className={'h-stack gap-2 text-brand-text font-semibold'}
+        >
+          <ArrowLeft /> Past Questions
+        </Button>
+      )}
       <div
         className={cn(
           'max-h-[180px] flex flex-col gap-y-3 w-full shadow-md px-4 lg:px-24 pt-4 pb-2 relative bg-white animate-fade-down',
