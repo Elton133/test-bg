@@ -1,13 +1,31 @@
 'use client';
 
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
+import useWindowScroll from '@hooks/useWindowScroll';
+import { useEffect } from 'react';
+import { markResourceAsCompleted } from '@/actions/courses';
 
 export default function PastQuestionsViewer({
   html,
+  noteId,
 }: {
   html: string;
+  noteId: string
 }) {
-  const { openSidePanel, toggleSidePanel } = useNoteSidePanel();
+  const { y } = useWindowScroll();
+  const { openSidePanel } = useNoteSidePanel();
+  useEffect(() => {
+    if (window !== undefined) {
+      const totalHeight = document.body.scrollHeight;
+      const currentScroll = y + window.innerHeight;
+      if (currentScroll >= totalHeight) {
+        markResourceAsCompleted(noteId, {
+          pqi_completed: true
+        })
+      }
+    }
+  }, [y, noteId]);
+
   return !openSidePanel ? (
     <section
       className={

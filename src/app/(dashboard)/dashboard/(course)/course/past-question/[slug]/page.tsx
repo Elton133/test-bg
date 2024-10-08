@@ -49,7 +49,7 @@ export default async function PastQuestionPage({
       {/*    dangerouslySetInnerHTML={{ __html: topic?.pqi }}*/}
       {/*  />*/}
       {/*</section>*/}
-      <PastQuestionsViewer html={topic?.pqi} />
+      <PastQuestionsViewer html={topic?.pqi} noteId={topic?.id} />
       {/*<CourseMenuBar />*/}
     </section>
   );
