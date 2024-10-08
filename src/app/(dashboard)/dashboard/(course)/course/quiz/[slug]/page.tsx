@@ -34,7 +34,7 @@ export default async function PastQuestionPage({
   const session = await getServerSession(authOptions);
 
   return (
-    <QuizProvider quiz={topic?.quiz}>
+    <QuizProvider quiz={topic?.quiz} noteId={topic?.id}>
       <section className={'w-full relative'}>
         <div className={'py-1'}>
           <QuizSession
