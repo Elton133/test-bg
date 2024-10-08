@@ -1,3 +1,5 @@
+'use client'
+
 import { markResourceAsCompleted } from '@/actions/courses';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
 import useWindowScroll from '@/hooks/useWindowScroll';
