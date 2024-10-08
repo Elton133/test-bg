@@ -88,7 +88,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
           <div
             style={{
               color: 'rgba(6, 50, 49, 0.2)',
-              fontSize: `${4 * props.scale}rem`,
+              fontSize: `${3.8 * props.scale}rem`,
               fontWeight: 'bold',
               textTransform: 'uppercase',
               transform: 'rotate(-45deg)',
