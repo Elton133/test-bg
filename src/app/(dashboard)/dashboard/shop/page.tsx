@@ -4,6 +4,8 @@ import { getCourses } from '@/actions/courses';
 import { Metadata } from 'next';
 import { ICourse } from '@/types/course';
 
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
+
 export const metadata: Metadata = {
   title: 'BSG - Shop',
   description:
@@ -28,7 +30,7 @@ export default async function ShopPage() {
     <div className={'h-full'}>
       <section
         className={
-          'bg-primary w-full min-[710px] min--[calc(100vh_-_56px)] md:min-h-[360px] pt-8 px-4 md:px-12 md:py-12 pb-2'
+          'bg-primary w-full min-[710px] min--[calc(100vh_-_56px)] md:min-h-[360px] pt-8 px-4 md:px-12 md:py-12 pb-2 animate-fade-down'
         }
       >
         <div
@@ -72,7 +74,7 @@ export default async function ShopPage() {
           </div>
           <div
             className={
-              'mx-auto animate-fade-up animate-once flex md:flex-col justify-center md:items-end w-full lg:w-1/2'
+              'mx-auto animate-fade-up animate-once animate-delay-200 flex md:flex-col justify-center md:items-end w-full lg:w-1/2'
             }
           >
             <Image
@@ -102,7 +104,7 @@ export default async function ShopPage() {
               courseID={course.id}
               slug={course.slug}
               purchased={course.enroll_status === 'active'}
-              // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+              imageUrl={`${STORAGE_URL}/${course.image}`}
               progress={20}
             />
           ))}
@@ -120,7 +122,7 @@ const PriceCard = ({ amount, price }: PriceCardProps) => {
   return (
     <div className={'flex flex-col gap-2'}>
       <p className={'text-[#B2BFBF] text-sm'}>
-        {amount > 1 ? `${amount} subjects` : `${amount} subject`}{' '}
+        {amount > 1 ? `${amount} courses` : `${amount} course`}{' '}
       </p>
       <p className={'text-white font-bold'}>GHS {price}</p>
     </div>

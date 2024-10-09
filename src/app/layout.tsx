@@ -9,6 +9,7 @@ import { CircleCheck } from 'lucide-react';
 import { CartProvider } from '@/context/cart-context';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
+import Script from 'next/script';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -71,9 +72,10 @@ export default async function RootLayout({
               unstyled: true,
               classNames: {
                 toast:
-                  'bg-[#D0EFE9] relative flex items-center gap-4 px-4 py-4 pr-1 shadow-md border-l-4 border-primary',
+                  'bg-[#D0EFE9] w-full  flex items-center gap-4 px-4 py-4 pr-1 shadow-md border-l-4 border-primary',
                 closeButton:
-                  'text-[#063231] absolute top-1/2 right-[20px] hover:text-[#FF170A] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50',
+                  'text-[#063231] top-1/2 right-[20px] hover:text-[#FF170A] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50',
+                error: 'bg-[#FED7D7] border-[#FECACA]',
               },
             }}
             icons={{
@@ -90,6 +92,17 @@ export default async function RootLayout({
             position={'top-center'}
           />
         </SessionWrapper>
+        <Script
+          type="text/javascript"
+          id="clarity-script"
+          strategy="afterInteractive"
+        >
+          {`(function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "o5dq2fxipd")`}
+        </Script>
       </body>
     </html>
   );

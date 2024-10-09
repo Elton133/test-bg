@@ -40,6 +40,7 @@ export interface ITopic {
 
 export interface ITopicDetail extends ITopic {
   course?: ICourse;
+  case_brief?: ICaseBrief[];
   case_briefs?: ICaseBrief[];
   quiz?: IQuiz;
 }
@@ -50,7 +51,7 @@ export interface ICourseDetail {
   notes: {
     note: ITopic;
     quiz: IQuiz;
-    case_briefs: ICaseBrief[];
+    case_brief: ICaseBrief[];
     note_status: boolean;
     quiz_status: boolean;
     study_guide_status: boolean;
@@ -101,3 +102,23 @@ export interface IQuiz {
   note: ITopic;
   questions: IQuestion[];
 }
+
+export interface IAnnouncement {
+  id: number;
+  title: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  type: string;
+  url: string | null;
+}
+
+export interface IAchievement {
+  course: string;
+  badge: string;
+}
+
+export type Streak = {
+  streak_count: number;
+  first_streak_date: string;
+};

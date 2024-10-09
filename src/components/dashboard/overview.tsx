@@ -3,10 +3,15 @@ import CourseCardList from '@components/courses/course-card-list';
 import { Button } from '@components/ui/button';
 import { getCourses } from '@/actions/courses';
 import Link from 'next/link';
-import { ICourse } from '@/types/course';
+import { ICourse, Streak } from '@/types/course';
+import { getStreak } from '@/actions/streak';
+import dayjs from 'dayjs';
+
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
 
 export default async function Overview() {
   const courses: ICourse[] = await getCourses();
+  const streak: Streak = await getStreak();
 
   const purchasedCourses =
     courses &&
@@ -18,7 +23,7 @@ export default async function Overview() {
       <div className={'v-stack lg:h-stack justify-between gap-6'}>
         <div
           className={
-            'lg:max-w-[350px] w-full min-h-[252px] h-full bg-brand-yellow-accent px-8 py-6 v-stack justify-start items-center rounded-xl text-center animate-once animate-fade'
+            'lg:max-w-[350px] w-full min-h-[252px] h-full bg-brand-yellow-accent px-8 py-6 v-stack justify-start items-center shadow-md rounded-xl text-center animate-once animate-fade'
           }
         >
           <p className={'text-[#BEA152] font-semibold text-base'}>
@@ -36,8 +41,16 @@ export default async function Overview() {
             width={30}
             height={40}
           />
-          <p className={'text-base font-semibold'}>0 day</p>
-          <p className={'text-muted text-sm'}>Jul 18</p>
+          <p className={'text-base font-semibold'}>
+            {streak?.streak_count > 1
+              ? `${streak?.streak_count} days`
+              : `${streak?.streak_count} day`}
+          </p>
+          <p className={'text-muted text-sm'}>
+            {streak?.streak_count > 1
+              ? `${streak?.first_streak_date} - present`
+              : dayjs().format('MMM D')}
+          </p>
         </div>
         <div className={'sm:w-full'}>
           <p className={'text-sm font-semibold'}>
@@ -45,15 +58,18 @@ export default async function Overview() {
           </p>
           <div className={'v-stack gap-4 pt-6'}>
             {courses &&
-              purchasedCourses.slice(0, 2).map((course) => (
-                <CourseCardList
-                  key={course.id}
-                  courseName={course.title}
-                  progress={course?.progress}
-                  slug={course.slug}
-                  // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
-                />
-              ))}
+              purchasedCourses
+                .slice(0, 2)
+                // .sort((a, b) => b.updated_at - a.updated_at)
+                .map((course) => (
+                  <CourseCardList
+                    key={course.id}
+                    courseName={course.title}
+                    progress={course?.progress}
+                    slug={course.slug}
+                    imageUrl={`${STORAGE_URL}/${course.image}`}
+                  />
+                ))}
           </div>
           {courses && purchasedCourses.length === 0 && (
             <div className={'py-4'}>

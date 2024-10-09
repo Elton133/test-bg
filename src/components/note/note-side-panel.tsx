@@ -44,9 +44,11 @@ const animationVariants = {
 export default function NoteSidePanel({
   topic,
   userName,
+  nextTopic,
 }: {
   topic: ITopicDetail;
   userName: string;
+  nextTopic?: ITopicDetail | null;
 }) {
   const { toggleSidePanel, openSidePanel } = useNoteSidePanel();
   const controls = useAnimationControls();
@@ -82,6 +84,7 @@ export default function NoteSidePanel({
       url: `/dashboard/course/case-briefs/${topic?.slug}`,
     },
   ];
+
   return (
     <motion.div
       className={
@@ -175,9 +178,13 @@ export default function NoteSidePanel({
                 <Link
                   href={item.url}
                   key={index}
-                  className={cn('h-stack p-3 rounded-[5px]', {
-                    'bg-[#FEF2D2]': path === item.url,
-                  })}
+                  className={cn(
+                    'h-stack p-3 rounded-[5px] hover:scale-105 transition-all',
+                    {
+                      'bg-[#FEF2D2] hover:scale-0 transition-none':
+                        path === item.url,
+                    }
+                  )}
                   onClick={toggleSidePanel}
                 >
                   {item.icon}
@@ -186,19 +193,24 @@ export default function NoteSidePanel({
               );
             })}
           </div>
-          <div className={'v-stack gap-3 md:pb-24 pb-4'}>
-            <h1 className={'text-base font-semibold'}>Next Topic</h1>
-            <hr className={'border-t border-gray-200'} />
-            <p
-              className={
-                'text-[#3A7FA8] inline-flex items-start text-sm gap-1'
-              }
-            >
-              <DocumentText variant={'Bold'} size={16} /> Commencement
-              of Proceedings
-            </p>
-          </div>
+          {nextTopic && (
+            <div className={'v-stack gap-3 md:pb-24 pb-4'}>
+              <h1 className={'text-base font-semibold'}>Next Topic</h1>
+              <hr className={'border-t border-gray-200'} />
+              <Link
+                href={`/dashboard/course/study-guide/${nextTopic?.slug}`}
+                onClick={toggleSidePanel}
+                className={
+                  'text-[#3A7FA8] inline-flex items-center text-sm gap-1 hover:underline'
+                }
+              >
+                <DocumentText variant={'Bold'} size={16} />
+                {nextTopic?.noteTitle}
+              </Link>
+            </div>
+          )}
         </div>
+        <div className={'min-h-[100px]'}></div>
       </div>
     </motion.div>
   );

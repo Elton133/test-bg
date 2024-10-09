@@ -7,7 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@components/ui/dialog';
-import { useState } from 'react';
 import Link from 'next/link';
 
 interface ConfirmResetModalProps {

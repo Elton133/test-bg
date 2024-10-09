@@ -11,7 +11,7 @@ import React, {
 import LocalStorage from '@/lib/local-storage';
 import { IAnswer, IQuiz } from '@/types/course';
 import dayjs from 'dayjs';
-import { submitQuizResults } from '@/actions/courses';
+import { markResourceAsCompleted, submitQuizResults } from '@/actions/courses';
 
 type Action = {
   action: 'ADD_ANSWER' | 'REMOVE_ANSWER' | 'CLEAR_ANSWERS';
@@ -65,9 +65,11 @@ const quizReducer = (state: IAnswer[], action: Action): IAnswer[] => {
 export const QuizProvider = ({
   children,
   quiz,
+  noteId,
 }: {
   children: ReactNode;
   quiz?: IQuiz;
+  noteId: string;
 }) => {
   const [answers, dispatch] = useReducer(quizReducer, []);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -131,6 +133,11 @@ export const QuizProvider = ({
     });
     if (res?.status) {
       setResults(res?.grade);
+      if (res?.grade >= 100) {
+        await markResourceAsCompleted(noteId, {
+          quiz_completed: true,
+        })
+      }
     }
     setIsSubmitting(false);
     setQuizEnded(true);

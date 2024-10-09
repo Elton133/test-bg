@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,20 +8,20 @@ import {
   FormItem,
   // FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 import {
   FloatingInput,
   FloatingLabel,
-} from "@components/ui/floating-label-input";
-import { useState } from "react";
-import { EyeSlash, Eye } from "iconsax-react";
-import Link from "next/link";
+} from '@components/ui/floating-label-input';
+import { useState } from 'react';
+import { EyeSlash, Eye } from 'iconsax-react';
+import Link from 'next/link';
 // import Image from "next/image";
 // import GoogleLogo from "@assets/google_logo.png";
-import { LoaderCircle } from "lucide-react";
-import useRegister from "@hooks/use-register";
-import { cn } from "@/lib/utils";
+import useRegister from '@hooks/use-register';
+import { cn } from '@/lib/utils';
+import LoaderButton from '@components/ui/loader-button';
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -31,27 +30,31 @@ export default function RegisterForm() {
   return (
     <Form {...form}>
       <form
-        className={"v-stack gap-2 h-full"}
+        className={'v-stack gap-2 h-full'}
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
-          name={"fname"}
+          name={'fname'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
-                  <FloatingInput type={"text"} placeholder={""} {...field} />
+                  <FloatingInput
+                    type={'text'}
+                    placeholder={''}
+                    {...field}
+                  />
                 </FormControl>
                 <FloatingLabel
-                  className={cn("", {
-                    "peer-focus:text-destructive": errors.email,
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
                   })}
                 >
                   First name
                 </FloatingLabel>
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.fname?.message}
               </FormMessage>
             </FormItem>
@@ -59,22 +62,26 @@ export default function RegisterForm() {
         />
         <FormField
           control={form.control}
-          name={"lname"}
+          name={'lname'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
-                  <FloatingInput type={"text"} placeholder={""} {...field} />
+                  <FloatingInput
+                    type={'text'}
+                    placeholder={''}
+                    {...field}
+                  />
                 </FormControl>
                 <FloatingLabel
-                  className={cn("", {
-                    "peer-focus:text-destructive": errors.email,
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
                   })}
                 >
                   Last name
                 </FloatingLabel>
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.lname?.message}
               </FormMessage>
             </FormItem>
@@ -82,22 +89,26 @@ export default function RegisterForm() {
         />
         <FormField
           control={form.control}
-          name={"email"}
+          name={'email'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
-                  <FloatingInput type={"email"} placeholder={""} {...field} />
+                  <FloatingInput
+                    type={'email'}
+                    placeholder={''}
+                    {...field}
+                  />
                 </FormControl>
                 <FloatingLabel
-                  className={cn("", {
-                    "peer-focus:text-destructive": errors.email,
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
                   })}
                 >
                   Email
                 </FloatingLabel>
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.email?.message}
               </FormMessage>
             </FormItem>
@@ -105,41 +116,41 @@ export default function RegisterForm() {
         />
         <FormField
           control={form.control}
-          name={"password"}
+          name={'password'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
                   <FloatingInput
-                    type={showPassword ? "text" : "password"}
-                    placeholder={""}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={''}
                     {...field}
                   />
                 </FormControl>
                 <FloatingLabel
-                  className={cn("", {
-                    "peer-focus:text-destructive": errors.email,
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
                   })}
                 >
                   Password
                 </FloatingLabel>
                 {showPassword ? (
                   <Eye
-                    variant={"Bold"}
-                    color={"#292D32"}
+                    variant={'Bold'}
+                    color={'#292D32'}
                     onClick={() => setShowPassword(false)}
-                    className={"absolute right-2 top-0 translate-y-1/2"}
+                    className={'absolute right-2 top-0 translate-y-1/2'}
                   />
                 ) : (
                   <EyeSlash
-                    variant={"Bold"}
-                    color={"#292D32"}
+                    variant={'Bold'}
+                    color={'#292D32'}
                     onClick={() => setShowPassword(true)}
-                    className={"absolute right-2 top-0 translate-y-1/2"}
+                    className={'absolute right-2 top-0 translate-y-1/2'}
                   />
                 )}
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.password?.message}
               </FormMessage>
             </FormItem>
@@ -147,90 +158,101 @@ export default function RegisterForm() {
         />
         <FormField
           control={form.control}
-          name={"confirmPassword"}
+          name={'confirmPassword'}
           render={({ field }) => (
             <FormItem>
-              <div className={"relative"}>
+              <div className={'relative'}>
                 <FormControl>
                   <FloatingInput
-                    type={showPassword ? "text" : "password"}
-                    placeholder={""}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={''}
                     {...field}
                   />
                 </FormControl>
                 <FloatingLabel
-                  className={cn("", {
-                    "peer-focus:text-destructive": errors.email,
+                  className={cn('', {
+                    'peer-focus:text-destructive': errors.email,
                   })}
                 >
                   Confirm password
                 </FloatingLabel>
                 {showPassword ? (
                   <Eye
-                    variant={"Bold"}
-                    color={"#292D32"}
+                    variant={'Bold'}
+                    color={'#292D32'}
                     onClick={() => setShowPassword(false)}
-                    className={"absolute right-2 top-0 translate-y-1/2"}
+                    className={'absolute right-2 top-0 translate-y-1/2'}
                   />
                 ) : (
                   <EyeSlash
-                    variant={"Bold"}
-                    color={"#292D32"}
+                    variant={'Bold'}
+                    color={'#292D32'}
                     onClick={() => setShowPassword(true)}
-                    className={"absolute right-2 top-0 translate-y-1/2"}
+                    className={'absolute right-2 top-0 translate-y-1/2'}
                   />
                 )}
               </div>
-              <FormMessage className={"text-xs"}>
+              <FormMessage className={'text-xs'}>
                 {errors.confirmPassword?.message}
               </FormMessage>
             </FormItem>
           )}
         />
-        <div className={"place-self-center text-xs text-muted"}>
-          By signing up, you agree to our{" "}
-          <Link href={"/#"} className={"text-[#CAAB57] hover:underline"}>
+        <div className={'place-self-center text-xs text-muted'}>
+          By signing up, you agree to our{' '}
+          <Link
+            href={'/terms-and-conditions'}
+            className={'text-[#CAAB57] hover:underline'}
+          >
             terms & conditions
-          </Link>{" "}
-          and{" "}
-          <Link href={"/#"} className={"text-[#CAAB57] hover:underline"}>
+          </Link>{' '}
+          and{' '}
+          <Link
+            href={'/privacy-policy'}
+            className={'text-[#CAAB57] hover:underline'}
+          >
             privacy policy
           </Link>
         </div>
-        <div className={"v-stack h-full justify-end sm:justify-start"}>
-          <div className={"v-stack gap-4"}>
-            <Button type={"submit"}>
-              {loading ? (
-                <LoaderCircle className={"animate-spin"} />
-              ) : (
-                "Create account"
-              )}
-            </Button>
-            <p className={"text-xs text-center font-medium"}>
-              Already have an account?{" "}
-              <Link className={"text-[#3A7FA8] font-medium"} href={"/login"}>
+        <div className={'v-stack h-full justify-end sm:justify-start'}>
+          <div className={'v-stack gap-4'}>
+            {/*<Button type={"submit"}>*/}
+            {/*  {loading ? (*/}
+            {/*    <LoaderCircle className={"animate-spin"} />*/}
+            {/*  ) : (*/}
+            {/*    "Create account"*/}
+            {/*  )}*/}
+            {/*</Button>*/}
+            <LoaderButton loading={loading} type={'submit'}>
+              Create account
+            </LoaderButton>
+            <p className={'text-xs text-center font-medium'}>
+              Already have an account?{' '}
+              <Link
+                className={'text-[#3A7FA8] font-medium'}
+                href={'/login'}
+              >
                 Sign in
               </Link>
             </p>
-            <div
+            {/* <div
               className={
-                "flex justify-between items-center gap-12 text-[#ABB3BF]"
+                'flex justify-between items-center gap-12 text-[#ABB3BF]'
               }
             >
-              <hr className={"border-[#ABB3BF] w-full my-4"} />
-              <p className={"text-xs"}>OR</p>
-              <hr className={"border-[#ABB3BF] w-full my-4"} />
-            </div>
-            <Link
-              href={'https://api.thebeststudyguide.com/api/auth/google/redirect'}
-              className={"h-stack w-full stack-center py-2 border rounded-lg"}
+              <hr className={'border-[#ABB3BF] w-full my-4'} />
+              <p className={'text-xs'}>OR</p>
+              <hr className={'border-[#ABB3BF] w-full my-4'} />
+            </div> */}
+            {/* <Link
+              href={
+                'https://api.thebeststudyguide.com/api/auth/google/redirect'
+              }
+              className={
+                'h-stack w-full stack-center py-2 border rounded-lg'
+              }
             >
-              {/* <Image
-                src={GoogleLogo}
-                alt={"google logo"}
-                width={24}
-                height={24}
-              /> */}
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -255,8 +277,8 @@ export default function RegisterForm() {
                   fill="#1976D2"
                 />
               </svg>
-              <p className={"text-sm"}>Continue with Google</p>
-            </Link>
+              <p className={'text-sm'}>Continue with Google</p>
+            </Link> */}
           </div>
         </div>
       </form>

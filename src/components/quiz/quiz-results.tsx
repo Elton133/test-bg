@@ -1,80 +1,93 @@
-import { useQuiz } from "@/context/quiz-context";
-import { Checkbox } from "@components/ui/checkbox";
-import { cn } from "@/lib/utils";
-import { Label } from "@components/ui/label";
+import { useQuiz } from '@/context/quiz-context';
+import { Checkbox } from '@components/ui/checkbox';
+import { cn } from '@/lib/utils';
+import { Label } from '@components/ui/label';
 
 export default function QuizResults() {
   const { quiz, answers, timer, correctAnswers, results } = useQuiz();
   return (
     <>
       <div
-        className={"max-w-[760px] w-full mx-auto flex flex-col gap-8 py-8 px-2"}
+        className={
+          'max-w-[760px] w-full mx-auto flex flex-col gap-8 py-8 px-2'
+        }
       >
-        <p className={"font-semibold md:text-2xl text-center"}>
+        <p className={'font-semibold md:text-2xl text-center'}>
           {results < 50
-            ? "You will do much better next time. We believe in you!"
+            ? 'You will do much better next time. We believe in you!'
             : results < 70
-              ? "We’re getting somewhere. Practice makes perfect!"
+              ? 'We’re getting somewhere. Practice makes perfect!'
               : results < 90
-                ? "Way to go! Keep the momentum. You’re almost there."
-                : "You’re a quiz master! Keep up the good work!"}
+                ? 'Way to go! Keep the momentum. You’re almost there.'
+                : 'You’re a quiz master! Keep up the good work!'}
         </p>
         <div
           className={
-            "flex flex-col md:flex-row items-center md:justify-around bg-[#FEF2D2] p-4 rounded-xl font-semibold"
+            'flex flex-col md:flex-row items-center md:justify-around bg-[#FEF2D2] p-4 rounded-xl font-semibold'
           }
         >
-          <p className={"text-base"}>Your time: {timer}</p>
-          <p className={"text-base text-[#268305]"}>
+          <p className={'text-base'}>Your time: {timer}</p>
+          <p className={'text-base text-[#268305]'}>
             Correct: {correctAnswers}
           </p>
-          <p className={"text-base text-[#E61509]"}>
+          <p className={'text-base text-[#E61509]'}>
             {/*@ts-ignore*/}
             Incorrect: {quiz?.questions?.length - correctAnswers}
           </p>
         </div>
-        <p className={"font-semibold text-base text-center"}>Your answers</p>
+        <p className={'font-semibold text-base text-center'}>
+          Your answers
+        </p>
       </div>
       {quiz?.questions.map((question, index) => (
         <div
           key={question?.id}
           className={
-            "max-w-[760px] w-full gap-y-4 mx-auto flex flex-col md:my-8 py-8 bg-white px-6 rounded-2xl animate-flip-up"
+            'max-w-[760px] w-full gap-y-4 mx-auto flex flex-col md:my-8 py-8 bg-white px-6 rounded-2xl animate-flip-up'
           }
         >
           {/*<div>*/}
-          <div className={"place-self-end"}>
+          <div className={'place-self-end'}>
             <p
-              className={"text-sm text-muted"}
+              className={'text-sm text-muted'}
             >{`${index + 1}/${quiz?.questions?.length}`}</p>
           </div>
-          <div className={"pb-4"}>
-            <p className={"font-semibold text-base"}>{question?.question}</p>
+          <div className={'pb-4'}>
+            <p className={'font-semibold text-base'}>
+              {question?.question}
+            </p>
           </div>
-          <div className={"flex flex-col gap-4"}>
+          <div className={'flex flex-col gap-4'}>
             {question?.answers?.map((option) => (
               <div
                 key={option?.id}
-                className={"flex items-center gap-6 animate-fade-up"}
+                className={'flex items-center gap-6 animate-fade-up'}
               >
                 <Checkbox
-                  id={""}
-                  className={"rounded-full bg-white checked:bg-[#063231]"}
-                  checked={answers.some((opt) => opt?.id === option?.id)}
+                  id={''}
+                  className={
+                    'rounded-full bg-white checked:bg-[#063231]'
+                  }
+                  checked={answers.some(
+                    (opt) => opt?.id === option?.id
+                  )}
                   disabled
                   // onChange={() => handleOptionSelect(option)}
                 />
                 <Label
                   className={cn(
-                    "border px-2 py-4 rounded-[12px] w-full relative",
+                    'border px-2 py-4 rounded-[12px] w-full relative',
                     {
-                      "border-[#FF170A]":
+                      'border-[#FF170A]':
                         answers.some((opt) => opt?.id === option?.id) &&
                         option?.correct === 0,
-                      "border-[#44C11D]":
-                        answers.some((opt) => opt?.id === option?.id) &&
-                        option?.correct === 1,
-                    },
+                      'border-[#44C11D]':
+                        (answers.some(
+                          (opt) => opt?.id === option?.id
+                        ) &&
+                          option?.correct === 1) ||
+                        option.correct === 1,
+                    }
                   )}
                 >
                   <p>{option?.answer}</p>
@@ -87,7 +100,7 @@ export default function QuizResults() {
                         viewBox="0 0 16 17"
                         fill="none"
                         className={
-                          "absolute right-2 top-1/2 transform -translate-y-1/2"
+                          'absolute right-2 top-1/2 transform -translate-y-1/2'
                         }
                       >
                         <path
@@ -121,7 +134,7 @@ export default function QuizResults() {
                         viewBox="0 0 16 17"
                         fill="none"
                         className={
-                          "absolute right-2 top-1/2 transform -translate-y-1/2"
+                          'absolute right-2 top-1/2 transform -translate-y-1/2'
                         }
                       >
                         <path

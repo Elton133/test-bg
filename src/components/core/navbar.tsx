@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '@assets/logo.jpg';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { getAnnouncements } from '@/actions/announcements';
 import { useSession } from 'next-auth/react';
 import { NotificationBing, ShoppingCart } from 'iconsax-react';
 import MobileNav from '@components/core/mobile-nav';
@@ -20,6 +21,10 @@ import CartPanel from '@components/shop/cart-panel';
 import { usePathname } from 'next/navigation';
 import { publicRoutes } from '@/middleware';
 import { Session } from 'next-auth';
+import useSWR from 'swr';
+import { IAnnouncement } from '@/types/course';
+import AnnouncementPanel from '@components/announcement/announcement-panel';
+import { logout } from '@/actions/auth';
 
 interface NavBarProps {
   session: Session | null;
@@ -31,26 +36,14 @@ export default function NavBar({
   const path = usePathname();
   const [open, setOpen] = React.useState(false);
   const [openCart, setOpenCart] = useState(false);
-  // const [activeHash, setActiveHash] = useState('');
+  const [openAnnouncement, setOpenAnnouncement] = useState(false);
   const { data: session } = useSession();
+  const notificationRef = useRef<HTMLDivElement>(null);
   const { dispatch, cart } = useCart();
-
-  // useEffect(() => {
-  //   const updateHash = () => {
-  //     setActiveHash(window.location.hash);
-  //   };
-
-  //   if (typeof window !== "undefined") {
-  //     updateHash();
-  //     window.addEventListener("hashchange", updateHash);
-  //   }
-
-  //   return () => {
-  //     if (typeof window !== "undefined") {
-  //       window.removeEventListener("hashchange", updateHash);
-  //     }
-  //   };
-  // }, []);
+  const { data: announcements } = useSWR('/announcements', async () => {
+    const response: IAnnouncement[] = await getAnnouncements();
+    return response;
+  });
 
   const handleToggleSidebar = () => {
     setOpen(!open);
@@ -58,22 +51,20 @@ export default function NavBar({
 
   const handleLogout = async () => {
     dispatch({ type: 'CLEAR_CART', payload: {} as Cart });
-    await signOut();
+    await logout();
+    await signOut({ redirect: true, callbackUrl: '/' });
   };
 
   const handleToggleCart = () => {
     setOpenCart(!openCart);
   };
 
-  // const handleActiveLink = (path: string, hash?: string) => {
-  //   if (hash) {
-  //     return activeHash === hash ? "text-yellow-400 border-b border-b-yellow-400" : "";
-  //   }
-  //   return pathname === path ? "text-yellow-400 border-b border-b-yellow-400" : "";
-  // };
+  const handleAnnouncement = () => {
+    setOpenAnnouncement(!openAnnouncement);
+  };
 
   return (
-    <header className={'sm:h-[78px] h-[50px] z-20'}>
+    <header className={'sm:h-[78px] h-[50px] z-20 relative'}>
       <nav
         className={
           'flex items-center max-h-[50px] sm:max-h-[78px] h-full justify-between bg-white sm:border-[0.5px] sm:border-[#D3D5D6] py- sm:py-5 px-4 lg:px-16 xl:px-20 w-full fixed top-0 z-30'
@@ -93,7 +84,7 @@ export default function NavBar({
               <MenuButton isOpen={open} onClick={handleToggleSidebar} />
             </div>
           )}
-          <Link href="/">
+          <Link href="/dashboard">
             <Image
               loading={'lazy'}
               className={'w-7 sm:w-9'}
@@ -150,7 +141,7 @@ export default function NavBar({
         ) : null}
         {session?.user && (
           <div
-            className={'flex gap-2 items-center justify-start w-max'}
+            className={'flex gap-6 items-center justify-start w-max'}
           >
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -178,11 +169,23 @@ export default function NavBar({
                 </Button>
               </DropdownMenuContent>
             </DropdownMenu>
-            <NotificationBing
-              className={
-                'text-muted cursor-pointer animate-fade animate-once animate-ease-linear'
-              }
-            />
+            <div className={'relative'} ref={notificationRef}>
+              <NotificationBing
+                className={
+                  'text-muted cursor-pointer animate-fade animate-once animate-ease-linear'
+                }
+                onClick={handleAnnouncement}
+              />
+              <div
+                className={
+                  'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'
+                }
+              >
+                <span className={'text-xs'}>
+                  {announcements?.length ? announcements?.length : 0}
+                </span>
+              </div>
+            </div>
             <div className={'relative'}>
               <ShoppingCart
                 onClick={handleToggleCart}
@@ -206,6 +209,13 @@ export default function NavBar({
           open={openCart}
           onClose={handleToggleCart}
           email={session?.user.email as string}
+        />
+      )}
+      {openAnnouncement && (
+        <AnnouncementPanel
+          announcements={announcements!}
+          onClose={handleAnnouncement}
+          notificationIconRef={notificationRef}
         />
       )}
     </header>

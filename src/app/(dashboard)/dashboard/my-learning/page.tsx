@@ -9,6 +9,27 @@ import { getCourses } from '@/actions/courses';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { ICourse } from '@/types/course';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'BSG - My Learning',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'learning',
+    'the best learning',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+  robots: 'follow, index',
+};
+
+const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL;
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
@@ -37,14 +58,18 @@ export default async function Page() {
             >
               {courses &&
                 courses
-                  .filter((item) => item.enroll_status === 'active')
+                  .filter(
+                    (item) =>
+                      item.enroll_status === 'active' &&
+                      parseInt(String(item.progress)) < 100
+                  )
                   .map((course) => (
                     <CourseCardGrid
                       key={course.slug}
                       courseName={course.title}
                       progress={course?.progress}
                       slug={course.slug}
-                      // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+                      imageUrl={`${STORAGE_URL}/${course.image}`}
                     />
                   ))}
             </div>
@@ -60,7 +85,7 @@ export default async function Page() {
                   .filter(
                     (item) =>
                       item.enroll_status === 'active' &&
-                      item.progress === 100
+                      parseInt(String(item.progress)) === 100
                   )
                   .map((course) => (
                     <CourseCardGrid
@@ -68,7 +93,7 @@ export default async function Page() {
                       courseName={course.title}
                       progress={course?.progress}
                       slug={course.slug}
-                      // imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/public/courses/${course.image}`}
+                      imageUrl={`${STORAGE_URL}/${course.image}`}
                     />
                   ))}
             </div>

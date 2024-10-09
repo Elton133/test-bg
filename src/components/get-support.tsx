@@ -1,4 +1,3 @@
-import { Button } from '@components/ui/button';
 import ContactUsModal from '@components/support/contact-us-modal';
 
 export default function GetSupport() {

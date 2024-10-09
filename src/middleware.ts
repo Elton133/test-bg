@@ -23,14 +23,30 @@ export async function middleware(req: NextRequest) {
   const isPublic = publicRoutes.some((route) =>
     route.startsWith(req.nextUrl.pathname)
   );
+  if (
+    token &&
+    // @ts-ignore
+    !token?.user?.email_verified_at &&
+    req.nextUrl.pathname.startsWith('/dashboard')
+  ) {
+    return NextResponse.redirect(
+      new URL(
+        // @ts-ignore
+        `/verify-email?email=${token?.user?.email}`,
+        req.nextUrl
+      ).toString()
+    );
+  }
+  // @ts-ignore
+  if (token?.user?.email_verified_at && isPublic) {
+    return NextResponse.redirect(
+      new URL('/dashboard', req.nextUrl).toString()
+    );
+  }
+
   if (!token && req.nextUrl.pathname.startsWith('/dashboard')) {
     return NextResponse.redirect(
       new URL('/login', req.nextUrl).toString()
-    );
-  }
-  if (token && isPublic) {
-    return NextResponse.redirect(
-      new URL('/dashboard', req.nextUrl).toString()
     );
   }
   return NextResponse.next();

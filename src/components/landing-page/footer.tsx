@@ -32,7 +32,7 @@ export default function Footer() {
               </p>
             </div>
             <div className="flex gap-3">
-              <a href="https://x.com">
+              <a href="https://x.com/TBSGgh?t=98qFRNvaU5GXHmYFDguXxg&s=09">
                 <svg
                   width="24"
                   height="25"
@@ -46,7 +46,7 @@ export default function Footer() {
                   />
                 </svg>
               </a>
-              <a href="https://x.com">
+              <a href="https://www.linkedin.com/company/the-best-study-guide/">
                 <svg
                   width="24"
                   height="25"
@@ -60,7 +60,7 @@ export default function Footer() {
                   />
                 </svg>
               </a>
-              <a href="https://x.com">
+              <a href="https://www.instagram.com/thebeststudyguidegh/">
                 <svg
                   width="24"
                   height="25"

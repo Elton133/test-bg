@@ -1,9 +1,28 @@
-import { ITopic, ITopicDetail } from '@/types/course';
+import { ITopicDetail } from '@/types/course';
 import { getNote } from '@/actions/courses';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import NoteHeader from '@components/note/note-header';
+import { Metadata } from 'next';
+import CaseBriefViewer from '@components/courses/case-brief-viewer';
 
+export const metadata: Metadata = {
+  title: 'BSG - Case Briefs',
+  description:
+    'Access expertly crafted content tailored to ensure your success in the bar exam.',
+  keywords: [
+    'past question',
+    'the best past question',
+    'law',
+    'study',
+    'constitutional law',
+    'family law',
+    'students',
+    'legal',
+    'resources',
+  ],
+  robots: 'follow, index',
+};
 export default async function PastQuestionPage({
   params,
   searchParams,
@@ -22,24 +41,8 @@ export default async function PastQuestionPage({
         topic={topic}
         userName={session?.user.name as string}
       />
-      <section
-        className={
-          'p-4 max-w-[1100px] mx-auto flex justify-center overflow-hidden'
-        }
-      >
-        <div
-          className={
-            'prose bg-white min-h-[600px] rounded-[20px] p-4 min-w-full prose-headings:underline'
-          }
-          dangerouslySetInnerHTML={{
-            __html:
-              (caseBrief?.citation as string) ||
-              `
-            <p>Case Brief Not Found</p>
-          `,
-          }}
-        />
-      </section>
+      <CaseBriefViewer html={caseBrief?.citation || ''} noteId={topic?.id} />
+      {/*<CourseMenuBar />*/}
     </section>
   );
 }
