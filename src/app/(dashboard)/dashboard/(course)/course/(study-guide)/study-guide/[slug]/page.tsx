@@ -55,7 +55,12 @@ export default async function StudyGuidePage({
         userName={session?.user.name as string}
         nextTopic={hasNext !== -1 ? course.notes[hasNext].note : null}
       />
-      <NoteViewer note={topic} />
+      <NoteViewer
+        note={topic}
+        noteStatus={
+          course?.notes[currentTopicIndex]?.study_guide_status
+        }
+      />
     </section>
   );
 }

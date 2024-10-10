@@ -140,7 +140,7 @@ const markResourceAsCompleted = async (
   }
 
   // revalidatePath('/dashboard/course/[slug]', 'page');
-  revalidateTag('courses');
+  // revalidateTag('courses');
   return response;
 };
 

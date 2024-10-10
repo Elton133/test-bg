@@ -1,7 +1,25 @@
-import { useNoteSidePanel } from '@/context/note-side-panel-context';
+'use client'
 
-export default function CaseBriefViewer({ html }: { html: string }) {
+import { markResourceAsCompleted } from '@/actions/courses';
+import { useNoteSidePanel } from '@/context/note-side-panel-context';
+import useWindowScroll from '@/hooks/useWindowScroll';
+import { useEffect } from 'react';
+
+export default function CaseBriefViewer({ html, noteId }: { html: string, noteId: string }) {
   const { openSidePanel } = useNoteSidePanel();
+  const { y } = useWindowScroll();
+  // console.log(y);
+  useEffect(() => {
+    if (window !== undefined) {
+      const totalHeight = document.body.scrollHeight;
+      const currentScroll = y + window.innerHeight;
+      if (currentScroll >= totalHeight) {
+        markResourceAsCompleted(noteId, {
+          case_brief_completed: true
+        })
+      }
+    }
+  }, [y, noteId]);
   return openSidePanel ? (
     <section
       className={

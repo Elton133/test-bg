@@ -5,6 +5,7 @@ import {
   PageChangeEvent,
   Rect,
   PdfJs,
+  RenderPage,
 } from '@react-pdf-viewer/core';
 import { pageNavigationPlugin } from '@react-pdf-viewer/page-navigation';
 import { bookmarkPlugin } from '@react-pdf-viewer/bookmark';
@@ -19,9 +20,12 @@ import { ArrowDown, ArrowUp } from 'iconsax-react';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
 import { cn } from '@/lib/utils';
 import useLocalStorage from '@hooks/use-local-storage';
+import { useSession } from 'next-auth/react';
+import { markResourceAsCompleted } from '@/actions/courses';
 
 interface INoteViewerProps {
   note: ITopic;
+  noteStatus?: boolean;
 }
 
 interface INotePreference {
@@ -31,6 +35,7 @@ interface INotePreference {
 
 export default function NoteViewer({ note }: INoteViewerProps) {
   const { openSidePanel, toggleSidePanel } = useNoteSidePanel();
+  const { data: session } = useSession();
   const [notePreference, setNotePreference] =
     useLocalStorage<INotePreference>('__note_pref_' + note.slug, {
       currentPage: 0,
@@ -64,10 +69,36 @@ export default function NoteViewer({ note }: INoteViewerProps) {
     }),
   };
 
-  const renderPage = (props: RenderPageProps) => {
+  const renderPage: RenderPage = (props: RenderPageProps) => {
     return (
       <div className={'no-scrollbar bg-blue-600 w-52'}>
         {props.canvasLayer.children}
+        <div
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            height: '100%',
+            justifyContent: 'center',
+            left: 0,
+            position: 'absolute',
+            top: -50,
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              color: 'rgba(6, 50, 49, 0.2)',
+              fontSize: `${2.5 * props.scale}rem`,
+              fontWeight: 'bold',
+              textTransform: 'uppercase',
+              transform: 'rotate(-45deg)',
+              userSelect: 'none',
+            }}
+            className={'font-poppins'}
+          >
+            {session?.user?.name}
+          </div>
+        </div>
         <div style={{ userSelect: 'none' }}>
           {props.textLayer.children}
         </div>
@@ -76,7 +107,7 @@ export default function NoteViewer({ note }: INoteViewerProps) {
     );
   };
 
-  const handlePageChange = (e: PageChangeEvent) => {
+  const handlePageChange = async (e: PageChangeEvent) => {
     if (
       notePreference.currentPage !== e.currentPage &&
       e.currentPage !== 0
@@ -84,6 +115,11 @@ export default function NoteViewer({ note }: INoteViewerProps) {
       setNotePreference({
         ...notePreference,
         currentPage: e.currentPage,
+      });
+    }
+    if (e.currentPage === e.doc.numPages - 1) {
+      await markResourceAsCompleted(note?.id, {
+        study_guide_completed: true,
       });
     }
   };
