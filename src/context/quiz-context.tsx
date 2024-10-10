@@ -133,7 +133,7 @@ export const QuizProvider = ({
     });
     if (res?.status) {
       setResults(res?.grade);
-      if (res?.grade >= 100) {
+      if (res?.grade >= 75) {
         await markResourceAsCompleted(noteId, {
           quiz_completed: true,
         })

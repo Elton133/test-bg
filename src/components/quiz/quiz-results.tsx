@@ -12,6 +12,10 @@ export default function QuizResults() {
           'max-w-[760px] w-full mx-auto flex flex-col gap-8 py-8 px-2'
         }
       >
+        <p className={cn('text-center font-bold text-3xl', {
+          'text-[#268305]': results >= 75,
+          'text-[#E61509]': results < 75
+        })}>{results}%</p>
         <p className={'font-semibold md:text-2xl text-center'}>
           {results < 50
             ? 'You will do much better next time. We believe in you!'
