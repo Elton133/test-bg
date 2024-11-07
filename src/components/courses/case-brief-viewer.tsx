@@ -1,26 +1,19 @@
-'use client'
+'use client';
 
-import { markResourceAsCompleted } from '@/actions/courses';
 import { useNoteSidePanel } from '@/context/note-side-panel-context';
-import useWindowScroll from '@/hooks/useWindowScroll';
-import { useEffect } from 'react';
 
-export default function CaseBriefViewer({ html, noteId }: { html: string, noteId: string }) {
+export default function CaseBriefViewer({
+  html,
+  citation,
+  title,
+}: {
+  html: string;
+  citation: string;
+  title: string;
+}) {
   const { openSidePanel } = useNoteSidePanel();
-  const { y } = useWindowScroll();
-  // console.log(y);
-  useEffect(() => {
-    if (window !== undefined) {
-      const totalHeight = document.body.scrollHeight;
-      const currentScroll = y + window.innerHeight;
-      if (currentScroll >= totalHeight) {
-        markResourceAsCompleted(noteId, {
-          case_brief_completed: true
-        })
-      }
-    }
-  }, [y, noteId]);
-  return openSidePanel ? (
+  console.log('openSidePanel', html);
+  return (
     <section
       className={
         'p-4 max-w-[1100px] mx-auto flex justify-center overflow-hidden'
@@ -28,16 +21,24 @@ export default function CaseBriefViewer({ html, noteId }: { html: string, noteId
     >
       <div
         className={
-          'prose bg-white min-h-[600px] rounded-[20px] p-4 min-w-full prose-headings:underline'
+          ' bg-white min-h-[600px] rounded-[20px] p-8 min-w-full v-stack stack-center'
         }
-        dangerouslySetInnerHTML={{
-          __html:
-            html ||
-            `
+      >
+        <div className={'text-center pb-6 v-stack gap-4'}>
+          <h1 className={'text-2xl font-semibold'}>{title}</h1>
+          <p>{citation}</p>
+        </div>
+        <div
+          className={'prose prose-headings:underline'}
+          dangerouslySetInnerHTML={{
+            __html:
+              html ||
+              `
             <p>Case Brief Not Found</p>
           `,
-        }}
-      />
+          }}
+        />
+      </div>
     </section>
-  ) : null;
+  );
 }
