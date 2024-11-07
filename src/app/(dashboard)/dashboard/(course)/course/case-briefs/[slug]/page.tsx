@@ -41,7 +41,11 @@ export default async function PastQuestionPage({
         topic={topic}
         userName={session?.user.name as string}
       />
-      <CaseBriefViewer html={caseBrief?.citation || ''} noteId={topic?.id} />
+      <CaseBriefViewer
+        html={caseBrief?.details || ''}
+        citation={caseBrief?.citation as string}
+        title={caseBrief?.title as string}
+      />
       {/*<CourseMenuBar />*/}
     </section>
   );
