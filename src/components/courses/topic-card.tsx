@@ -147,7 +147,7 @@ export default function TopicCard({
                   />
                 )}
               </div>
-              <div
+              {/* <div
                 className={cn('h-stack w-full items-center', {
                   'items-start': openCaseBriefs,
                 })}
@@ -164,7 +164,7 @@ export default function TopicCard({
                     checked={noteStatuses?.case_brief_status}
                   />
                 )}
-                {/* {enrolled ? (
+                {enrolled ? (
                   <div>
                     <button
                       className={'text-base text-[#3A7FA8]'}
@@ -197,8 +197,8 @@ export default function TopicCard({
                   </div>
                 ) : (
                   <SubscribeToCourseModal buttonText={'Case Briefs'} />
-                )} */}
-              </div>
+                )}
+              </div> */}
             </div>
           </div>
         </AccordionContent>
