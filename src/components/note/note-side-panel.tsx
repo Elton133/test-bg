@@ -78,11 +78,11 @@ export default function NoteSidePanel({
       icon: <SparklingIcon />,
       url: `/dashboard/course/quiz/${topic?.slug}`,
     },
-    {
-      name: 'Case Briefs',
-      icon: <CaseBriefIcon />,
-      url: `/dashboard/course/case-briefs/${topic?.slug}`,
-    },
+    // {
+    //   name: 'Case Briefs',
+    //   icon: <CaseBriefIcon />,
+    //   url: `/dashboard/course/case-briefs/${topic?.slug}`,
+    // },
   ];
 
   return (
