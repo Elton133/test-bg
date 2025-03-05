@@ -84,7 +84,7 @@ export default function UpdateProfileForm({
         await update({
           user,
         });
-        toast.success('Your changes has been saved.');
+        toast.success('Your changes have been saved.');
       }
     }
   };
