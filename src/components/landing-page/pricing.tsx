@@ -33,7 +33,7 @@ export default function Pricing() {
             </p>
           </div>
           <p className="text-sm lg:text-base leading-6 font-bold text-red-600">
-            All subscriptions end on 31st July {currentYear + 1}
+            All subscriptions end on 31st July {currentYear}
           </p>
 
           <a
