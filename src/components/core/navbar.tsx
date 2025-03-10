@@ -176,15 +176,17 @@ export default function NavBar({
                 }
                 onClick={handleAnnouncement}
               />
-              <div
-                className={
-                  'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'
-                }
-              >
-                <span className={'text-xs'}>
-                  {announcements?.length ? announcements?.length : 0}
-                </span>
-              </div>
+              {announcements?.length && (
+                <div
+                  className={
+                    'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'
+                  }
+                >
+                  <span className={'text-xs'}>
+                    {announcements?.length ? announcements?.length : 0}
+                  </span>
+                </div>
+              )}
             </div>
             <div className={'relative'}>
               <ShoppingCart
@@ -193,13 +195,15 @@ export default function NavBar({
                   'text-muted cursor-pointer animate-fade animate-once animate-ease-linear'
                 }
               />
-              <div
-                className={
-                  'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'
-                }
-              >
-                <span className={'text-xs'}>{cart.length}</span>
-              </div>
+              {cart?.length > 0 && (
+                <div
+                  className={
+                    'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'
+                  }
+                >
+                  <span className={'text-xs'}>{cart.length}</span>
+                </div>
+              )}
             </div>
           </div>
         )}
