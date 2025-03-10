@@ -53,6 +53,9 @@ export default function NavBar({
     dispatch({ type: 'CLEAR_CART', payload: {} as Cart });
     await logout();
     await signOut({ redirect: true, callbackUrl: '/' });
+    if (typeof window !== 'undefined') {
+      window.localStorage.clear();
+    }
   };
 
   const handleToggleCart = () => {
