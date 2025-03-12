@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { markAnnouncementAsRead } from '@/actions/announcements';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 dayjs.extend(relativeTime);
 
@@ -21,7 +22,8 @@ const AnnouncementItem = ({
         'min-h-[80px] h-full w-full text-left bg-[#D0EFE9] rounded-lg p-3 relative cursor-pointer'
       }
       onClick={async () => {
-        await markAnnouncementAsRead(announcement?.id)
+        await markAnnouncementAsRead(announcement?.id);
+        toast.success('Announcement marked as read');
         cb && cb();
       }}
     >
