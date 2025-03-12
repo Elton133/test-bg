@@ -179,7 +179,7 @@ export default function NavBar({
                 }
                 onClick={handleAnnouncement}
               />
-              {announcements?.length && (
+              {announcements && announcements?.length > 0 && (
                 <div
                   className={
                     'absolute -top-2 -right-2 bg-[#FF170A] text-white text-center text-xs font-semibold rounded-full w-4 h-4'
