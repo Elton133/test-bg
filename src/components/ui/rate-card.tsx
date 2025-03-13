@@ -1,5 +1,5 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import React from 'react';
 
 interface RateCardProps {
   no_of_courses: string;
@@ -25,7 +25,7 @@ const RateCard: React.FC<RateCardProps> = ({
           {no_of_courses}
         </p>
       </div>
-      <p>The subscription ends on 31st July {currentYear + 1}</p>
+      <p>The subscription ends on 31st July {currentYear}</p>
       <p className="text-3xl font-bold">
         <span className="text-sm">GHS </span>
         {price}
