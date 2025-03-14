@@ -5,50 +5,62 @@ import useLocalStorage from '@/hooks/use-local-storage';
 import { toast } from 'sonner';
 import { Label } from '../ui/label';
 import { useEffect, useState } from 'react';
+import { updateNotificationSettings } from '@/actions/notifications';
 
-type UserPrefsType = {
-  showNotifications: boolean;
-  showNewUploads: boolean;
-  receiveSpecialOffers: boolean;
-};
+interface NotificationSettingsProps {
+  show: boolean;
+  receive: boolean;
+  special_offer: boolean;
+}
 
-export function NotificationSettings() {
-  const [prefs, setPrefs] = useLocalStorage<UserPrefsType>(
+export function NotificationSettings({
+  show,
+  receive,
+  special_offer,
+}: NotificationSettingsProps) {
+  const [prefs, setPrefs] = useLocalStorage<NotificationSettingsProps>(
     'userPrefs',
     {
-      showNotifications: false,
-      showNewUploads: false,
-      receiveSpecialOffers: false,
+      show: false,
+      receive: false,
+      special_offer: false,
     }
   );
   const [hydrated, setHydrated] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setHydrated(true);
   }, []);
 
-  const handleToggle = (key: keyof UserPrefsType, value: boolean) => {
+  const handleToggle = async (
+    key: keyof NotificationSettingsProps,
+    value: boolean
+  ) => {
+    setLoading(true);
     const newPrefs = { ...prefs, [key]: value };
     setPrefs(newPrefs);
+    await updateNotificationSettings(newPrefs);
 
     let message = '';
     switch (key) {
-      case 'showNotifications':
+      case 'show':
         message = value
           ? 'You will now receive notifications'
           : 'You will no longer receive notifications';
         break;
-      case 'showNewUploads':
+      case 'receive':
         message = value
           ? 'You will now receive notifications for new uploads'
           : 'You will no longer receive notifications for new uploads';
         break;
-      case 'receiveSpecialOffers':
+      case 'special_offer':
         message = value
           ? 'You will now receive special offers and events'
           : 'You will no longer receive special offers and events';
         break;
     }
+    setLoading(false);
     toast.success(message);
   };
 
@@ -65,10 +77,9 @@ export function NotificationSettings() {
           </div>
           <Switch
             id="showNotifications"
-            checked={prefs.showNotifications}
-            onCheckedChange={(value) =>
-              handleToggle('showNotifications', value)
-            }
+            checked={show}
+            disabled={loading}
+            onCheckedChange={(value) => handleToggle('show', value)}
           />
         </div>
         <div className="h-stack justify-between">
@@ -79,10 +90,9 @@ export function NotificationSettings() {
           </div>
           <Switch
             id="showNewUploads"
-            checked={prefs.showNewUploads}
-            onCheckedChange={(value) =>
-              handleToggle('showNewUploads', value)
-            }
+            checked={receive}
+            disabled={loading}
+            onCheckedChange={(value) => handleToggle('receive', value)}
           />
         </div>
         <div className="h-stack justify-between">
@@ -93,9 +103,10 @@ export function NotificationSettings() {
           </div>
           <Switch
             id="receiveSpecialOffers"
-            checked={prefs.receiveSpecialOffers}
+            checked={special_offer}
+            disabled={loading}
             onCheckedChange={(value) =>
-              handleToggle('receiveSpecialOffers', value)
+              handleToggle('special_offer', value)
             }
           />
         </div>
