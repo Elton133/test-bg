@@ -42,7 +42,7 @@ export default async function Overview() {
             height={40}
           />
           <p className={'text-base font-semibold'}>
-            {streak?.streak_count > 1
+            {streak?.streak_count !== 1
               ? `${streak?.streak_count} days`
               : `${streak?.streak_count} day`}
           </p>
