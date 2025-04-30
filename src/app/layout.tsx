@@ -7,8 +7,6 @@ import SessionWrapper from '@/providers/session-wrapper';
 import { InfoCircle } from 'iconsax-react';
 import { CircleCheck } from 'lucide-react';
 import { CartProvider } from '@/context/cart-context';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import Script from 'next/script';
 
 const poppins = Poppins({
@@ -43,10 +41,6 @@ export const metadata: Metadata = {
       name: 'The Best Study Guide',
       url: 'https://thebeststudyguide.com',
     },
-    {
-      name: 'TouchStack Technologies',
-      url: 'https://touchstacktechnologies.com',
-    },
   ],
   robots: 'follow, index',
 };
@@ -56,7 +50,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
   return (
     <html className="scroll-smooth" lang="en">
       <body
@@ -64,7 +57,7 @@ export default async function RootLayout({
       >
         <SessionWrapper>
           <CartProvider>
-            <NavBar session={session} />
+            <NavBar />
             {children}
           </CartProvider>
           <Toaster

@@ -4,8 +4,9 @@ import axiosInstance from '@/lib/axios';
 import { cookies } from 'next/headers';
 import { IUser } from '@/types/user';
 import { redirect } from 'next/navigation';
+import { AxiosError } from 'axios';
 
-export async function getUserSession(): Promise<IUser | null> {
+export async function getUserSession() {
   try {
     const { data } = await axiosInstance.get('/api/auth-user', {
       headers: {
@@ -18,8 +19,15 @@ export async function getUserSession(): Promise<IUser | null> {
     return data?.user;
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(err);
-    return null;
+    // console.error('Error in getUserSession', err);
+    if (err instanceof AxiosError) {
+      return {
+        error: err.response,
+      };
+    }
+    return {
+      error: 'Something went wrong',
+    };
   }
 }
 

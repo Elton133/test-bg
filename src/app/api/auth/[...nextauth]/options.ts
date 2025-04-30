@@ -4,6 +4,7 @@ import { AuthOptions } from 'next-auth';
 import axiosInstance from '@/lib/axios';
 import { cookies } from 'next/headers';
 import { IUser } from '@/types/user';
+import { getUserSession } from '@/actions/auth';
 
 export const authOptions: AuthOptions = {
   session: {
@@ -96,6 +97,10 @@ export const authOptions: AuthOptions = {
     },
 
     async jwt({ token, user, session, trigger }) {
+      const res = await getUserSession();
+      if (res?.error?.status === 401) {
+        return {};
+      }
       if (trigger === 'update' && session.user) {
         token.user = session.user;
         return token;

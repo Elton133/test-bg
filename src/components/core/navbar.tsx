@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '@assets/logo.jpg';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { getAnnouncements } from '@/actions/announcements';
 import { useSession } from 'next-auth/react';
 import { NotificationBing, ShoppingCart } from 'iconsax-react';
@@ -20,19 +20,12 @@ import { Button } from '@components/ui/button';
 import CartPanel from '@components/shop/cart-panel';
 import { usePathname } from 'next/navigation';
 import { publicRoutes } from '@/middleware';
-import { Session } from 'next-auth';
-import useSWR from 'swr';
 import { IAnnouncement } from '@/types/course';
 import AnnouncementPanel from '@components/announcement/announcement-panel';
 import { logout } from '@/actions/auth';
+import useSWR from 'swr';
 
-interface NavBarProps {
-  session: Session | null;
-}
-
-export default function NavBar({
-  session: ses,
-}: NavBarProps): React.ReactElement {
+export default function NavBar(): React.ReactElement {
   const path = usePathname();
   const [open, setOpen] = React.useState(false);
   const [openCart, setOpenCart] = useState(false);
@@ -40,6 +33,16 @@ export default function NavBar({
   const { data: session } = useSession();
   const notificationRef = useRef<HTMLDivElement>(null);
   const { dispatch, cart } = useCart();
+
+  const handleLogout = useCallback(async () => {
+    dispatch({ type: 'CLEAR_CART', payload: {} as Cart });
+    await logout();
+    await signOut({ redirect: true, callbackUrl: '/' });
+    if (typeof window !== 'undefined') {
+      window.localStorage.clear();
+    }
+  }, [dispatch]);
+
   const { data: announcements } = useSWR('/announcements', async () => {
     const response: IAnnouncement[] = await getAnnouncements();
     return response;
@@ -47,15 +50,6 @@ export default function NavBar({
 
   const handleToggleSidebar = () => {
     setOpen(!open);
-  };
-
-  const handleLogout = async () => {
-    dispatch({ type: 'CLEAR_CART', payload: {} as Cart });
-    await logout();
-    await signOut({ redirect: true, callbackUrl: '/' });
-    if (typeof window !== 'undefined') {
-      window.localStorage.clear();
-    }
   };
 
   const handleToggleCart = () => {
@@ -149,11 +143,7 @@ export default function NavBar({
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Image
-                  src={`${
-                    session?.user?.image
-                      ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}`
-                      : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`
-                  }`}
+                  src={`${session?.user?.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${session?.user.image}` : `https://ui-avatars.com/api/?name=${session?.user.firstName}+${session?.user.lastName}&background=063231&color=fff`}`}
                   alt={session.user.name}
                   width={28}
                   height={28}
