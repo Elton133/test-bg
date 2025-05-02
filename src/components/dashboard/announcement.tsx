@@ -1,3 +1,5 @@
+'use client';
+
 import Speaker from '@components/icons/speaker';
 import { getAnnouncements } from '@/actions/announcements';
 import { IAnnouncement } from '@/types/course';
@@ -5,7 +7,7 @@ import AnnouncementItem from '@components/announcement/announcement-item';
 import { Fragment } from 'react';
 import useSWR from 'swr';
 
-export default async function Announcement({
+export default function Announcement({
   announcements,
 }: {
   announcements: IAnnouncement[];
