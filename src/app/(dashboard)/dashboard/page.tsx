@@ -7,6 +7,8 @@ import Achievement from '@components/dashboard/achievement';
 import GetSupport from '@components/get-support';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
+import { getAnnouncements } from '@/actions/announcements';
+import { IAnnouncement } from '@/types/course';
 
 export const metadata: Metadata = {
   title: 'BSG - Home',
@@ -28,6 +30,7 @@ export const metadata: Metadata = {
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
+  const announcements: IAnnouncement[] = await getAnnouncements();
 
   return (
     <main className="h-full v-stack gap-6 pb-8 lg:px-8 lg:py-6">
@@ -90,7 +93,7 @@ export default async function Dashboard() {
       </div>
       <div className={'lg:px-4 v-stack gap-6'}>
         <div className={'px-4'}>
-          <Announcement />
+          <Announcement announcements={announcements} />
         </div>
         <div className={'px-4'}>
           <Overview />

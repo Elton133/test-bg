@@ -3,9 +3,20 @@ import { getAnnouncements } from '@/actions/announcements';
 import { IAnnouncement } from '@/types/course';
 import AnnouncementItem from '@components/announcement/announcement-item';
 import { Fragment } from 'react';
+import useSWR from 'swr';
 
-export default async function Announcement() {
-  const announcements: IAnnouncement[] = await getAnnouncements();
+export default async function Announcement({
+  announcements,
+}: {
+  announcements: IAnnouncement[];
+}) {
+  const { data } = useSWR<IAnnouncement[]>(
+    '/announcements',
+    getAnnouncements,
+    {
+      fallbackData: announcements,
+    }
+  );
   return (
     <section
       className={
@@ -29,15 +40,16 @@ export default async function Announcement() {
       >
         {/*<EmptyAnnouncement />*/}
 
-        {announcements.length > 0 &&
-          announcements.map((announcement, index) => (
+        {data &&
+          data.length > 0 &&
+          data.map((announcement, index) => (
             <Fragment key={announcement.id}>
               <AnnouncementItem announcement={announcement} />
               {/* {index !== 1 && index !== announcements.length && <hr className={'my-2'} />} */}
               <hr className={'my-2'} />
             </Fragment>
           ))}
-        {announcements.length === 0 && <EmptyAnnouncement />}
+        {data && data.length === 0 && <EmptyAnnouncement />}
       </div>
     </section>
   );
