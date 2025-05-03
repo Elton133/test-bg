@@ -87,7 +87,7 @@ export default function CartPanel({ open, onClose, email }: CartPanelProps) {
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
-      <SheetContent className={"w-[300px] sm:w-[400px]"}>
+      <SheetContent className={"w-[300px] sm:w-[400px] no-scrollbar overflow-y-auto"}>
         <SheetHeader className={"py-2 bg-primary px-4"}>
           <SheetTitle className={"text-white py-[6%]"}>Cart</SheetTitle>
         </SheetHeader>
