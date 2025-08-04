@@ -55,7 +55,11 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.1 },
               }}
             >
-              <RateCard no_of_courses="1 course" price={120} />
+              <RateCard
+                no_of_courses="1 course"
+                price={120}
+                year={currentYear}
+              />
             </motion.div>
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
@@ -65,7 +69,11 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.2 },
               }}
             >
-              <RateCard no_of_courses="3 courses" price={300} />
+              <RateCard
+                no_of_courses="3 courses"
+                price={300}
+                year={currentYear}
+              />
             </motion.div>
 
             <motion.div
@@ -76,7 +84,11 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.3 },
               }}
             >
-              <RateCard no_of_courses="5 courses" price={450} />
+              <RateCard
+                no_of_courses="5 courses"
+                price={450}
+                year={currentYear}
+              />
             </motion.div>
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
@@ -86,7 +98,11 @@ export default function Pricing() {
                 transition: { duration: 0.5, delay: 0.4 },
               }}
             >
-              <RateCard no_of_courses="7 courses" price={600} />
+              <RateCard
+                no_of_courses="7 courses"
+                price={600}
+                year={currentYear}
+              />
             </motion.div>
           </div>
         </div>
