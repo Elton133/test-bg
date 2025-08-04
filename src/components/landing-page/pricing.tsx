@@ -4,7 +4,11 @@ import RateCard from '@components/ui/rate-card';
 import { motion } from 'framer-motion';
 
 export default function Pricing() {
-  const currentYear = new Date().getFullYear();
+  const today = new Date();
+  const currentYear =
+    today.getMonth() >= 7
+      ? today.getFullYear() + 1
+      : today.getFullYear();
 
   return (
     <section
