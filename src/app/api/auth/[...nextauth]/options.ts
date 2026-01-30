@@ -14,12 +14,7 @@ export const authOptions: AuthOptions = {
   jwt: {
     maxAge: 24 * 60 * 60,
   },
-  // useSecureCookies: true,
-  // cookies: {
-  //     sessionToken: {
-  //         name: '__bsg_session',
-  //     }
-  // },
+  useSecureCookies: process.env.NODE_ENV === 'production',
   pages: {
     signIn: '/login',
     signOut: '/logout',
@@ -45,7 +40,8 @@ export const authOptions: AuthOptions = {
               expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
               httpOnly: true,
               secure: process.env.NODE_ENV === 'production',
-              sameSite: 'strict',
+              sameSite: 'lax',
+              path: '/',
             });
             cookies().set(
               '__verified',
@@ -54,7 +50,8 @@ export const authOptions: AuthOptions = {
                 expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+                sameSite: 'lax',
+                path: '/',
               }
             );
             return res.data;

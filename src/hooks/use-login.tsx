@@ -41,9 +41,11 @@ export default function useLogin() {
           password: values.password,
           redirect: false,
           callbackUrl: '/dashboard',
-        }).then((res) => {
+        }).then(async (res) => {
           // console.log(res);
           if (res?.ok) {
+            // Wait a brief moment for cookies to be set
+            await new Promise(resolve => setTimeout(resolve, 100));
             return true;
           } else if (res?.error) {
             throw new Error(res.error);
@@ -51,15 +53,18 @@ export default function useLogin() {
         }),
       {
         loading: 'Signing in...',
-        success: (data) => {
-          // router.push('/dashboard', {
-          //
-          // });
+        success: async (data) => {
           if (data) {
-            // form.reset();
-            // some stuff
-            if (typeof window !== 'undefined') {
-              window.location.href = '/dashboard';
+            // Use router.push for client-side navigation which preserves cookies
+            // Fallback to window.location if router doesn't work
+            try {
+              router.push('/dashboard');
+              // Small delay to ensure navigation happens
+              await new Promise(resolve => setTimeout(resolve, 50));
+            } catch (error) {
+              if (typeof window !== 'undefined') {
+                window.location.href = '/dashboard';
+              }
             }
             return 'Signed in successfully';
           }
@@ -73,7 +78,6 @@ export default function useLogin() {
         },
         finally: () => {
           setLoading(false);
-          // router.push('/dashboard')
         },
       }
     );
