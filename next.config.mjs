@@ -23,39 +23,31 @@ const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
-  // webpack: (config, { webpack }) => {
-  //   config.module.rules.push({
-  //     test: /\.(pdf)$/,
-  //     type: "asset/resource",
-  //   })
-  //   config.experiments = {
-  //     ...config.experiments,
-  //     topLevelAwait: true,
-  //   };
-  //   config.externals.push({
-  //     canvas: "commonjs canvas",
-  //   });
-  //   config.plugins.push(
-  //     new webpack.ProvidePlugin({
-  //       Buffer: ["buffer", "Buffer"],
-  //       // process: "process/browser",
-  //     }),
-  //   );
-  //   return config;
-  // },
+  webpack: (config, { isServer, webpack }) => {
+    // Externalize canvas for client-side builds (it's a server-only native module)
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        canvas: false,
+      };
+      
+      // Ignore canvas module in client-side builds (used by pdfjs-dist but not needed in browser)
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /^canvas$/,
+        })
+      );
+      
+      // Ignore .node files (native binary modules) - they can't be bundled for browser
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /\.node$/,
+        })
+      );
+    }
 
-  // webpack: (config, options) => {
-  // config.module.rules.push({
-  //     test: /\.pdf$/,
-  //     use: {
-  //       loader: 'file-loader',
-  //       options: {
-  //         name: '[path][name].[ext]',
-  //       },
-  //     },
-  //   });
-  //   return config;
-  // },
+    return config;
+  },
 };
 
 export default nextConfig;
