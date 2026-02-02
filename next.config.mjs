@@ -23,26 +23,26 @@ const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
-  // webpack: (config, { webpack }) => {
-  //   config.module.rules.push({
-  //     test: /\.(pdf)$/,
-  //     type: "asset/resource",
-  //   })
-  //   config.experiments = {
-  //     ...config.experiments,
-  //     topLevelAwait: true,
-  //   };
-  //   config.externals.push({
-  //     canvas: "commonjs canvas",
-  //   });
-  //   config.plugins.push(
-  //     new webpack.ProvidePlugin({
-  //       Buffer: ["buffer", "Buffer"],
-  //       // process: "process/browser",
-  //     }),
-  //   );
-  //   return config;
-  // },
+  webpack: (config, { isServer, webpack }) => {
+    // Externalize canvas for client-side builds (it's a server-only native module)
+    if (!isServer) {
+      // Externalize canvas module - prevents bundling native .node files
+      if (!config.externals) {
+        config.externals = [];
+      }
+      config.externals.push({
+        canvas: "commonjs canvas",
+      });
+      
+      // Ignore .node files using IgnorePlugin
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /\.node$/,
+        })
+      );
+    }
+    return config;
+  },
 
   // webpack: (config, options) => {
   // config.module.rules.push({
