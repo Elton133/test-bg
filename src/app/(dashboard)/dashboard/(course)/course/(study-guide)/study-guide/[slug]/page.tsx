@@ -56,10 +56,7 @@ export default async function StudyGuidePage({
         nextTopic={hasNext !== -1 ? course.notes[hasNext].note : null}
       />
       <NoteViewer
-        note={topic}
-        noteStatus={
-          course?.notes[currentTopicIndex]?.study_guide_status
-        }
+        fileUrl={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${topic?.pdf}`}
       />
     </section>
   );
