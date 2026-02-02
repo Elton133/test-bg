@@ -26,24 +26,36 @@ const nextConfig = {
   webpack: (config, { isServer, webpack }) => {
     // Externalize canvas for client-side builds (it's a server-only native module)
     if (!isServer) {
+      // Replace canvas with an empty module stub for client-side builds
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /^canvas$/,
+          require.resolve('./canvas-stub.js')
+        )
+      );
+      
+      // Ignore .node files using IgnorePlugin - they are native binary modules
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          checkResource(resource, context) {
+            // Ignore .node files
+            if (/\.node$/.test(resource)) {
+              return true;
+            }
+            // Ignore canvas.node specifically
+            if (/canvas\.node$/.test(resource)) {
+              return true;
+            }
+            return false;
+          },
+        })
+      );
+      
+      // Add to resolve fallback
       config.resolve.fallback = {
         ...config.resolve.fallback,
         canvas: false,
       };
-      
-      // Ignore canvas module in client-side builds (used by pdfjs-dist but not needed in browser)
-      config.plugins.push(
-        new webpack.IgnorePlugin({
-          resourceRegExp: /^canvas$/,
-        })
-      );
-      
-      // Ignore .node files (native binary modules) - they can't be bundled for browser
-      config.plugins.push(
-        new webpack.IgnorePlugin({
-          resourceRegExp: /\.node$/,
-        })
-      );
     }
 
     return config;
