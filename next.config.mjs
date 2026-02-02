@@ -1,9 +1,3 @@
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -32,38 +26,21 @@ const nextConfig = {
   webpack: (config, { isServer, webpack }) => {
     // Externalize canvas for client-side builds (it's a server-only native module)
     if (!isServer) {
-      // Replace canvas with an empty module stub for client-side builds
-      config.plugins.push(
-        new webpack.NormalModuleReplacementPlugin(
-          /^canvas$/,
-          resolve(__dirname, 'canvas-stub.js')
-        )
-      );
+      // Externalize canvas module - prevents bundling native .node files
+      if (!config.externals) {
+        config.externals = [];
+      }
+      config.externals.push({
+        canvas: "commonjs canvas",
+      });
       
-      // Ignore .node files using IgnorePlugin - they are native binary modules
+      // Ignore .node files using IgnorePlugin
       config.plugins.push(
         new webpack.IgnorePlugin({
-          checkResource(resource, context) {
-            // Ignore .node files
-            if (/\.node$/.test(resource)) {
-              return true;
-            }
-            // Ignore canvas.node specifically
-            if (/canvas\.node$/.test(resource)) {
-              return true;
-            }
-            return false;
-          },
+          resourceRegExp: /\.node$/,
         })
       );
-      
-      // Add to resolve fallback
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        canvas: false,
-      };
     }
-
     return config;
   },
 };
