@@ -2,9 +2,14 @@ import { getCourse, getNote } from '@/actions/courses';
 import { ICourseDetail, ITopicDetail } from '@/types/course';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
-import NoteViewer from '@components/note/note-viewer';
 import NoteHeader from '@components/note/note-header';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+const NoteViewerWithWorker = dynamic(
+  () => import('@components/note/note-viewer-with-worker'),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   title: 'BSG - Study Guide',
@@ -55,7 +60,7 @@ export default async function StudyGuidePage({
         userName={session?.user.name as string}
         nextTopic={hasNext !== -1 ? course.notes[hasNext].note : null}
       />
-      <NoteViewer
+      <NoteViewerWithWorker
         note={topic}
         noteStatus={
           course?.notes[currentTopicIndex]?.study_guide_status
