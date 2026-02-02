@@ -1,3 +1,9 @@
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -30,7 +36,7 @@ const nextConfig = {
       config.plugins.push(
         new webpack.NormalModuleReplacementPlugin(
           /^canvas$/,
-          require.resolve('./canvas-stub.js')
+          resolve(__dirname, 'canvas-stub.js')
         )
       );
       
